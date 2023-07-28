@@ -1,7 +1,18 @@
 .profile-dropdown {
+  background-color: white;
+  border-radius: 6px;
+  list-style: none;
   position: absolute;
+  right: 10px;
+  width: 90px;
 }
 
 .hidden {
   display: none;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
 }

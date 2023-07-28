@@ -9,12 +9,11 @@ const PostsPage = () => {
     
     return (
       
-        <div>
+        <div className="posts">
             {Object.values(posts).map(post => 
-            <div>
+            <div className="post">
                 <div>{post.content}</div>
                 <div>{post.created_at}</div>
-                    
             </div>
             )}
             </div>
