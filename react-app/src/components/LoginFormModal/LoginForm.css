@@ -1,0 +1,89 @@
+.modalBackground {
+    width: 500px;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0);
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    position: static;
+    bottom: 100px;
+    left: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modalContainer {
+    width: 450px;
+    height: 300px;
+    border-radius: 30px;
+    background-color: white;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    display: grid;
+    grid-template-rows: 25px 40px 100px 35px 35px;
+    padding: 25px;
+  }
+  .titleCloseButton {
+    grid-row: 1/2;
+    /* display: flex;
+    justify-content: flex-end; */
+  }
+
+  .titleCloseButton button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    position: relative;
+    left: 290px;
+  }
+
+ .title {
+    grid-row: 2/3;
+    display: inline-block;
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  .errors{
+    grid-row: 3/4;
+    color: red;
+  }
+
+  .modalContainer .errorsBox{
+    height: 4px;
+  }
+
+  .modalContainer .email {
+    height: 5px;
+  }
+
+  .email {
+    grid-row: 4/5;
+  }
+
+  .modalContainer .password {
+    height: 5px;
+  }
+
+  .password {
+    grid-row: 5/6;
+  }
+
+
+  .input {
+    border-radius: 5px;
+    height: 25px;
+  }
+
+
+.LogIn {
+  color: white;
+  background-color: lightslategray;
+  height: 40px;
+  width: 90px;
+  position: relative;
+  top: 110px;
+  right: 250px;
+  border-radius: 10px;
+  cursor: pointer;
+}
