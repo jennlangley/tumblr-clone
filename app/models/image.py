@@ -11,3 +11,10 @@ class Image(db.Model):
     postId = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
 
     post = db.relationship("Post", back_populates='images')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'imageUrl': self.imageUrl,
+            'postId': self.postId,
+        }
