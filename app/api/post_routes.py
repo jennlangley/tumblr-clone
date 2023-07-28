@@ -6,9 +6,9 @@ post_routes = Blueprint('posts', __name__)
 
 @post_routes.route('/')
 def get_posts():
-    
-
-    posts = db.session.query(Post).all()
-
-
+    posts = Post.query.all()
     return {'posts': [post.to_dict() for post in posts]}
+
+@post_routes.route('/user/<int:userId>')
+def get_user_posts():
+    posts = Post.query()

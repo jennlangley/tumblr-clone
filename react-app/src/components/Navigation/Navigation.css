@@ -5,6 +5,7 @@
   position: absolute;
   right: 10px;
   width: 90px;
+  padding-inline: 10px;
 }
 
 .hidden {

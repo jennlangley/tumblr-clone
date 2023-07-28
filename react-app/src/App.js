@@ -28,7 +28,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path='/posts'>
-            <PostsPage />
+            <PostsPage isLoaded={isLoaded} />
           </Route>
         </Switch>
       )}

@@ -11,6 +11,7 @@ export const getAllPosts = () => async (dispatch) => {
 			"Content-Type": "application/json",
 		},
     });
+
     if (response.ok) {
         const data = await response.json();
         dispatch(getPosts(data));
@@ -20,7 +21,7 @@ export const getAllPosts = () => async (dispatch) => {
 const initialState = {}
 
 export default function reducer(state = initialState, action) {
-    const newState = { ...initialState }
+    const newState = { ...state }
     switch (action.type) {
         case GET_POSTS:
             action.payload.posts.forEach(post => newState[post.id] = post);

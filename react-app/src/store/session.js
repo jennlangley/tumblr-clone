@@ -95,12 +95,15 @@ export const signUp = (username, email, password) => async (dispatch) => {
 };
 
 export default function reducer(state = initialState, action) {
+	const newState = { ...state }
 	switch (action.type) {
 		case SET_USER:
-			return { user: action.payload };
+			newState.user = action.payload;
+			return newState;
 		case REMOVE_USER:
-			return { user: null };
+			newState.user = null;
+			return newState;
 		default:
-			return state;
+			return newState;
 	}
 }
