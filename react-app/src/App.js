@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import PostsPage from "./components/PostsPage";
+import PostDetail from "./components/PostsPage/PostDetail";
 import * as postsActions from "./store/posts"
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path='/posts/:postId'>
+            <PostDetail isLoaded={isLoaded} />
           </Route>
           <Route path='/posts'>
             <PostsPage isLoaded={isLoaded} />

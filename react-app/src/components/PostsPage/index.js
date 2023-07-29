@@ -11,7 +11,7 @@ const PostsPage = ({ isLoaded }) => {
         isLoaded &&
         <div className="posts">
             {Object.values(posts).map(post => 
-                <div className="post">
+                <div key={post.id} className="post">
                     <div>{post.content}</div>
                     <div>{post.created_at}</div>
                 </div>

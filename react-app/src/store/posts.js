@@ -11,7 +11,7 @@ export const getAllPosts = () => async (dispatch) => {
 			"Content-Type": "application/json",
 		},
     });
-
+    
     if (response.ok) {
         const data = await response.json();
         dispatch(getPosts(data));
