@@ -25,7 +25,7 @@ def get_posts():
             'comments': [comment.to_dict() for comment in comments]}
 
 # @login_required
-@post_routes.route('/', methods=['POST'])
+@post_routes.route('', methods=['POST'])
 def new_post():
     post_form = PostForm()
     # image_form = ImageForm()
