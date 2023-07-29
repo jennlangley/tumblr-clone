@@ -26,12 +26,16 @@ export const getAllPosts = () => async (dispatch) => {
 
 export const createNewPost = (content) => async (dispatch) => {
     console.log(content)
+    const userId = 1
     const response = await fetch("/api/posts", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(content)
+        body: JSON.stringify({
+            content,
+            userId
+        })
     })
 
     if (response.ok) {

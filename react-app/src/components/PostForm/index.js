@@ -18,6 +18,8 @@ const PostForm = () => {
         if (data) {
             setErrors(data)
         } 
+        setContent('')
+        setImageUrl('')
         // if (imageUrl) dispatch(imagesActions.createNewImage(imageUrl))
     }
 
