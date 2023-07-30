@@ -35,7 +35,7 @@ def new_post():
         post = Post(content=post_form.data['content'], userId=1)
         db.session.add(post)
         # if image_form.data['imageUrl']:
-        #     image = Image(imageUrl=image_form.data['imageUrl'], postId=post.id) 
+        #     image = Image(imageUrl=image_form.data['imageUrl'], postId=post.id)
         #     db.session.add(image)
         #     db.session.commit()
         #     return {'post': post.to_dict()}
@@ -45,7 +45,7 @@ def new_post():
     # return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
 
 
-    
+
 
 # @post_routes.route('/<int:postId>')
 # def get_post_by_id(postId):
