@@ -5,7 +5,9 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import PostsPage from "./components/PostsPage";
 import PostDetail from "./components/PostsPage/PostDetail";
-import * as postsActions from "./store/posts"
+import * as postsActions from "./store/posts";
+import * as commentsActions from './store/comments';
+import * as imagesActions from './store/images';
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -14,7 +16,9 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate())
-    dispatch(postsActions.getAllPosts()).then(() => setIsLoaded(true));
+    dispatch(postsActions.getAllPosts())
+    dispatch(commentsActions.getAllComments())
+    dispatch(imagesActions.getAllImages()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
