@@ -17,7 +17,7 @@ export const getAllImages = () => async (dispatch) => {
 			"Content-Type": "application/json",
 		},
     });
-    
+
     if (response.ok) {
         const data = await response.json();
         dispatch(getImages(data));
@@ -25,6 +25,7 @@ export const getAllImages = () => async (dispatch) => {
 }
 
 export const createNewImage = (imageUrl) => async (dispatch) => {
+
     const response = await fetch("/api/posts", {
         method: 'POST',
         headers: {
@@ -34,10 +35,11 @@ export const createNewImage = (imageUrl) => async (dispatch) => {
             imageUrl
         })
     })
+
     if (response.ok) {
 		const data = await response.json();
 		dispatch(createImage(data));
-		return null;
+        return data
     }
 }
 

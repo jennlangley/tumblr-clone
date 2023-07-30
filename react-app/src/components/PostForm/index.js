@@ -14,10 +14,13 @@ const PostForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const data = await dispatch(postsActions.createNewPost(content))
-        if (data) {
-            setErrors(data)
-        } 
+        // const data = await dispatch(postsActions.createNewPost(content))
+        // if (data) {
+        //     setErrors(data)
+        // }
+        dispatch(postsActions.createNewPost(content))
+        dispatch(imagesActions.createNewImage(imageUrl))
+
         setContent('')
         setImageUrl('')
         // if (imageUrl) dispatch(imagesActions.createNewImage(imageUrl))
@@ -77,7 +80,7 @@ const PostForm = () => {
                 </form>
             </div>
         </>
-        
+
     )
 }
 

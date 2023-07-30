@@ -17,7 +17,7 @@ export const getAllPosts = () => async (dispatch) => {
 			"Content-Type": "application/json",
 		},
     });
-    
+
     if (response.ok) {
         const data = await response.json();
         dispatch(getPosts(data));
@@ -25,8 +25,7 @@ export const getAllPosts = () => async (dispatch) => {
 }
 
 export const createNewPost = (content) => async (dispatch) => {
-    console.log(content)
-    const userId = 1
+
     const response = await fetch("/api/posts", {
         method: "POST",
         headers: {
@@ -34,20 +33,20 @@ export const createNewPost = (content) => async (dispatch) => {
         },
         body: JSON.stringify({
             content,
-            userId
+           
         })
     })
 
     if (response.ok) {
         const data = await response.json();
-        
+
         // if (data.errors) {
         //     return data.errors;
         // }
 
         dispatch(createPost(data))
-    } 
-    
+    }
+
 }
 
 const initialState = {}
