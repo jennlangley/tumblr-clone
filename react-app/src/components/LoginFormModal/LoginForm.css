@@ -82,8 +82,20 @@
   height: 40px;
   width: 90px;
   position: relative;
+  top: 150px;
+  right: 300px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.Demo {
+  color: white;
+  background-color: blue;
+  height: 40px;
+  width: 90px;
+  position: relative;
   top: 110px;
-  right: 250px;
+  right: 200px;
   border-radius: 10px;
   cursor: pointer;
 }

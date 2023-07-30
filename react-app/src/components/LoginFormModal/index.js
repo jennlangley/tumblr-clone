@@ -21,6 +21,12 @@ function LoginFormModal() {
     }
   };
 
+  const loginDemo = async (e) => {
+    e.preventDefault()
+    dispatch(login('demo@aa.io','password'))
+    .then(closeModal())
+  }
+
   return (
     <>
 
@@ -69,6 +75,7 @@ function LoginFormModal() {
         </div>
         <div className='footer'>
           <div><button className='LogIn'>Log In</button></div>
+          <div><button className='Demo' onClick={loginDemo}>Demo User</button></div>
 
 
            {/* {disable ? (
