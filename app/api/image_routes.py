@@ -1,0 +1,45 @@
+from flask import Blueprint, jsonify, request
+from flask_login import login_required, current_user
+from app.models import db, Post, Image, Comment
+from app.forms import ImageForm, PostForm
+
+
+image_routes = Blueprint('images', __name__)
+
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
+@image_routes.route('/')
+def get_posts():
+    posts = Post.query.all()
+    images = Image.query.all()
+    comments = Comment.query.all()
+
+    return {'posts': [post.to_dict() for post in posts],
+            'images': [image.to_dict() for image in images],
+            'comments': [comment.to_dict() for comment in comments]}
+
+# @login_required
+@image_routes.route('', methods=['POST'])
+def new_post():
+    image_form = ImageForm()
+    post = PostForm()
+
+    image_form['csrf_token'].data = request.cookies['csrf_token']
+
+    if image_form.validate_on_submit():
+        image = Image(imageUrl=image_form.data['imageUrl'], postId=post.id)
+        db.session.add(image)
+        db.session.commit()
+        return {'image': image.to_dict()}
+
+
+
+    return {'errors': validation_errors_to_error_messages(image_form.errors)}, 401
