@@ -16,30 +16,33 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
-@image_routes.route('/')
-def get_posts():
-    posts = Post.query.all()
-    images = Image.query.all()
-    comments = Comment.query.all()
+# @image_routes.route('/')
+# def get_images():
+#     posts = Post.query.all()
+#     images = Image.query.all()
+#     comments = Comment.query.all()
 
-    return {'posts': [post.to_dict() for post in posts],
-            'images': [image.to_dict() for image in images],
-            'comments': [comment.to_dict() for comment in comments]}
+#     return {'posts': [post.to_dict() for post in posts],
+#             'images': [image.to_dict() for image in images],
+#             'comments': [comment.to_dict() for comment in comments]}
 
 # @login_required
 @image_routes.route('', methods=['POST'])
-def new_post():
+def new_image():
+
     image_form = ImageForm()
-    post = PostForm()
 
     image_form['csrf_token'].data = request.cookies['csrf_token']
 
+    all_post = Post.query.all()
+    recent_post = all_post[len(all_post)-1]
+    print(all_post, recent_post.id, "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+
     if image_form.validate_on_submit():
-        image = Image(imageUrl=image_form.data['imageUrl'], postId=post.id)
+        image = Image(imageUrl=image_form.data['imageUrl'], postId=recent_post.id)
         db.session.add(image)
         db.session.commit()
         return {'image': image.to_dict()}
-
 
 
     return {'errors': validation_errors_to_error_messages(image_form.errors)}, 401
