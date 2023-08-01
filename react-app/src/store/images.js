@@ -1,12 +1,12 @@
 const GET_IMAGES = "images/GET_IMAGES"
 const CREATE_IMAGE = "images/CREATE_IMAGE"
 
-const getImages = (images) => ({
+const getAllImagesAction = (images) => ({
     type: GET_IMAGES,
     payload: images
 })
 
-const createImage = (image) => ({
+const createNewImageAction = (image) => ({
     type: CREATE_IMAGE,
     payload: image
 })
@@ -20,7 +20,7 @@ export const getAllImages = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(getImages(data));
+        dispatch(getAllImagesAction(data));
     }
 }
 
@@ -38,7 +38,7 @@ export const createNewImage = (imageUrl) => async (dispatch) => {
 
     if (response.ok) {
 		const data = await response.json();
-		dispatch(createImage(data));
+		dispatch(createNewImageAction(data));
         return data
     }
 }

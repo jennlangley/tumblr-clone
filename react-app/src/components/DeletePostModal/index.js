@@ -8,7 +8,7 @@ const DeletePostForm = (postId) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(postsActions.deletePostById(postId))
+        await dispatch(postsActions.deletePost(postId))
         closeModal()
     }
 
