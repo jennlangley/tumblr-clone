@@ -1,61 +1,48 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
 import * as postsActions from '../../store/posts';
-import * as imagesActions from '../../store/images';
+// import * as imagesActions from '../../store/images';
 import './PostForm.css';
+import { useModal } from "../../context/Modal";
 
 const PostForm = () => {
-
-    const dispatch = useDispatch()
-    const [content, setContent] = useState('')
-    const [imageUrl, setImageUrl] = useState('')
-    const [errors, setErrors] = useState([])
-    const [showMenu, setShowMenu] = useState(false);
+    const dispatch = useDispatch();
+    const [content, setContent] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+    const { closeModal } = useModal();
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        setHasSubmitted(true);
         // const data = await dispatch(postsActions.createNewPost(content))
         // if (data) {
         //     setErrors(data)
         // }
-        dispatch(postsActions.createNewPost(content))
-        dispatch(imagesActions.createNewImage(imageUrl))
-
-        setContent('')
-        setImageUrl('')
+        if (!errors.length) {
+            await dispatch(postsActions.createNewPost(content));
+            // dispatch(imagesActions.createNewImage(imageUrl))
+            setContent('');
+            setImageUrl('');
+            setErrors([]);
+            setHasSubmitted(false);
+            closeModal();
+        }
+        
         // if (imageUrl) dispatch(imagesActions.createNewImage(imageUrl))
     }
 
-    const ulRef = useRef();
-    const ulClassName = "post" + (showMenu ? "" : " hidden");
-
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-    };
-
     useEffect(() => {
-        if (!showMenu) return;
-
-        const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
-                setShowMenu(false);
-            }
-        };
-
-        document.addEventListener("click", closeMenu);
-
-        return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu]);
-
-    const closeMenu = () => setShowMenu(false);
+        if (hasSubmitted) {
+            const errors = []
+            if (!content) errors.push('Post must have some content!')
+            setErrors(errors)
+        }
+    }, [hasSubmitted, content, imageUrl]);
 
     return (
-        <>
-            <button onClick={openMenu}>
-                Create a new post
-            </button>
-            <div className={ulClassName} ref={ulRef}>
+            <div className="post">
                 <form id="post-form" onSubmit={handleSubmit}>
                     <div className='errorsBox'>
                         <ul className='errors'>
@@ -79,8 +66,6 @@ const PostForm = () => {
                     <button type='submit'>Post</button>
                 </form>
             </div>
-        </>
-
     )
 }
 

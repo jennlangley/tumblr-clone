@@ -32,7 +32,7 @@ def new_post():
     post_form['csrf_token'].data = request.cookies['csrf_token']
     # image_form['csrf_token'].data = request.cookies['csrf_token']
     if post_form.validate_on_submit():
-        post = Post(content=post_form.data['content'], userId=1)
+        post = Post(content=post_form.data['content'], userId=current_user.id)
         db.session.add(post)
         # if image_form.data['imageUrl']:
         #     image = Image(imageUrl=image_form.data['imageUrl'], postId=post.id)
