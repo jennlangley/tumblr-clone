@@ -7,7 +7,7 @@ const Comments = ({ postId }) => {
     // const comments = useSelector(state => state.comments)
     const comments = useSelector(state => Object.values(state.comments).filter(comment => comment.postId === postId))
     const [showComments, setShowComments] = useState(false)
-    console.log(`comments`, comments)
+
     let commentToggle = showComments ? "comment-toggle comments-on" : "comment-toggle comments-off"
     return (
         <div>

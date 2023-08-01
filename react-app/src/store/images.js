@@ -38,13 +38,12 @@ export const createNewImage = (imageUrl) => async (dispatch) => {
 
     if (response.ok) {
 		const data = await response.json();
-<<<<<<< HEAD
+
 		dispatch(createNewImageAction(data));
         return data
-=======
-		dispatch(createImage(data));
 
->>>>>>> images-feature
+
+
     }
 }
 

@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from "react"
-import { useDispatch } from "react-redux";
-=======
 import React, { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
->>>>>>> a307ef5b8ddbd2bc785f222531ff638fa047866d
+
 import * as postsActions from '../../store/posts';
-// import * as imagesActions from '../../store/images';
+import * as imagesActions from '../../store/images';
 import './PostForm.css';
 import { useModal } from "../../context/Modal";
 
@@ -21,18 +17,18 @@ const PostForm = () => {
     // let post = useSelector(state=> state.post)
 
     const handleSubmit = async (e) => {
-<<<<<<< HEAD
+
         e.preventDefault();
         setHasSubmitted(true);
-=======
+
         // let postid=1
         e.preventDefault()
->>>>>>> a307ef5b8ddbd2bc785f222531ff638fa047866d
+
         // const data = await dispatch(postsActions.createNewPost(content))
         // if (data) {
         //     setErrors(data)
         // }
-<<<<<<< HEAD
+
         if (!errors.length) {
             await dispatch(postsActions.createNewPost(content));
             // dispatch(imagesActions.createNewImage(imageUrl))
@@ -43,14 +39,14 @@ const PostForm = () => {
             closeModal();
         }
         
-=======
+
         dispatch(postsActions.createNewPost(content))
         .then(dispatch(postsActions.getAllPosts()))
         .then(dispatch(imagesActions.createNewImage(imageUrl)))
         // console.log('after dispatch')
         setContent('')
         setImageUrl('')
->>>>>>> a307ef5b8ddbd2bc785f222531ff638fa047866d
+
         // if (imageUrl) dispatch(imagesActions.createNewImage(imageUrl))
     }
 
