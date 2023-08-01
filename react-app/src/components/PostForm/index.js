@@ -21,16 +21,8 @@ const PostForm = () => {
         e.preventDefault();
         setHasSubmitted(true);
 
-        // let postid=1
-        e.preventDefault()
-
-        // const data = await dispatch(postsActions.createNewPost(content))
-        // if (data) {
-        //     setErrors(data)
-        // }
-
         if (!errors.length) {
-            await dispatch(postsActions.createNewPost(content));
+            dispatch(postsActions.createNewPost(content));
             // dispatch(imagesActions.createNewImage(imageUrl))
             setContent('');
             setImageUrl('');
@@ -38,16 +30,9 @@ const PostForm = () => {
             setHasSubmitted(false);
             closeModal();
         }
-        
 
-        dispatch(postsActions.createNewPost(content))
-        .then(dispatch(postsActions.getAllPosts()))
-        .then(dispatch(imagesActions.createNewImage(imageUrl)))
-        // console.log('after dispatch')
         setContent('')
         setImageUrl('')
-
-        // if (imageUrl) dispatch(imagesActions.createNewImage(imageUrl))
     }
 
     useEffect(() => {
