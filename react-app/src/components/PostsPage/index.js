@@ -22,7 +22,7 @@ const PostsPage = () => {
 
     const posts = useSelector(state => state.posts)
     const user = useSelector(state => state.session.user)
-    console.log(posts)
+
     return (
         isLoaded &&
         <div className="posts">
