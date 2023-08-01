@@ -18,6 +18,9 @@ const PostsPage = () => {
         dispatch(postsActions.getAllPosts())
         dispatch(commentsActions.getAllComments())
         dispatch(imagesActions.getAllImages()).then(() => setIsLoaded(true))
+
+        
+
     }, [dispatch])
 
     const posts = useSelector(state => state.posts)
