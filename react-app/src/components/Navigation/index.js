@@ -10,7 +10,7 @@ function Navigation({ isLoaded }){
 	return (
 		<ul className='navigation'>
 			<li>
-				<NavLink exact to="/posts">Home</NavLink>
+				<NavLink exact to="/posts">Ramble</NavLink>
 			</li>
 			{isLoaded && (
 				<li>

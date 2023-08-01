@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Post, Image, Comment
 from app.forms import PostForm, ImageForm
+
 post_routes = Blueprint('posts', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -19,10 +20,12 @@ def get_posts():
     posts = Post.query.all()
     images = Image.query.all()
     comments = Comment.query.all()
+    
 
     return {'posts': [post.to_dict() for post in posts],
             'images': [image.to_dict() for image in images],
-            'comments': [comment.to_dict() for comment in comments]}
+            'comments': [comment.to_dict() for comment in comments],
+            'users': [post.user.to_dict() for post in posts]}
 
 # @login_required
 @post_routes.route('', methods=['POST'])
@@ -32,7 +35,7 @@ def new_post():
     post_form['csrf_token'].data = request.cookies['csrf_token']
     # image_form['csrf_token'].data = request.cookies['csrf_token']
     if post_form.validate_on_submit():
-        post = Post(content=post_form.data['content'], userId=1)
+        post = Post(content=post_form.data['content'], userId=current_user.id)
         db.session.add(post)
         # if image_form.data['imageUrl']:
         #     image = Image(imageUrl=image_form.data['imageUrl'], postId=post.id)

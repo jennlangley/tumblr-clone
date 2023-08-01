@@ -1,0 +1,18 @@
+.comment-toggle {
+    border-radius: 16px;
+    width: fit-content;
+    margin: 4px;
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.comments-on {
+    background-color: lightgrey;
+    color: dimgray;
+}
+
+.comments-off {
+    border: 1px solid lightgray;
+    color: dimgray;
+}

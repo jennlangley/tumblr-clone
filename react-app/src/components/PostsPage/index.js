@@ -8,7 +8,7 @@ import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
 import * as commentsActions from '../../store/comments';
 import './PostsPage.css';
-import DeletePostForm from "../DeletePostModal";
+import DeletePostForm from "../PostModals/DeletePostForm";
 
 const PostsPage = () => {
     const dispatch = useDispatch();
@@ -21,24 +21,29 @@ const PostsPage = () => {
     }, [dispatch])
 
     const posts = useSelector(state => state.posts)
-    
+    const user = useSelector(state => state.session.user)
+
     return (
         isLoaded &&
         <div className="posts">
-            <PostForm />
+            {user && 
+                <OpenModalButton 
+                    buttonText="New Post"
+                    modalComponent={<PostForm />}
+                />
+            }
             <div className="">
                 {posts && Object.values(posts).map(post => 
                     <div key={post.id} className="post">
+                        <div>{post.created_at}</div>
                         <Images postId={post.id} />
                         <div>{post.content}</div>
-                        <div>{post.created_at}</div>
+                        {user && (post.userId === user.id &&
+                        <OpenModalButton
+                            buttonText=<i className="fa-regular fa-trash-can"></i>
+                            modalComponent={<DeletePostForm postId={post.id}/>}
+                        />)}
                         <Comments postId={post.id} />
-                        <>
-                            <OpenModalButton
-                                buttonText="Delete"
-                                modalComponent={<DeletePostForm postId={post.id}/>}
-                            />
-                        </>
                     </div>
                 )}
                 </div>
