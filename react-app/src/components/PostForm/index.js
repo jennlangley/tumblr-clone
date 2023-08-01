@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
 import './PostForm.css';
@@ -12,15 +12,19 @@ const PostForm = () => {
     const [errors, setErrors] = useState([])
     const [showMenu, setShowMenu] = useState(false);
 
+    // let post = useSelector(state=> state.post)
+
     const handleSubmit = async (e) => {
+        // let postid=1
         e.preventDefault()
         // const data = await dispatch(postsActions.createNewPost(content))
         // if (data) {
         //     setErrors(data)
         // }
         dispatch(postsActions.createNewPost(content))
-        dispatch(imagesActions.createNewImage(imageUrl))
-
+        .then(dispatch(postsActions.getAllPosts()))
+        .then(dispatch(imagesActions.createNewImage(imageUrl)))
+        // console.log('after dispatch')
         setContent('')
         setImageUrl('')
         // if (imageUrl) dispatch(imagesActions.createNewImage(imageUrl))
