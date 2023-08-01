@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 
+=======
+>>>>>>> a307ef5b8ddbd2bc785f222531ff638fa047866d
 import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
 import './PostForm.css';
@@ -16,11 +19,16 @@ const PostForm = () => {
 
     // let post = useSelector(state=> state.post)
 
+    // let post = useSelector(state=> state.post)
+
     const handleSubmit = async (e) => {
+<<<<<<< HEAD
 
         e.preventDefault();
         setHasSubmitted(true);
 
+=======
+>>>>>>> a307ef5b8ddbd2bc785f222531ff638fa047866d
         // let postid=1
         e.preventDefault()
 
@@ -28,6 +36,7 @@ const PostForm = () => {
         // if (data) {
         //     setErrors(data)
         // }
+<<<<<<< HEAD
 
         if (!errors.length) {
             await dispatch(postsActions.createNewPost(content));
@@ -40,6 +49,8 @@ const PostForm = () => {
         }
         
 
+=======
+>>>>>>> a307ef5b8ddbd2bc785f222531ff638fa047866d
         dispatch(postsActions.createNewPost(content))
         .then(dispatch(postsActions.getAllPosts()))
         .then(dispatch(imagesActions.createNewImage(imageUrl)))
