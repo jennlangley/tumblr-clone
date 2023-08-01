@@ -20,10 +20,12 @@ def get_posts():
     posts = Post.query.all()
     images = Image.query.all()
     comments = Comment.query.all()
+    
 
     return {'posts': [post.to_dict() for post in posts],
             'images': [image.to_dict() for image in images],
-            'comments': [comment.to_dict() for comment in comments]}
+            'comments': [comment.to_dict() for comment in comments],
+            'users': [post.user.to_dict() for post in posts]}
 
 # @login_required
 @post_routes.route('', methods=['POST'])
