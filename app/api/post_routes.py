@@ -45,6 +45,13 @@ def new_post():
     # return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
 
 
+@post_routes.route('/<int:postId>', methods=['DELETE'])
+@login_required
+def delete_post(postId):
+    post = Post.query.get(postId)
+    db.session.delete(post)
+    db.session.commit()
+    return {'message': 'Post successfully deleted.'}
 
 
 # @post_routes.route('/<int:postId>')

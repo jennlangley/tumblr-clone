@@ -34,7 +34,7 @@ function LoginFormModal() {
        <div className='modalBackground'>
          <div className="modalContainer">
            <div className='titleCloseButton'>
-          <button onClick={closeModal}>X</button>
+            <button onClick={closeModal}>X</button>
           </div>
       <div className='title'>Log In</div>
 
