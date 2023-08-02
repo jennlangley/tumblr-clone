@@ -1,6 +1,7 @@
 const GET_POSTS = "posts/GET_POSTS";
 const CREATE_POST = "posts/CREATE_POST";
 const DELETE_POST = "posts/DELETE_POST";
+const EDIT_POST = "posts/EDIT_POST";
 
 const getAllPostsAction = (posts) => ({
     type: GET_POSTS,
@@ -15,6 +16,10 @@ const createPost = (post) => ({
 const deletePostAction = (postId) => ({
     type: DELETE_POST,
     payload: postId
+})
+const editPostAction = (post) => ({
+    type: EDIT_POST,
+    payload: post
 })
 
 export const getAllPosts = () => async (dispatch) => {
@@ -42,10 +47,24 @@ export const createNewPost = (content) => async (dispatch) => {
     })
     if (response.ok) {
         const data = await response.json();
-        // if (data.errors) {
-        //     return data.errors;
-        // }
         dispatch(createPost(data))
+    }
+}
+
+export const editPost = (postId, content) => async (dispatch) => {
+    console.log(postId, content)
+    const response = await fetch(`/api/posts/${postId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            content
+        })
+    })
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(editPostAction(data))
     }
 }
 
@@ -67,6 +86,9 @@ export default function reducer(state = initialState, action) {
             action.payload.posts.forEach(post => newState[post.id] = post);
             return newState;
         case CREATE_POST:
+            newState[action.payload.post.id] = action.payload.post;
+            return newState;
+        case EDIT_POST:
             newState[action.payload.post.id] = action.payload.post;
             return newState;
         case DELETE_POST:

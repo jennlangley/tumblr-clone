@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import * as postsActions from '../../store/posts';
-import * as imagesActions from '../../store/images';
+// import * as imagesActions from '../../store/images';
 import './PostForm.css';
 import { useModal } from "../../context/Modal";
 
@@ -44,30 +44,30 @@ const PostForm = () => {
     }, [hasSubmitted, content, imageUrl]);
 
     return (
-            <div className="post">
-                <form id="post-form" onSubmit={handleSubmit}>
-                    <div className='errorsBox'>
-                        <ul className='errors'>
-                        {errors.map((error, idx) => (
-                            <li key={idx}>{error}</li>
-                        ))}
-                        </ul>
-                    </div>
-                    <label>Write something: </label>
-                    <textarea
-                        type="text"
-                        value={content}
-                        onChange={e => setContent(e.target.value)}
-                    />
-                    <label>Image URL: </label>
-                    <input
-                        type="text"
-                        value={imageUrl}
-                        onChange={e => setImageUrl(e.target.value)}
-                    />
-                    <button type='submit'>Post</button>
-                </form>
-            </div>
+        <div className="post">
+            <form id="post-form" onSubmit={handleSubmit}>
+                <div className='errorsBox'>
+                    <ul className='errors'>
+                    {errors.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                    ))}
+                    </ul>
+                </div>
+                <label>Write something: </label>
+                <textarea
+                    type="text"
+                    value={content}
+                    onChange={e => setContent(e.target.value)}
+                />
+                <label>Image URL: </label>
+                <input
+                    type="text"
+                    value={imageUrl}
+                    onChange={e => setImageUrl(e.target.value)}
+                />
+                <button type='submit'>Post</button>
+            </form>
+        </div>
     )
 }
 

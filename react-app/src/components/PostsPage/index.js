@@ -9,6 +9,7 @@ import * as imagesActions from '../../store/images';
 import * as commentsActions from '../../store/comments';
 import './PostsPage.css';
 import DeletePostForm from "../PostModals/DeletePostForm";
+import EditPostForm from "../PostModals/EditPostForm";
 
 const PostsPage = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const PostsPage = () => {
 
     const posts = useSelector(state => state.posts)
     const user = useSelector(state => state.session.user)
-    console.log(posts)
+
     return (
         isLoaded &&
         <div className="posts">
@@ -35,14 +36,22 @@ const PostsPage = () => {
             <div className="">
                 {posts && Object.values(posts).map(post => 
                     <div key={post.id} className="post">
+                        <div>{post.user.username}</div>
                         <div>{post.created_at}</div>
                         <Images postId={post.id} />
                         <div>{post.content}</div>
                         {user && (post.userId === user.id &&
-                        <OpenModalButton
+                        (<>
+                            <OpenModalButton
                             buttonText=<i className="fa-regular fa-trash-can"></i>
                             modalComponent={<DeletePostForm postId={post.id}/>}
-                        />)}
+                            />
+                            <OpenModalButton 
+                            buttonText=<i className="fa-regular fa-pen-to-square"></i>
+                            modalComponent={<EditPostForm post={post} />}
+                            />
+                        </>
+                        ))}
                         <Comments postId={post.id} />
                     </div>
                 )}
