@@ -4,8 +4,9 @@
   list-style: none;
   position: absolute;
   right: 10px;
-  width: 90px;
+  width: 150px;
   padding-inline: 10px;
+
 }
 
 .hidden {
@@ -21,4 +22,9 @@
 .active {
   color: white;
   text-decoration: none;
+}
+
+.logOut {
+  color: red;
+  
 }

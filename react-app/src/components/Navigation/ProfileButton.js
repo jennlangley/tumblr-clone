@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink, useHistory } from 'react-router-dom'
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
@@ -45,10 +46,13 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
+            <li><NavLink className='commentsRoute' to='/my_comments'>{user.username}'s Comments</NavLink></li>
+            <li><NavLink className='postsRoute' to='/my_posts'>{user.username}'s Posts</NavLink></li>
+            <li><div> * * * * * </div></li>
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button className='logOut' onClick={handleLogout}>Log Out</button>
             </li>
           </>
         ) : (
