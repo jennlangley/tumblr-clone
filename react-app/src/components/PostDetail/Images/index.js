@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const Images = ({ postId }) => {
 
     const image = useSelector(state => Object.values(state.images).filter(image => image.postId === postId))
-   
+    console.log("postId: ", postId)
     return (
         <div>
             {image && <img alt={image.id} src={image.imageUrl} />}
