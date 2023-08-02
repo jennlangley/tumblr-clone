@@ -6,3 +6,4 @@ from app.models import Post
 class PostForm(FlaskForm):
     content = StringField('content', validators=[DataRequired()])
     userId = IntegerField('userId')
+    imageUrl = StringField('imageUrl')

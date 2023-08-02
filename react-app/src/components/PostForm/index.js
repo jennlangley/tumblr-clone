@@ -11,7 +11,6 @@ const PostForm = () => {
     const [content, setContent] = useState('')
     const [imageUrl, setImageUrl] = useState('')
     const [errors, setErrors] = useState([])
-    const [showMenu, setShowMenu] = useState(false);
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal()
     // let post = useSelector(state=> state.post)
@@ -30,9 +29,6 @@ const PostForm = () => {
             setHasSubmitted(false);
             closeModal();
         }
-
-        setContent('')
-        setImageUrl('')
     }
 
     useEffect(() => {

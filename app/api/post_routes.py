@@ -29,25 +29,21 @@ def get_posts():
 # @login_required
 @post_routes.route('', methods=['POST'])
 def new_post():
-    print('****************************************')
-    print("CONTENT: ",request.data)
-    print("IMAGES: ", request.data)
-    print('****************************************')
     post_form = PostForm()
-    # image_form = ImageForm()
     post_form['csrf_token'].data = request.cookies['csrf_token']
-    # image_form['csrf_token'].data = request.cookies['csrf_token']
+
     if post_form.validate_on_submit():
         post = Post(content=post_form.data['content'], userId=current_user.id)
         db.session.add(post)
-        # if image_form.data['imageUrl']:
-        #     image = Image(imageUrl=image_form.data['imageUrl'], postId=post.id)
-        #     db.session.add(image)
-        #     db.session.commit()
-        #     return {'post': post.to_dict()}
         db.session.commit()
-        return {'post': post.to_dict()}
 
+        if (post_form.data['imageUrl']):
+            image = Image(imageUrl=post_form.data['imageUrl'], postId=post.id)
+            db.session.add(image)
+            db.session.commit()
+            return {'post': post.to_dict(), 'image': image.to_dict()}
+        
+        return {'post': post.to_dict()}
     return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
 
 @post_routes.route('/<int:postId>', methods=['PUT'])

@@ -11,6 +11,11 @@ const createNewImageAction = (image) => ({
     payload: image
 })
 
+export const createNewImage = (images) => async (dispatch) => {
+    dispatch(createNewImageAction(images))
+    dispatch(getAllImages())
+}
+
 export const getAllImages = () => async (dispatch) => {
     const response = await fetch("/api/posts", {
         headers: {
@@ -24,30 +29,11 @@ export const getAllImages = () => async (dispatch) => {
     }
 }
 
-export const createNewImage = (images) => async (dispatch) => {
-    const response = await fetch("/api/images", {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            images
-        })
-    })
-
-    if (response.ok) {
-        const data = await response.json();
-
-        dispatch(createNewImageAction(data));
-        return data
-    }
-
-}
-
 const initialState = {}
 
 export default function reducer(state = initialState, action) {
     const newState = { ...state }
+
     switch (action.type) {
         case GET_IMAGES:
             action.payload.images.forEach(image => newState[image.id] = image);

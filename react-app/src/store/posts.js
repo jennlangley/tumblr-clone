@@ -1,3 +1,5 @@
+import * as imagesActions  from './images'
+
 const GET_POSTS = "posts/GET_POSTS";
 const CREATE_POST = "posts/CREATE_POST";
 const DELETE_POST = "posts/DELETE_POST";
@@ -35,7 +37,7 @@ export const getAllPosts = () => async (dispatch) => {
     }
 }
 
-export const createNewPost = (content, images) => async (dispatch) => {
+export const createNewPost = (content, imageUrl) => async (dispatch) => {
     const response = await fetch("/api/posts", {
         method: "POST",
         headers: {
@@ -43,17 +45,17 @@ export const createNewPost = (content, images) => async (dispatch) => {
         },
         body: JSON.stringify({
             content,
-            images
+            imageUrl
         })
     })
     if (response.ok) {
         const data = await response.json();
         dispatch(createPost(data))
+        dispatch(imagesActions.createNewImage(data))
     }
 }
 
 export const editPost = (postId, content) => async (dispatch) => {
-    console.log(postId, content)
     const response = await fetch(`/api/posts/${postId}`, {
         method: "PUT",
         headers: {
