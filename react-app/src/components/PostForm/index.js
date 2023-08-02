@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import * as postsActions from '../../store/posts';
-// import * as imagesActions from '../../store/images';
+import * as imagesActions from '../../store/images';
 import './PostForm.css';
 import { useModal } from "../../context/Modal";
 
@@ -21,8 +21,8 @@ const PostForm = () => {
         setHasSubmitted(true);
 
         if (!errors.length) {
-            await dispatch(postsActions.createNewPost(content));
-            if (imageUrl) await dispatch(imagesActions.createNewImage(imageUrl))
+            await dispatch(postsActions.createNewPost(content, imageUrl));
+            // if (imageUrl) await dispatch(imagesActions.createNewImage(imageUrl))
             // dispatch(imagesActions.createNewImage(imageUrl))
             setContent('');
             setImageUrl('');

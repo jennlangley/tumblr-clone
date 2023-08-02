@@ -29,6 +29,10 @@ def get_posts():
 # @login_required
 @post_routes.route('', methods=['POST'])
 def new_post():
+    print('****************************************')
+    print("CONTENT: ",request.data)
+    print("IMAGES: ", request.data)
+    print('****************************************')
     post_form = PostForm()
     # image_form = ImageForm()
     post_form['csrf_token'].data = request.cookies['csrf_token']

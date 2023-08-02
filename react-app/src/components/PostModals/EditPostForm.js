@@ -7,8 +7,10 @@ const EditPostForm = ({ post }) => {
     const dispatch = useDispatch();
     
     const image = useSelector(state => state.images[post.id])
-
-    const [imageUrl, setImageUrl] = useState(image.imageUrl);
+ 
+    const [imageUrl, setImageUrl] = useState(image?.imageUrl);
+    
+    
     const [content, setContent] = useState(post.content);
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);

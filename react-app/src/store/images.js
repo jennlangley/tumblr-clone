@@ -24,25 +24,24 @@ export const getAllImages = () => async (dispatch) => {
     }
 }
 
-export const createNewImage = (imageUrl) => async (dispatch) => {
-   
+export const createNewImage = (images) => async (dispatch) => {
     const response = await fetch("/api/images", {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            imageUrl
+            images
         })
     })
 
     if (response.ok) {
-		const data = await response.json();
+        const data = await response.json();
 
-
-		dispatch(createNewImageAction(data));
+        dispatch(createNewImageAction(data));
         return data
     }
+
 }
 
 const initialState = {}

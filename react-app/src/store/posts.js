@@ -35,7 +35,7 @@ export const getAllPosts = () => async (dispatch) => {
     }
 }
 
-export const createNewPost = (content) => async (dispatch) => {
+export const createNewPost = (content, images) => async (dispatch) => {
     const response = await fetch("/api/posts", {
         method: "POST",
         headers: {
@@ -43,6 +43,7 @@ export const createNewPost = (content) => async (dispatch) => {
         },
         body: JSON.stringify({
             content,
+            images
         })
     })
     if (response.ok) {
