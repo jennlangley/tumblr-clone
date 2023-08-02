@@ -7,7 +7,7 @@ const Images = ({ postId }) => {
    
     return (
         <div>
-            {image && <img alt={image?.id} src={image?.imageUrl} />}
+            {image && <img alt={image.id} src={image?.imageUrl} />}
         </div>
     )
 }
