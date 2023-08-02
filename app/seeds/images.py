@@ -11,10 +11,14 @@ def seed_images():
     image_3 = Image(
         imageUrl="https://placekitten.com/200/140", postId=3, 
     )
+    image_4 = Image(
+        imageUrl="https://placekitten.com/400/300", postId=4,
+    )
 
     db.session.add(image_1)
     db.session.add(image_2)
     db.session.add(image_3)
+    db.session.add(image_4)
     db.session.commit()
 
 def undo_images():
