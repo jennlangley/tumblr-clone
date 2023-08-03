@@ -6,10 +6,10 @@ def seed_likes():
         userId=1, postId=3
     )
     like2 = Like(
-        userId=2, postId=2
+        userId=2, postId=1
     )
     like3 = Like(
-        userId=3, postId=3
+        userId=3, postId=1
     )
     like4 = Like(
         userId=1, postId=4

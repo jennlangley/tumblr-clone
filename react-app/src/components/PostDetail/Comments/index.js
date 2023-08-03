@@ -4,11 +4,10 @@ import { useState } from "react";
 import './Comments.css'
 
 const Comments = ({ postId }) => {
-    // const comments = useSelector(state => state.comments)
-    const comments = useSelector(state => Object.values(state.comments).filter(comment => comment.postId === postId))
-    const [showComments, setShowComments] = useState(false)
+    const comments = useSelector(state => Object.values(state.comments).filter(comment => comment.postId === postId));
+    const [showComments, setShowComments] = useState(false);
 
-    let commentToggle = showComments ? "comment-toggle comments-on" : "comment-toggle comments-off"
+    let commentToggle = showComments ? "comment-toggle comments-on" : "comment-toggle comments-off";
     return (
         <div>
             <div className={commentToggle} onClick={e => setShowComments(!showComments)}>

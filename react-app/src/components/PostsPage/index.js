@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import PostForm from '../PostForm/index'
 import Comments from "../PostDetail/Comments";
 import Images from "../PostDetail/Images";
+import Likes from "../PostDetail/Likes";
 import OpenModalButton from "../OpenModalButton";
 import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
 import * as commentsActions from '../../store/comments';
+import * as likesActions from '../../store/likes';
 import './PostsPage.css';
 import DeletePostForm from "../PostModals/DeletePostForm";
 import EditPostForm from "../PostModals/EditPostForm";
@@ -18,6 +20,7 @@ const PostsPage = () => {
     useEffect(() => {
         dispatch(postsActions.getAllPosts())
         dispatch(commentsActions.getAllComments())
+        dispatch(likesActions.getLikes())
         dispatch(imagesActions.getAllImages()).then(() => setIsLoaded(true));
     }, [dispatch])
 
@@ -52,7 +55,10 @@ const PostsPage = () => {
                             />
                         </>
                         ))}
-                        <Comments postId={post.id} />
+                        <div className="comments-like-button">
+                            <Comments postId={post.id} />
+                            <Likes postId={post.id} userId={user.id} />
+                        </div>
                     </div>
                 )}
                 </div>

@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from sqlalchemy import UniqueConstraint
 
 class Follow(db.Model):
     __tablename__ = 'follows'
@@ -10,6 +11,8 @@ class Follow(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     followerId = db.Column(db.Integer)
     followedId = db.Column(db.Integer)
+
+    __table_args__ = (UniqueConstraint('followerId', 'followedId', name='unique_follows'),)
 
     def to_dict(self):
         return {

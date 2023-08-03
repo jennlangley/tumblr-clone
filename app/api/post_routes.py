@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Post, Image, Comment
+from app.models import db, Post, Image, Comment, Like
 from app.forms import PostForm
 from datetime import datetime
 
@@ -72,6 +72,14 @@ def delete_post(postId):
     db.session.commit()
     return {'message': 'Post successfully deleted.'}
 
+
+@post_routes.route('/<int:postId>', methods=['POST'])
+@login_required
+def like_post(postId):
+    like = Like(postId=postId, userId=current_user.id)
+    db.session.add(like)
+    db.session.commit()
+    return {'like': like.to_dict()}
 
 
 # @post_routes.route('/<int:postId>')

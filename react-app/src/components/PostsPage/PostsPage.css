@@ -17,3 +17,10 @@ body {
     border-radius: 6px;
     background-color: white;
 }
+
+.comments-like-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
