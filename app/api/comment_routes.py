@@ -11,3 +11,7 @@ def get_comments():
     comments = Comment.query.all()
     return {'posts': [post.to_dict() for post in posts]}
             # 'images': [image.to_dict() for image in images]}
+
+@comment_routes.route('/<int:userId>')
+def get_user_comments(userId):
+    user_comments = Comment.query.filter_by(userId).all()
