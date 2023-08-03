@@ -20,6 +20,8 @@ class Follow(db.Model):
     
 user_follows = db.Table(
     "user_follows",
-    db.Column("followerId", db.Integer, db.ForeignKey("users.id")),
-    db.Column("followedId", db.Integer, db.ForeignKey("users.id"))
+    db.Column("followerId", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"))),
+    db.Column("followedId", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 )
+if environment == "production":
+    user_follows.schema = SCHEMA
