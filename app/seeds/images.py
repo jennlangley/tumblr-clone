@@ -12,7 +12,7 @@ def seed_images():
         imageUrl="https://placekitten.com/200/140", postId=3, 
     )
     image_4 = Image(
-        imageUrl="https://placekitten.com/500/400", postId=4,
+        imageUrl="https://placekitten.com/400/300", postId=4,
     )
 
     db.session.add(image_1)
