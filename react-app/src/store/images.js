@@ -1,5 +1,6 @@
 const GET_IMAGES = "images/GET_IMAGES"
 const CREATE_IMAGE = "images/CREATE_IMAGE"
+const EDIT_IMAGE = "images/EDIT_IMAGE"
 
 const getAllImagesAction = (images) => ({
     type: GET_IMAGES,
@@ -10,6 +11,16 @@ const createNewImageAction = (image) => ({
     type: CREATE_IMAGE,
     payload: image
 })
+
+const editImageAction = (image) => ({
+    type: EDIT_IMAGE,
+    payload: image
+})
+
+export const editImage = (image) => async (dispatch) => {
+    dispatch(editImageAction(image))
+    dispatch(getAllImages())
+}
 
 export const createNewImage = (images) => async (dispatch) => {
     dispatch(createNewImageAction(images))
@@ -39,6 +50,9 @@ export default function reducer(state = initialState, action) {
             action.payload.images.forEach(image => newState[image.id] = image);
             return newState;
         case CREATE_IMAGE:
+            newState[action.payload.image.id] = action.payload.image;
+            return newState;
+        case EDIT_IMAGE:
             newState[action.payload.image.id] = action.payload.image;
             return newState;
         default:

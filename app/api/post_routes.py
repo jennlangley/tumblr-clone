@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Post, Image, Comment
-from app.forms import PostForm, ImageForm
+from app.forms import PostForm
 from datetime import datetime
 
 post_routes = Blueprint('posts', __name__)
@@ -57,6 +57,10 @@ def edit_post(postId):
         post.content = post_form.data['content']
         post.updated_at = datetime.now()
         db.session.commit()
+
+        # if (post_form.data['imageUrl']):
+        #     image = Image.query.get()
+
         return {'post': post.to_dict()}
     return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
 
