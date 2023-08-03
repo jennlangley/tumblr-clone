@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import * as commentsActions from '../../store/comments';
 import * as postsActions from '../../store/posts';
 import Comment_Posts from './Comment_Posts';
+import OpenModalButton from "../OpenModalButton";
+import DeleteComment from "../CommentModal/DeleteComment";
 import './MyComments.css';
+
 
 
 const MyCommentsPage = () => {
@@ -19,15 +22,20 @@ const MyCommentsPage = () => {
 
     const posts = useSelector(state => state.posts)
 
+
     return (
         <>
         <div className='myComments'>
-        <div style={{color:'white'}}>{sessionUser.username}'s Comments</div>
+        <div style={{color:'white'}}>{sessionUser?.username}'s Comments</div>
         {sessionUser ? (
             myComments.map(comment =>
                 <div key={comment.id} className='myComment'>
                     <Comment_Posts postId={comment.postId} />
                     <div>{comment.content}</div>
+                    <OpenModalButton
+                        buttonText=<i className="fa-regular fa-trash-can"></i>
+                        modalComponent={<DeleteComment commentId={comment.id}/>}/>
+                    <button>Edit Comment</button>
                     <div>{comment.created_at}</div>
                 </div>
             )

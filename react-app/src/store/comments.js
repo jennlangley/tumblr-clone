@@ -1,5 +1,6 @@
 const GET_COMMENTS = "comments/GET_COMMENTS"
 const GET_USER_COMMENTS = 'comments/GET_USER_COMMENTS'
+const DELETE_COMMENT = 'comments/DELETE_COMMENT'
 
 const getComments = (comments) => ({
     type: GET_COMMENTS,
@@ -9,6 +10,11 @@ const getComments = (comments) => ({
 const userComments = (userData) => ({
     type: GET_USER_COMMENTS,
     payload: userData
+})
+
+const deleteThisComment = (commentId) => ({
+    type: DELETE_COMMENT,
+    payload: commentId
 })
 
 export const getAllComments = () => async (dispatch) => {
@@ -24,7 +30,7 @@ export const getAllComments = () => async (dispatch) => {
     }
 }
 
-export const getUserComments = ({userId}) => async(dispatch) => {
+export const getUserComments = ({userId}) => async (dispatch) => {
     const response = await fetch(`/api/comments/${userId}`, {
         headers: {
             "Content-Type": "application/json"
@@ -34,6 +40,16 @@ export const getUserComments = ({userId}) => async(dispatch) => {
     if(response.ok) {
         const data = await response.json();
         dispatch(userComments(data))
+    }
+}
+
+export const deleteComment = ({commentId}) => async(dispatch) => {
+   
+    const response = await fetch(`/api/comments/${commentId}`, {
+        method: "DELETE"
+    })
+    if (response.ok) {
+        dispatch(deleteThisComment(commentId))
     }
 }
 
@@ -48,6 +64,9 @@ export default function reducer(state = initialState, action) {
         case GET_USER_COMMENTS:
             action.payload.userData.forEach(comment => newState[comment.id] = comment);
             return newState;
+        case DELETE_COMMENT:
+            delete newState[action.payload];
+            return newState
         default:
             return newState;
     }

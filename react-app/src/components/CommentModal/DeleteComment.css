@@ -1,0 +1,37 @@
+.deleteTitle {
+    position: relative;
+    left: 50px;
+}
+
+
+.yesButton {
+  color: white;
+  background-color: lightslategray;
+  height: 40px;
+  width: 90px;
+  border-radius: 10px;
+  position: relative;
+  left: 100px;
+  cursor: pointer;
+}
+
+.yesButton:hover {
+    font-weight: bold;
+    background-color: rgb(130, 165, 201);
+}
+
+.noButton {
+    color: white;
+    background-color: lightslategray;
+    height: 40px;
+    width: 90px;
+    border-radius: 10px;
+    position: relative;
+    left: 150px;
+    cursor: pointer;
+}
+
+.noButton:hover {
+    font-weight: bold;
+    background-color: rgb(130, 165, 201);
+}
