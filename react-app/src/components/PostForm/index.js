@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as postsActions from '../../store/posts';
-import * as imagesActions from '../../store/images';
 import './PostForm.css';
 import { useModal } from "../../context/Modal";
 

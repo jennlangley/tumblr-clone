@@ -11,3 +11,12 @@ def get_likes():
     return {
         'likes': [like.to_dict() for like in likes],
     }
+
+@like_routes.route('/<int:likeId>', methods=['DELETE'])
+@login_required
+def delete_like(likeId):
+    like = Like.query.get(likeId)
+    db.session.delete(like)
+    db.session.commit()
+    return {'message': 'Like successfully deleted.'}
+

@@ -19,3 +19,9 @@
     align-items: center;
     justify-content: space-between;
 }
+
+#logged-out-button {
+    background-color: none;
+    border: none;
+    color: red;
+}

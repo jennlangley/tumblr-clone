@@ -1,5 +1,6 @@
 const GET_LIKES = "likes/GET_LIKES";
 const CREATE_LIKE = "likes/CREATE_LIKE";
+const DELETE_LIKE = "likes/DELETE_LIKE";
 
 const getLikesAction = (likes) => ({
     type: GET_LIKES,
@@ -8,6 +9,10 @@ const getLikesAction = (likes) => ({
 const createLikeAction = (like) => ({
     type: CREATE_LIKE,
     payload: like
+})
+const deleteLikeAction = (likeId) => ({
+    type: DELETE_LIKE,
+    payload: likeId
 })
 
 export const getLikes = () => async (dispatch) => {
@@ -37,6 +42,15 @@ export const createLike = (postId) => async (dispatch) => {
     }
 }
 
+export const deleteLike = (likeId) => async (dispatch) => {
+    const response = await fetch(`/api/likes/${likeId}`, {
+        method: "DELETE",
+    })
+    if (response.ok) {
+        dispatch(deleteLikeAction(likeId));
+    }
+}
+
 const initialState = {};
 
 export default function reducer(state = initialState, action) {
@@ -48,6 +62,9 @@ export default function reducer(state = initialState, action) {
         case CREATE_LIKE:
             newState[action.payload.like.id] = action.payload.like;
             return newState;
+            case DELETE_LIKE:
+                delete newState[action.payload];
+                return newState;
         default: 
             return newState;
     }

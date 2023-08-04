@@ -57,7 +57,7 @@ const PostsPage = () => {
                         ))}
                         <div className="comments-like-button">
                             <Comments postId={post.id} />
-                            <Likes postId={post.id} userId={user.id} />
+                            <Likes postId={post.id} userId={user?.id} />
                         </div>
                     </div>
                 )}
