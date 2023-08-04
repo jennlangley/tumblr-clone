@@ -44,7 +44,7 @@ export const getUserComments = ({userId}) => async (dispatch) => {
 }
 
 export const deleteComment = ({commentId}) => async(dispatch) => {
-   
+
     const response = await fetch(`/api/comments/${commentId}`, {
         method: "DELETE"
     })
@@ -65,7 +65,7 @@ export default function reducer(state = initialState, action) {
             action.payload.userData.forEach(comment => newState[comment.id] = comment);
             return newState;
         case DELETE_COMMENT:
-            delete newState[action.payload];
+            delete newState[action.payload.commentId];
             return newState
         default:
             return newState;

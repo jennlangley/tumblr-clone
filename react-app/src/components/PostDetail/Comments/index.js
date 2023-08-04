@@ -17,8 +17,9 @@ const Comments = ({ postId }) => {
             <div>
                 {showComments &&
                     (comments && Object.values(comments).map(comment => <div key={comment.id}>{comment.content}</div>))
-                }  
+                }
             </div>
+            <div className='addComment'><button>Add comment</button></div>
         </div>
     )
 }
