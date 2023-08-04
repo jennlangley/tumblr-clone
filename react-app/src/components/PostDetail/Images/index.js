@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import './Image.css'
 
 const Images = ({ postId }) => {
 
@@ -7,7 +8,7 @@ const Images = ({ postId }) => {
 
     return (
         <div>
-            {images.length ? images.map(image => <img alt="" key={image.id} src={image.imageUrl}/>) : null}
+            {images.length ? images.map(image => <img className="post-image" alt="" key={image.id} src={image.imageUrl}/>) : null}
         </div>
     )
 }
