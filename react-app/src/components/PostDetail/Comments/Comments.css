@@ -17,7 +17,7 @@
     color: dimgray;
 }
 
-button{
+.commentButton button{
     border-radius: 16px;
     width: fit-content;
     margin: 4px;

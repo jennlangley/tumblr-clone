@@ -12,7 +12,7 @@ const Comments = ({ postId }) => {
 
     let commentToggle = showComments ? "comment-toggle comments-on" : "comment-toggle comments-off"
 
-    
+
     return (
         <div>
             <div className={commentToggle} onClick={e => setShowComments(!showComments)}>
@@ -23,7 +23,7 @@ const Comments = ({ postId }) => {
                     (comments && Object.values(comments).map(comment => <div key={comment.id}>{comment.content}</div>))
                 }
             </div>
-            <div>
+            <div className='commentButton'>
                 <OpenModalButton
                     buttonText = 'Add Comment'
                     modalComponent={<CreateComment postId={postId} />}
