@@ -20,7 +20,7 @@ def get_posts():
     posts = Post.query.all()
     images = Image.query.all()
     comments = Comment.query.all()
-    
+
 
     return {'posts': [post.to_dict() for post in posts],
             'images': [image.to_dict() for image in images],
@@ -61,3 +61,9 @@ def delete_post(postId):
 # def get_post_by_id(postId):
 #     post = Post.query.get(postId)
 #     return post.to_dict()
+
+
+# @post_routes.route('/<int:postId/comments/<int:commentId>', methods=['DELETE'])
+# def delete_comment(postId, commentId):
+#     post = Post.query.get(postId)
+#     comment = Comment.query.get(commentId)

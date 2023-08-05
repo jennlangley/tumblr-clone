@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import * as commentsActions from "../../store/comments";
 import './CreateComment.css'
 
-const CreateComment = () => {
+const CreateComment = ({postId}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal();
 
@@ -33,9 +33,9 @@ const CreateComment = () => {
         setError({})
         setHasFilled(false)
 
-        const contentForm = {content}
+        const contentForm = {content, postId}
 
-        await dispatch(commentsActions.CreateComment(contentForm))
+        await dispatch(commentsActions.createMyComment(contentForm, postId))
         closeModal()
     }
 

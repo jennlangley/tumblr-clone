@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import OpenModalButton from '../../OpenModalButton';
+import CreateComment from '../../CommentModal/CreateComment';
 import './Comments.css'
 
 const Comments = ({ postId }) => {
@@ -9,6 +11,18 @@ const Comments = ({ postId }) => {
     const [showComments, setShowComments] = useState(false)
 
     let commentToggle = showComments ? "comment-toggle comments-on" : "comment-toggle comments-off"
+
+    const openCommentForm = () => {
+
+        return (
+            <>
+            <OpenModalButton
+                    modalComponent={<CreateComment postId={postId} />}
+                />
+            </>
+        )
+    }
+
     return (
         <div>
             <div className={commentToggle} onClick={e => setShowComments(!showComments)}>
@@ -19,7 +33,12 @@ const Comments = ({ postId }) => {
                     (comments && Object.values(comments).map(comment => <div key={comment.id}>{comment.content}</div>))
                 }
             </div>
-            <div className='addComment'><button>Add comment</button></div>
+            <div>
+                <OpenModalButton
+                    buttonText = 'Add Comment'
+                    modalComponent={<CreateComment postId={postId} />}
+                />
+               </div>
         </div>
     )
 }
