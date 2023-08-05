@@ -18,8 +18,9 @@ comment_routes = Blueprint('comments', __name__)
 #     user_comments = Comment.query.filter_by(userId).all()
 
 
-@comment_routes.route('/<int:postId>', methods=['POST'])
+@comment_routes.route('/<int:postId>', methods=['POST, PUT'])
 def new_comment(postId):
+
     comment_form = CommentForm()
 
     comment_form['csrf_token'].data = request.cookies['csrf_token']
@@ -29,14 +30,24 @@ def new_comment(postId):
         db.session.add(comment)
         db.session.commit()
         return {'comment': comment.to_dict()}
-    return
-    # return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
+
+@comment_routes.route('<int:commentId>', methods=['PUT'])
+def update_comment(commentId):
+    comment_form = CommentForm()
+    comment = Comment.query.get(commentId)
+    comment.content = comment_form.data['content']
+    db.session.commit()
+    return {'comment': comment.to_dict()}
+
+
+
+
 
 
 @comment_routes.route('/<int:commentId>', methods=['DELETE'])
 def delete_comment(commentId):
-    #print(commentId, 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+
     comment = Comment.query.get(commentId)
     db.session.delete(comment)
     db.session.commit()
-    return
+    return {'message': 'Successfully deleted'}

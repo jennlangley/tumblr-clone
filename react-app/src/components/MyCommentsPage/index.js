@@ -5,6 +5,7 @@ import * as postsActions from '../../store/posts';
 import Comment_Posts from './Comment_Posts';
 import OpenModalButton from "../OpenModalButton";
 import DeleteComment from "../CommentModal/DeleteComment";
+import EditComment from "../CommentModal/EditComment";
 import './MyComments.css';
 
 
@@ -35,7 +36,11 @@ const MyCommentsPage = () => {
                     <OpenModalButton
                         buttonText=<i className="fa-regular fa-trash-can"></i>
                         modalComponent={<DeleteComment commentId={comment.id}/>}/>
-                    <button>Edit Comment</button>
+                    <OpenModalButton
+                        buttonText='Edit Comment'
+                        modalComponent={<EditComment commentId={comment.id} />}
+                        />
+                    {/* <button>Edit Comment</button> */}
                     <div>{comment.created_at}</div>
                 </div>
             )

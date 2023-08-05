@@ -10,7 +10,9 @@ const DeleteComment = (commentId) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await dispatch(commentsActions.deleteMyComment(commentId))
+              .then(dispatch(commentsActions.getAllComments()))
         closeModal()
+
     }
 
     return (

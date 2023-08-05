@@ -1,14 +1,21 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react"
 import { useModal } from "../../context/Modal";
 import * as commentsActions from "../../store/comments";
 import './CreateComment.css'
 
-const CreateComment = ({postId}) => {
+const EditComment = ({commentId}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal();
 
-    const [content, setContent] = useState('')
+    useEffect(()=> {
+        dispatch(commentsActions.getAllComments())
+    },[dispatch])
+
+    const comment = useSelector(state => Object.values(state.comments).filter((comment => comment.id === commentId)))
+    // console.log(comment[0].content, 'OOOOOOOOOOOOOOOO')
+
+    const [content, setContent] = useState(comment[0].content)
     const [hasFilled, setHasFilled] = useState(false)
     const [error, setError] = useState({})
 
@@ -33,7 +40,7 @@ const CreateComment = ({postId}) => {
         setError({})
         setHasFilled(false)
 
-        await dispatch(commentsActions.createMyComment({content}, postId))
+        await dispatch(commentsActions.editComment({content},comment[0].id))
         closeModal()
     }
 
@@ -52,7 +59,7 @@ const CreateComment = ({postId}) => {
                               value={content}
                               onChange={(e) => setContent(e.target.value)}
                               onClick={()=> {setHasFilled(true)}} />
-                    <button className='addComment' onClick={e => handleSubmit(e)}>Add Comment</button>
+                    <button className='addComment' onClick={e => handleSubmit(e)}>Edit Comment</button>
                     <button className='cancelComment' onClick={closeModal}>Cancel</button>
                 </div>
             </div>
@@ -61,4 +68,4 @@ const CreateComment = ({postId}) => {
     )
 }
 
-export default CreateComment;
+export default EditComment;
