@@ -12,17 +12,7 @@ const Comments = ({ postId }) => {
 
     let commentToggle = showComments ? "comment-toggle comments-on" : "comment-toggle comments-off"
 
-    const openCommentForm = () => {
-
-        return (
-            <>
-            <OpenModalButton
-                    modalComponent={<CreateComment postId={postId} />}
-                />
-            </>
-        )
-    }
-
+    
     return (
         <div>
             <div className={commentToggle} onClick={e => setShowComments(!showComments)}>
