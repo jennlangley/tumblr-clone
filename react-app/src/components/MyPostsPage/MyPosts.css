@@ -1,0 +1,19 @@
+body {
+    background-color: lightslategray;
+    font-family: Helvetica;
+}
+
+.myPosts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myPost {
+    margin: 10px;
+    padding: 5px;
+    width: 500px;
+    border-radius: 6px;
+    background-color: white;
+}

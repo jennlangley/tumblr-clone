@@ -18,7 +18,7 @@ comment_routes = Blueprint('comments', __name__)
 #     user_comments = Comment.query.filter_by(userId).all()
 
 
-@comment_routes.route('/<int:postId>', methods=['POST, PUT'])
+@comment_routes.route('/<int:postId>', methods=['POST'])
 def new_comment(postId):
 
     comment_form = CommentForm()
@@ -38,9 +38,6 @@ def update_comment(commentId):
     comment.content = comment_form.data['content']
     db.session.commit()
     return {'comment': comment.to_dict()}
-
-
-
 
 
 

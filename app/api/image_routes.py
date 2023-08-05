@@ -36,7 +36,6 @@ def new_image():
 
     all_post = Post.query.all()
     recent_post = all_post[len(all_post)-1]
-  #  print(all_post, recent_post.id, "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
 
     if image_form.validate_on_submit():
         image = Image(imageUrl=image_form.data['imageUrl'], postId=recent_post.id)
@@ -46,3 +45,11 @@ def new_image():
 
 
     return {'errors': validation_errors_to_error_messages(image_form.errors)}, 401
+
+@image_routes.route('<int:imageId>', methods=['PUT'])
+def update_image(imageId):
+    image_form = ImageForm()
+    image = Image.query.get(imageId)
+    image.imageUrl = image_form.data['imageUrl']
+    db.session.commit()
+    return {'image': image.to_dict()}
