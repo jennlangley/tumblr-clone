@@ -16,3 +16,29 @@
     border: 1px solid lightgray;
     color: dimgray;
 }
+
+.comment-text {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 4px;
+}
+
+.comment-username {
+    font-weight: bold;
+}
+
+.comment-date {
+    font-weight: normal;
+    color: dimgray;
+}
+#comment-container {
+    display: flex;
+    flex-direction: row;
+}
+#comment-profile-link {
+    font-size: 24px;
+    padding: 5px;
+    margin-top: 5px;
+    color: darkgray;
+}

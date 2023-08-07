@@ -5,6 +5,7 @@ import Comments from "../PostDetail/Comments";
 import Images from "../PostDetail/Images";
 import Likes from "../PostDetail/Likes";
 import OpenModalButton from "../OpenModalButton";
+import * as usersActions from '../../store/users';
 import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
 import * as commentsActions from '../../store/comments';
@@ -18,6 +19,7 @@ const PostsPage = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     
     useEffect(() => {
+        dispatch(usersActions.getUsers())
         dispatch(postsActions.getAllPosts())
         dispatch(commentsActions.getAllComments())
         dispatch(likesActions.getLikes())
