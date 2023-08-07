@@ -16,7 +16,7 @@ function OpenModalButton({
   };
 
   return (
-    <button onClick={onClick}>{buttonText}</button>
+    <button style={{cursor: 'pointer'}} onClick={onClick}>{buttonText}</button>
   );
 }
 

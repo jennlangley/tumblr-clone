@@ -1,3 +1,5 @@
+import * as imagesActions  from './images'
+
 const GET_POSTS = "posts/GET_POSTS";
 const CREATE_POST = "posts/CREATE_POST";
 const DELETE_POST = "posts/DELETE_POST";
@@ -36,7 +38,7 @@ export const getAllPosts = () => async (dispatch) => {
     }
 }
 
-export const createNewPost = (content) => async (dispatch) => {
+export const createNewPost = (content, imageUrl) => async (dispatch) => {
     const response = await fetch("/api/posts", {
         method: "POST",
         headers: {
@@ -44,28 +46,30 @@ export const createNewPost = (content) => async (dispatch) => {
         },
         body: JSON.stringify({
             content,
+            imageUrl
         })
     })
     if (response.ok) {
         const data = await response.json();
-        // if (data.errors) {
-        //     return data.errors;
-        // }
         dispatch(createPost(data))
+        dispatch(imagesActions.createNewImage(data))
     }
 }
 
-export const editPost = ({content}, postId) => async (dispatch) => {
-    console.log(content, postId)
+export const editPost = (postId, content, imageUrl) => async (dispatch) => {
     const response = await fetch(`/api/posts/${postId}`, {
         method: "PUT",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({content})
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            content, imageUrl
+        })
     })
-
-    if(response.ok) {
-        const data = await response.json()
+    if (response.ok) {
+        const data = await response.json();
         dispatch(editPostAction(data))
+        // dispatch(imagesActions.editImage(data))
     }
 }
 
@@ -90,7 +94,7 @@ export default function reducer(state = initialState, action) {
             newState[action.payload.post.id] = action.payload.post;
             return newState;
         case EDIT_POST:
-            newState[action.payload.editData.id] = action.payload.editData;
+            newState[action.payload.post.id] = action.payload.post;
             return newState;
         case DELETE_POST:
             delete newState[action.payload];

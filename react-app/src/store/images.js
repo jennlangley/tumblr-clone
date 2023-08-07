@@ -17,6 +17,16 @@ const editThisImage = (editImage) => ({
     payload: editImage
 })
 
+export const editImage = (image) => async (dispatch) => {
+    dispatch(editImageAction(image))
+    dispatch(getAllImages())
+}
+
+export const createNewImage = (images) => async (dispatch) => {
+    dispatch(createNewImageAction(images))
+    dispatch(getAllImages())
+}
+
 export const getAllImages = () => async (dispatch) => {
     const response = await fetch("/api/posts", {
         headers: {
@@ -30,41 +40,34 @@ export const getAllImages = () => async (dispatch) => {
     }
 }
 
-export const createNewImage = (imageUrl) => async (dispatch) => {
+// export const createNewImage = (imageUrl) => async (dispatch) => {
+   
+//     const response = await fetch("/api/images", {
+//         method: 'POST',
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//             imageUrl
+//         })
+//     })
 
-    const response = await fetch("/api/images", {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            imageUrl
-        })
-    })
+//     if (response.ok) {
+// 		const data = await response.json();
 
-    if (response.ok) {
-		const data = await response.json();
-		dispatch(createNewImageAction(data));
-        return data
-    }
-}
+// 		dispatch(createNewImageAction(data));
+//         return data
 
-export const editImage = ({content}, imageId) => async (dispatch) => {
-    const response = await fetch(`/api/images/${imageId}`, {
-        method: "PUT",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(content)
-    })
-    if (response.ok) {
-        const data = await response.json()
-        dispatch(editThisImage(data))
-    }
-}
+
+
+//     }
+// }
 
 const initialState = {}
 
 export default function reducer(state = initialState, action) {
     const newState = { ...state }
+
     switch (action.type) {
         case GET_IMAGES:
             action.payload.images.forEach(image => newState[image.id] = image);
@@ -73,7 +76,7 @@ export default function reducer(state = initialState, action) {
             newState[action.payload.image.id] = action.payload.image;
             return newState;
         case EDIT_IMAGE:
-            newState[action.payload.editImage.id] = action.payload.editImage;
+            newState[action.payload.image.id] = action.payload.image;
             return newState;
         default:
             return newState;

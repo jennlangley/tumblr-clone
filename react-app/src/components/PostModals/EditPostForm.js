@@ -1,12 +1,23 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 import { useModal } from "../../context/Modal";
 import * as postsActions from "../../store/posts";
 import * as imageActions from "../../store/images";
 
 const EditPostForm = ({postId}) => {
 
+const EditPostForm = ({ post }) => {
     const dispatch = useDispatch();
+    
+    const image = useSelector(state => state.images[post.id])
+ 
+    const [imageUrl, setImageUrl] = useState(image?.imageUrl);
+    
+    
+    const [content, setContent] = useState(post.content);
+    const [errors, setErrors] = useState([]);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
     const { closeModal } = useModal();
 
     useEffect(()=> {
@@ -16,21 +27,19 @@ const EditPostForm = ({postId}) => {
 
     const myPost = useSelector(state => Object.values(state.posts).filter((post => post.id === postId)))
     const myImage = useSelector(state => Object.values(state.images).filter(image => image.postId === postId))
-
-
-    const [content, setContent] = useState(myPost[0].content);
-    const [imageUrl, setImageUrl] = useState(myImage[0].imageUrl);
-    const [errors, setErrors] = useState([]);
-    const [hasSubmitted, setHasSubmitted] = useState(false);
-
-
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(postsActions.editPost({content}, postId))
-              .then(dispatch(postsActions.getAllPosts()))
-        // await dispatch(imageActions.editImage({imageUrl, postId}))
-             .then(closeModal())
+        setHasSubmitted(true);
+        if (!errors.length) {
+            // dispatch(imagesActions.createNewImage(imageUrl))
+            dispatch(postsActions.editPost(post.id, content))
+            setContent('');
+            setImageUrl('');
+            setErrors([]);
+            setHasSubmitted(false);
+            closeModal();
+        }
     }
 
     useEffect(() => {
@@ -42,33 +51,29 @@ const EditPostForm = ({postId}) => {
     }, [hasSubmitted, content, imageUrl]);
 
     return (
-        <div className="modalBackground">
-            <div className="modalContainer">
-            <div className="post">
-                <form id="post-form" onSubmit={handleSubmit}>
-                    <div className='errorsBox'>
-                        <ul className='errors'>
-                        {errors.map((error, idx) => (
-                            <li key={idx}>{error}</li>
-                        ))}
-                        </ul>
-                    </div>
-                    <label>Write something: </label>
-                    <textarea
-                        type="text"
-                        value={content}
-                        onChange={e => setContent(e.target.value)}
-                    />
-                    <label>Image URL: </label>
-                    <input
-                        type="text"
-                        value={imageUrl}
-                        onChange={e => setImageUrl(e.target.value)}
-                    />
-                    <button type='submit'>Edit</button>
-                </form>
-            </div>
-            </div>
+        <div className="post">
+            <form id="post-form" onSubmit={handleSubmit}>
+                <div className='errorsBox'>
+                    <ul className='errors'>
+                    {errors.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                    ))}
+                    </ul>
+                </div>
+                <label>Write something: </label>
+                <textarea
+                    type="text"
+                    value={content}
+                    onChange={e => setContent(e.target.value)}
+                />
+                <label>Image URL: </label>
+                <input
+                    type="text"
+                    value={imageUrl}
+                    onChange={e => setImageUrl(e.target.value)}
+                />
+                <button type='submit'>Update Post</button>
+            </form>
         </div>
     )
 }

@@ -1,0 +1,27 @@
+.fa-heart {
+    font-size: 20px;
+    padding-right: 10px;
+    color: dimgray;
+    cursor: pointer;
+}
+
+.fa-solid.fa-heart {
+    color: #d95f41;
+}
+
+.num-likes {
+    color: dimgray;
+    padding-right: 4px;
+}
+
+.num-likes-like-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logged-out-button {
+    background-color: none;
+    border: none;
+    color: red;
+}
