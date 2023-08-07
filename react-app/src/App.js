@@ -5,6 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import PostsPage from "./components/PostsPage";
 import PostDetail from "./components/PostsPage/PostDetail";
+import MyCommentsPage from "./components/MyCommentsPage";
+import MyPostsPage from "./components/MyPostsPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -31,6 +33,12 @@ function App() {
           </Route>
           <Route path='/posts'>
             <PostsPage isLoaded={isLoaded} />
+          </Route>
+          <Route path='/my_comments'>
+            <MyCommentsPage isLoaded={isLoaded} />
+          </Route>
+          <Route path='/my_posts'>
+            <MyPostsPage isLoaded={isLoaded} />
           </Route>
         </Switch>
       )}

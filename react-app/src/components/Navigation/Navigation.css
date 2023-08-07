@@ -4,8 +4,9 @@
   list-style: none;
   position: absolute;
   right: 10px;
-  width: 90px;
+  width: 150px;
   padding-inline: 10px;
+
 }
 
 .hidden {
@@ -21,4 +22,36 @@
 .active {
   color: white;
   text-decoration: none;
+}
+
+.logOut {
+  color: white;
+  position: relative;
+  border-radius: 5px;
+  height: 30px;
+  background-color: lightslategray;
+  left: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+
+}
+
+.commentsRoute {
+  color: lightslategray;
+
+  text-decoration: none;
+}
+
+.commentsRoute:hover {
+  font-weight: bold;
+}
+
+.postsRoute {
+  color: lightslategray;
+  text-decoration: none;
+}
+
+.postsRoute:hover {
+  font-weight: bold;
 }

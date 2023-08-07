@@ -3,24 +3,17 @@ body {
     font-family: Helvetica;
 }
 
-.posts {
+.myPosts {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.post {
+.myPost {
     margin: 10px;
     padding: 5px;
     width: 500px;
     border-radius: 6px;
     background-color: white;
 }
-
-.comments-like-button {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-

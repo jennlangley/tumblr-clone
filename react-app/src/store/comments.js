@@ -1,8 +1,32 @@
 const GET_COMMENTS = "comments/GET_COMMENTS"
+const GET_USER_COMMENTS = 'comments/GET_USER_COMMENTS'
+const DELETE_COMMENT = 'comments/DELETE_COMMENT'
+const CREATE_COMMENT = 'comments/CREATE_COMMENT'
+const EDIT_COMMENT = 'comments/EDIT_COMMENT'
 
 const getComments = (comments) => ({
     type: GET_COMMENTS,
     payload: comments
+})
+
+const userComments = (userData) => ({
+    type: GET_USER_COMMENTS,
+    payload: userData
+})
+
+const createThisComment = (comment) => ({
+    type: CREATE_COMMENT,
+    payload: comment
+})
+
+const editThisComment = (comment) => ({
+    type: EDIT_COMMENT,
+    payload: comment
+})
+
+const deleteThisComment = (commentId) => ({
+    type: DELETE_COMMENT,
+    payload: commentId
 })
 
 export const getAllComments = () => async (dispatch) => {
@@ -11,10 +35,67 @@ export const getAllComments = () => async (dispatch) => {
 			"Content-Type": "application/json",
 		},
     });
-    
+
     if (response.ok) {
         const data = await response.json();
         dispatch(getComments(data));
+    }
+}
+
+export const getUserComments = ({userId}) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${userId}`, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if(response.ok) {
+        const data = await response.json();
+        dispatch(userComments(data))
+    }
+}
+
+export const createMyComment = ({content}, postId) => async (dispatch) => {
+
+    const response = await fetch(`/api/comments/${postId}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content
+        })
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(createThisComment(data))
+    }
+}
+
+export const editComment = (content, commentId) => async (dispatch) => {
+
+    console.log(content, commentId)
+    const response = await fetch(`/api/comments/${commentId}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(content)
+    })
+
+    if(response.ok) {
+        const data = await response.json()
+        dispatch(editThisComment(data))
+    }
+}
+
+export const deleteMyComment = ({commentId}) => async(dispatch) => {
+
+    const response = await fetch(`/api/comments/${commentId}`, {
+        method: "DELETE"
+    })
+
+    if (response.ok) {
+        dispatch(deleteThisComment(commentId))
     }
 }
 
@@ -26,6 +107,19 @@ export default function reducer(state = initialState, action) {
         case GET_COMMENTS:
             action.payload.comments.forEach(comment => newState[comment.id] = comment);
             return newState;
+        case GET_USER_COMMENTS:
+            action.payload.userData.forEach(comment => newState[comment.id] = comment);
+            return newState;
+        case CREATE_COMMENT:
+            newState[action.payload.comment.id] = action.payload.comment;
+            return newState;
+        case EDIT_COMMENT:
+            console.log(action.payload)
+            newState[action.payload.comment.id] = action.payload.comment;
+            return newState;
+        case DELETE_COMMENT:
+            delete newState[action.payload];
+            return newState
         default:
             return newState;
     }

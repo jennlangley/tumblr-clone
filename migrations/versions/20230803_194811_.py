@@ -1,8 +1,14 @@
 """create users table
 
+<<<<<<< HEAD:migrations/versions/20230802_214939_create_users_table.py
 Revision ID: 57fb2e901158
 Revises: 
 Create Date: 2023-08-02 21:49:39.792701
+=======
+Revision ID: 63af0be15004
+Revises: 
+Create Date: 2023-08-03 19:48:11.366924
+>>>>>>> dev:migrations/versions/20230803_194811_.py
 
 """
 from alembic import op
