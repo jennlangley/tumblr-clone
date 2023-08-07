@@ -14,14 +14,14 @@ const userComments = (userData) => ({
     payload: userData
 })
 
-const createThisComment = (commentData) => ({
+const createThisComment = (comment) => ({
     type: CREATE_COMMENT,
-    payload: commentData
+    payload: comment
 })
 
-const editThisComment = (editData) => ({
+const editThisComment = (comment) => ({
     type: EDIT_COMMENT,
-    payload: editData
+    payload: comment
 })
 
 const deleteThisComment = (commentId) => ({
@@ -74,6 +74,8 @@ export const createMyComment = ({content}, postId) => async (dispatch) => {
 }
 
 export const editComment = (content, commentId) => async (dispatch) => {
+
+    console.log(content, commentId)
     const response = await fetch(`/api/comments/${commentId}`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -109,13 +111,14 @@ export default function reducer(state = initialState, action) {
             action.payload.userData.forEach(comment => newState[comment.id] = comment);
             return newState;
         case CREATE_COMMENT:
-             newState[action.payload.commentData.id] = action.payload.commentData;
+            newState[action.payload.comment.id] = action.payload.comment;
             return newState;
         case EDIT_COMMENT:
-            newState[action.payload.editData.id] = action.payload.editData;
+            console.log(action.payload)
+            newState[action.payload.comment.id] = action.payload.comment;
             return newState;
         case DELETE_COMMENT:
-            delete newState[action.payload.commentId];
+            delete newState[action.payload];
             return newState
         default:
             return newState;

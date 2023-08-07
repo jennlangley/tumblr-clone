@@ -16,11 +16,11 @@ const MyPostsPage = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
 
-    useEffect(() => {
-        dispatch(postsActions.getAllPosts())
-    //    dispatch(commentsActions.getAllComments())
-        dispatch(imagesActions.getAllImages())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(postsActions.getAllPosts())
+    // //    dispatch(commentsActions.getAllComments())
+    //     dispatch(imagesActions.getAllImages())
+    // }, [dispatch])
 
     const myPosts = useSelector(state => (Object.values(state.posts)).filter((post) => post.userId === sessionUser.id))
 

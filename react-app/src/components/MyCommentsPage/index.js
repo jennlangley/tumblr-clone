@@ -14,11 +14,11 @@ const MyCommentsPage = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
 
-    useEffect(() => {
-        dispatch(commentsActions.getAllComments())
-        dispatch(postsActions.getAllPosts())
-        dispatch(imagesActions.getAllImages())
-    },[dispatch])
+    // useEffect(() => {
+    //     dispatch(commentsActions.getAllComments())
+    //     dispatch(postsActions.getAllPosts())
+    //     dispatch(imagesActions.getAllImages())
+    // },[dispatch])
 
     const myComments = useSelector(state => (Object.values(state.comments)).filter((comment) => comment.userId === sessionUser.id))
     const post = useSelector(state => state.posts)
@@ -47,7 +47,8 @@ const MyCommentsPage = () => {
                    <div>{comment.content}</div>
                     <OpenModalButton
                         buttonText=<i className="fa-regular fa-trash-can"></i>
-                        modalComponent={<DeleteComment commentId={comment.id}/>}/>
+                        modalComponent={<DeleteComment commentId={comment.id}/>}
+                        />
                     <OpenModalButton
                         buttonText='Edit Comment'
                         modalComponent={<EditComment commentId={comment.id} />}

@@ -8,6 +8,8 @@ const Likes = ({ postId, userId }) => {
     const dispatch = useDispatch();
     const likes = useSelector(state => Object.values(state.likes).filter(like => like.postId === postId));
 
+    
+
     let liked = false;
     let likeId;
 

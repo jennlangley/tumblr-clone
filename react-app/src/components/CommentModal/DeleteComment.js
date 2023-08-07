@@ -13,11 +13,11 @@ const DeleteComment = (commentId) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-       await dispatch(commentsActions.deleteMyComment(commentId))
-             .then(dispatch(commentsActions.getAllComments()))
-             .then(dispatch(postsActions.getAllPosts()))
-             .then(dispatch(imagesActions.getAllImages()))
-             .then(history.push('/my_comments'))
+        await dispatch(commentsActions.deleteMyComment(commentId))
+            //  .then(dispatch(commentsActions.getAllComments()))
+            //  .then(dispatch(postsActions.getAllPosts()))
+            //  .then(dispatch(imagesActions.getAllImages()))
+            //  .then(history.push('/my_comments'))
              .then(closeModal())
     }
 

@@ -61,6 +61,8 @@ def edit_post(postId):
 
         # if (post_form.data['imageUrl']):
         #     image = Image.query.get()
+        return post.to_dict()
+
 
 @post_routes.route('<int:postId>', methods=["PUT"])
 def update_post(postId):
@@ -68,8 +70,8 @@ def update_post(postId):
     post = Post.query.get(postId)
     post.content = post_form.data['content']
     db.session.commit()
-    return
-   # return {'post': post.to_dict()}
+    # return
+    return {'post': post.to_dict()}
 
 
 @post_routes.route('/<int:postId>', methods=['DELETE'])

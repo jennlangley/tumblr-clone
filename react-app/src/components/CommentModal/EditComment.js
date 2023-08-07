@@ -11,9 +11,9 @@ const EditComment = ({commentId}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal();
 
-    useEffect(()=> {
-        dispatch(commentsActions.getAllComments())
-    },[dispatch])
+    // useEffect(()=> {
+    //     dispatch(commentsActions.getAllComments())
+    // },[dispatch])
 
     const comment = useSelector(state => Object.values(state.comments).filter((comment => comment.id === commentId)))
 
@@ -44,7 +44,6 @@ const EditComment = ({commentId}) => {
         setHasFilled(false)
 
         await dispatch(commentsActions.editComment({content}, commentId))
-              .then(await dispatch(commentsActions.getAllComments()))
               .then(closeModal())
     }
 

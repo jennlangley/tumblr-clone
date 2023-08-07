@@ -18,10 +18,10 @@ const EditPostForm = ({ post }) => {
 
     const { closeModal } = useModal();
 
-    useEffect(()=> {
-        dispatch(postsActions.getAllPosts())
-        dispatch(imageActions.getAllImages())
-    },[dispatch])
+    // useEffect(()=> {
+    //     dispatch(postsActions.getAllPosts())
+    //     dispatch(imageActions.getAllImages())
+    // },[dispatch])
 
     // const myPost = useSelector(state => Object.values(state.posts).filter((post => post.id === postId)))
     // const myImage = useSelector(state => Object.values(state.images).filter(image => image.postId === postId))
@@ -31,7 +31,7 @@ const EditPostForm = ({ post }) => {
         setHasSubmitted(true);
         if (!errors.length) {
             // dispatch(imagesActions.createNewImage(imageUrl))
-            dispatch(postsActions.editPost(post.id, content))
+            await dispatch(postsActions.editPost(post.id, content))
             setContent('');
             setImageUrl('');
             setErrors([]);

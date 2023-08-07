@@ -29,11 +29,11 @@ const PostsPage = () => {
     const posts = useSelector(state => Object.values(state.posts))
     const user = useSelector(state => state.session.user)
 
-    let orderPost = []
-    for(let i = 0; i < posts.length; i++) {
-        let post = posts[i]
-        orderPost.unshift(post)
-    }
+    // let orderPost = []
+    // for(let i = 0; i < posts.length; i++) {
+    //     let post = posts[i]
+    //     orderPost.unshift(post)
+    // }
 
     return (
         isLoaded &&
@@ -45,7 +45,7 @@ const PostsPage = () => {
                 />
             }
             <div className="">
-                {orderPost.map(post =>
+                {Object.values(posts).reverse().map(post =>
                     <div key={post.id} className="post">
                         <div>{post.user.username}</div>
                         <div>{post.created_at}</div>
