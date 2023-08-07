@@ -44,13 +44,12 @@ export const createNewImage = (imageUrl) => async (dispatch) => {
 
     if (response.ok) {
 		const data = await response.json();
-
 		dispatch(createNewImageAction(data));
         return data
     }
 }
 
-export const editImage = (content, imageId) => async (dispatch) => {
+export const editImage = ({content}, imageId) => async (dispatch) => {
     const response = await fetch(`/api/images/${imageId}`, {
         method: "PUT",
         headers: {'Content-Type': 'application/json'},

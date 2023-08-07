@@ -27,9 +27,10 @@ const EditPostForm = ({postId}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(postsActions.editPost(content))
-        await dispatch(imageActions.editImage(imageUrl))
-        closeModal()
+        await dispatch(postsActions.editPost({content}, postId))
+              .then(dispatch(postsActions.getAllPosts()))
+        // await dispatch(imageActions.editImage({imageUrl, postId}))
+             .then(closeModal())
     }
 
     useEffect(() => {

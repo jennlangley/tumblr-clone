@@ -4,7 +4,7 @@ import DeletePostForm from "../PostModals/DeletePostForm";
 import EditPostForm from "../PostModals/EditPostForm";
 import Images from "../PostDetail/Images";
 import OpenModalButton from "../OpenModalButton";
-import Comments from "../PostDetail/Comments";
+// import Comments from "../PostDetail/Comments";
 import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
 import * as commentsActions from '../../store/comments';
@@ -18,11 +18,19 @@ const MyPostsPage = () => {
 
     useEffect(() => {
         dispatch(postsActions.getAllPosts())
-        dispatch(commentsActions.getAllComments())
+    //    dispatch(commentsActions.getAllComments())
         dispatch(imagesActions.getAllImages())
     }, [dispatch])
 
     const myPosts = useSelector(state => (Object.values(state.posts)).filter((post) => post.userId === sessionUser.id))
+
+    // let orderPost = []
+    // for(let i = 0; i < myPosts.length; i++) {
+    //     let post = myPosts[i]
+    //     orderPost.unshift(post)
+    // }
+
+
 
     return (
         <>
@@ -36,7 +44,7 @@ const MyPostsPage = () => {
                     <div>{post.content}</div>
                     <OpenModalButton
                         buttonText=<i className="fa-regular fa-trash-can"></i>
-                        modalComponent={<DeletePostForm posttId={post.id}/>}/>
+                        modalComponent={<DeletePostForm postId={post.id}/>}/>
                     <OpenModalButton
                         buttonText='Edit Post'
                         modalComponent={<EditPostForm postId={post.id} />}

@@ -47,13 +47,14 @@ def new_post():
     return
     # return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
 
-@post_routes.route('/<int:postId>', methods=["PUT"])
+@post_routes.route('<int:postId>', methods=["PUT"])
 def update_post(postId):
     post_form = PostForm()
     post = Post.query.get(postId)
     post.content = post_form.data['content']
     db.session.commit()
-    return {'post': post.to_dict()}
+    return
+   # return {'post': post.to_dict()}
 
 
 @post_routes.route('/<int:postId>', methods=['DELETE'])

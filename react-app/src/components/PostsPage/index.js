@@ -13,27 +13,33 @@ import DeletePostForm from "../PostModals/DeletePostForm";
 const PostsPage = () => {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false)
-    
+
     useEffect(() => {
         dispatch(postsActions.getAllPosts())
         dispatch(commentsActions.getAllComments())
         dispatch(imagesActions.getAllImages()).then(() => setIsLoaded(true))
     }, [dispatch])
 
-    const posts = useSelector(state => state.posts)
+    const posts = useSelector(state => Object.values(state.posts))
     const user = useSelector(state => state.session.user)
+
+    let orderPost = []
+    for(let i = 0; i < posts.length; i++) {
+        let post = posts[i]
+        orderPost.unshift(post)
+    }
 
     return (
         isLoaded &&
         <div className="posts">
-            {user && 
-                <OpenModalButton 
+            {user &&
+                <OpenModalButton
                     buttonText="New Post"
                     modalComponent={<PostForm />}
                 />
             }
             <div className="">
-                {posts && Object.values(posts).map(post => 
+                {orderPost.map(post =>
                     <div key={post.id} className="post">
                         <div>{post.created_at}</div>
                         <Images postId={post.id} />

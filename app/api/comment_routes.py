@@ -29,22 +29,23 @@ def new_comment(postId):
         comment = Comment(content=comment_form.data['content'], userId=current_user.id, postId=postId)
         db.session.add(comment)
         db.session.commit()
-        return {'comment': comment.to_dict()}
+        return
+        # return {'comment': comment.to_dict()}
 
-@comment_routes.route('<int:commentId>', methods=['PUT'])
+@comment_routes.route('/<int:commentId>', methods=['PUT'])
 def update_comment(commentId):
     comment_form = CommentForm()
     comment = Comment.query.get(commentId)
     comment.content = comment_form.data['content']
     db.session.commit()
-    return {'comment': comment.to_dict()}
+    return
+   # return {'comment': comment.to_dict()}
 
 
 
 @comment_routes.route('/<int:commentId>', methods=['DELETE'])
 def delete_comment(commentId):
-
     comment = Comment.query.get(commentId)
     db.session.delete(comment)
     db.session.commit()
-    return {'message': 'Successfully deleted'}
+    return {'message': 'successfully deleted'}

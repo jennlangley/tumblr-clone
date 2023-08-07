@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react"
+// import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as commentsActions from "../../store/comments";
 import './CreateComment.css'
 
 const EditComment = ({commentId}) => {
+
+    // const history = useHistory();
     const dispatch = useDispatch()
     const { closeModal } = useModal();
 
@@ -13,7 +16,7 @@ const EditComment = ({commentId}) => {
     },[dispatch])
 
     const comment = useSelector(state => Object.values(state.comments).filter((comment => comment.id === commentId)))
-    // console.log(comment[0].content, 'OOOOOOOOOOOOOOOO')
+
 
     const [content, setContent] = useState(comment[0].content)
     const [hasFilled, setHasFilled] = useState(false)
@@ -40,8 +43,9 @@ const EditComment = ({commentId}) => {
         setError({})
         setHasFilled(false)
 
-        await dispatch(commentsActions.editComment({content},comment[0].id))
-        closeModal()
+        await dispatch(commentsActions.editComment({content}, commentId))
+              .then(await dispatch(commentsActions.getAllComments()))
+              .then(closeModal())
     }
 
     return (
@@ -55,7 +59,7 @@ const EditComment = ({commentId}) => {
                       {error.content && (<p>{error.content}</p>)}
                     </div>
                     <textarea id='comment'
-                              placeholder='Type your comment'
+                              placeholder='Edit your comment'
                               value={content}
                               onChange={(e) => setContent(e.target.value)}
                               onClick={()=> {setHasFilled(true)}} />

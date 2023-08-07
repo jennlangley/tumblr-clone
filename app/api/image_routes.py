@@ -52,4 +52,5 @@ def update_image(imageId):
     image = Image.query.get(imageId)
     image.imageUrl = image_form.data['imageUrl']
     db.session.commit()
-    return {'image': image.to_dict()}
+    return
+ #   return {'image': image.to_dict()}

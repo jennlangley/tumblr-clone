@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as commentsActions from '../../store/comments';
 import * as postsActions from '../../store/posts';
-import Comment_Posts from './Comment_Posts';
+import * as imagesActions from '../../store/images';
 import OpenModalButton from "../OpenModalButton";
 import DeleteComment from "../CommentModal/DeleteComment";
 import EditComment from "../CommentModal/EditComment";
@@ -17,12 +17,22 @@ const MyCommentsPage = () => {
     useEffect(() => {
         dispatch(commentsActions.getAllComments())
         dispatch(postsActions.getAllPosts())
+        dispatch(imagesActions.getAllImages())
     },[dispatch])
 
     const myComments = useSelector(state => (Object.values(state.comments)).filter((comment) => comment.userId === sessionUser.id))
+    const post = useSelector(state => state.posts)
+    const image = useSelector(state => state.images)
 
-    const posts = useSelector(state => state.posts)
+    // console.log(myComments)
 
+    // let orderComment = []
+    // for(let i = 0; i < myComments.length; i++) {
+    //     let comment = myComments[i]
+    //     orderComment.unshift(post)
+    // }
+
+    // console.log(orderComment)
 
     return (
         <>
@@ -31,8 +41,10 @@ const MyCommentsPage = () => {
         {sessionUser ? (
             myComments.map(comment =>
                 <div key={comment.id} className='myComment'>
-                    <Comment_Posts postId={comment.postId} />
-                    <div>{comment.content}</div>
+                   <div>
+                    <img alt='' src={image[comment.postId]?.imageUrl} /></div>
+                   <div>{post[comment.postId]?.content}</div>
+                   <div>{comment.content}</div>
                     <OpenModalButton
                         buttonText=<i className="fa-regular fa-trash-can"></i>
                         modalComponent={<DeleteComment commentId={comment.id}/>}/>
@@ -40,7 +52,6 @@ const MyCommentsPage = () => {
                         buttonText='Edit Comment'
                         modalComponent={<EditComment commentId={comment.id} />}
                         />
-                    {/* <button>Edit Comment</button> */}
                     <div>{comment.created_at}</div>
                 </div>
             )

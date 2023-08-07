@@ -55,11 +55,12 @@ export const createNewPost = (content) => async (dispatch) => {
     }
 }
 
-export const editPost = (content, postId) => async (dispatch) => {
+export const editPost = ({content}, postId) => async (dispatch) => {
+    console.log(content, postId)
     const response = await fetch(`/api/posts/${postId}`, {
         method: "PUT",
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(content)
+        body: JSON.stringify({content})
     })
 
     if(response.ok) {

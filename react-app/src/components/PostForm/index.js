@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react"
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react"
+import { useDispatch } from "react-redux";
 
 import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
@@ -23,7 +23,7 @@ const PostForm = () => {
 
         if (!errors.length) {
             dispatch(postsActions.createNewPost(content));
-            // dispatch(imagesActions.createNewImage(imageUrl))
+            dispatch(imagesActions.createNewImage(imageUrl))
             setContent('');
             setImageUrl('');
             setErrors([]);
