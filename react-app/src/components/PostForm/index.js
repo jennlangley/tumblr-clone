@@ -22,8 +22,9 @@ const PostForm = () => {
         setHasSubmitted(true);
 
         if (!errors.length) {
-            dispatch(postsActions.createNewPost(content));
-            dispatch(imagesActions.createNewImage(imageUrl))
+            dispatch(postsActions.createNewPost(content))
+            .then(dispatch(postsActions.getAllPosts()))
+            .then(dispatch(imagesActions.createNewImage(imageUrl)))
             setContent('');
             setImageUrl('');
             setErrors([]);
