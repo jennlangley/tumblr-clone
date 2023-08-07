@@ -12,7 +12,7 @@ const createNewImageAction = (image) => ({
     payload: image
 })
 
-const editThisImage = (editImage) => ({
+const editImageAction = (editImage) => ({
     type: EDIT_IMAGE,
     payload: editImage
 })

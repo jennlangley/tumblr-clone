@@ -4,8 +4,6 @@ import { useModal } from "../../context/Modal";
 import * as postsActions from "../../store/posts";
 import * as imageActions from "../../store/images";
 
-const EditPostForm = ({postId}) => {
-
 const EditPostForm = ({ post }) => {
     const dispatch = useDispatch();
     
@@ -25,9 +23,9 @@ const EditPostForm = ({ post }) => {
         dispatch(imageActions.getAllImages())
     },[dispatch])
 
-    const myPost = useSelector(state => Object.values(state.posts).filter((post => post.id === postId)))
-    const myImage = useSelector(state => Object.values(state.images).filter(image => image.postId === postId))
-    
+    // const myPost = useSelector(state => Object.values(state.posts).filter((post => post.id === postId)))
+    // const myImage = useSelector(state => Object.values(state.images).filter(image => image.postId === postId))
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
