@@ -12,7 +12,7 @@ class Follow(db.Model):
     followerId = db.Column(db.Integer)
     followedId = db.Column(db.Integer)
 
-    __table_args__ = (UniqueConstraint('followerId', 'followedId', name='unique_follows'),)
+    # __table_args__ = (UniqueConstraint('followerId', 'followedId', name='unique_follows'),)
 
     def to_dict(self):
         return {

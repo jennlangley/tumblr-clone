@@ -25,7 +25,6 @@ def upgrade():
     sa.Column('followerId', sa.Integer(), nullable=True),
     sa.Column('followedId', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('followerId', 'followedId', name='unique_follows')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
