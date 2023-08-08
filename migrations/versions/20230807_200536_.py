@@ -75,9 +75,9 @@ def upgrade():
     sa.Column('postId', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['postId'], ['posts.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('userId', 'postId', name='unique_likes')
+    sa.PrimaryKeyConstraint('id')
     )
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
