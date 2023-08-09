@@ -6,7 +6,7 @@ const getUsersAction = (users) => ({
 })
 
 export const getUsers = () => async (dispatch) => {
-    const response = await fetch('api/users', {
+    const response = await fetch('/api/users', {
         "Content-Type": "application/json"
     })
 

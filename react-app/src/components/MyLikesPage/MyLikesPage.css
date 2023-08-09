@@ -1,0 +1,8 @@
+#num-likes {
+    color: lightgray;
+    width: 520px;
+    font-size: 18px;
+    display: flex;
+    justify-content: flex-start;
+    padding: none;
+}

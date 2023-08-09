@@ -55,3 +55,13 @@ body {
 .post-content {
     padding-top: 5px;
 }
+
+#follow-button {
+    font-size: 14px;
+    padding-left: 6px;
+    color: rgb(45, 174, 255);
+    cursor: pointer;
+}
+#follow-button:hover {
+    text-decoration: underline;
+}

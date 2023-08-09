@@ -20,11 +20,11 @@ const MyPostsPage = () => {
     const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {
-        dispatch(usersActions.getUsers())
-        dispatch(postsActions.getAllPosts())
-        dispatch(commentsActions.getAllComments())
-        dispatch(likesActions.getLikes())
-        dispatch(imagesActions.getAllImages())
+        dispatch(usersActions.getUsers());
+        dispatch(postsActions.getAllPosts());
+        dispatch(commentsActions.getAllComments());
+        dispatch(likesActions.getLikes());
+        dispatch(imagesActions.getAllImages());
         
     }, [dispatch])
 
@@ -50,15 +50,18 @@ const MyPostsPage = () => {
                         <div id="timestamp">{post.created_at}</div>
                         <Images postId={post.id} />
                         <div className="post-content">{post.content}</div>
-                        <OpenModalButton
+                        <div className="edit-and-delete-button">
+                            <OpenModalButton
                             buttonText=<i className="fa-regular fa-trash-can"></i>
                             modalComponent={<DeletePostForm postId={post.id}/>}
                         
-                        />
-                        <OpenModalButton
-                            buttonText=<i className="fa-regular fa-pen-to-square"></i>
-                            modalComponent={<EditPostForm postId={post.id} />}
-                        />
+                            />
+                            <OpenModalButton
+                                buttonText=<i className="fa-regular fa-pen-to-square"></i>
+                                modalComponent={<EditPostForm postId={post.id} />}
+                            />
+                        </div>
+                        
                         <div className="comments-like-button">
                             <Comments postId={post.id} />
                             <Likes postId={post.id} userId={sessionUser.id} />

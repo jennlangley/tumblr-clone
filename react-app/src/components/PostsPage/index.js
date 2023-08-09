@@ -60,7 +60,7 @@ const PostsPage = () => {
                         <div id="username">{post.user.username}
                         {user && !(user.id === post.userId) && (
                             (following.includes(post.userId) 
-                                ? <i onClick={e => {
+                                ? <span id="follow-button" onClick={e => {
                                     e.preventDefault();
                                     let followId;
                                     for (let follow of follows) {
@@ -70,14 +70,14 @@ const PostsPage = () => {
                                     }
                                     dispatch(followsActions.deleteFollow(followId))
                                 }}
-                                className="fa-solid fa-square-minus"></i>
-                                : <i onClick={e => {
+                                >Unfollow</span>
+                                : <span id="follow-button" onClick={e => {
                                     e.preventDefault();
                                     dispatch(followsActions.createFollow(post.userId));
                                     }} 
-                                    className="fa-solid fa-square-plus"></i>
+                                    >Follow</span>
                         ))}
-                        </div>
+                         </div>
                         <div id="timestamp">{post.created_at}</div>
                         <Images postId={post.id} />
                         <div className="post-content">{post.content}</div>

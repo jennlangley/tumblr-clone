@@ -1,13 +1,9 @@
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom"
 import { useModal } from "../../context/Modal";
-import * as postsActions from "../../store/posts"
 import * as commentsActions from "../../store/comments";
-import * as imagesActions from "../../store/images";
 import './DeleteComment.css'
 
 const DeleteComment = (commentId) => {
-    const history = useHistory();
     const dispatch = useDispatch()
     const { closeModal } = useModal();
 
