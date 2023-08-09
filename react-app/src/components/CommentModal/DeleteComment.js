@@ -9,7 +9,7 @@ const DeleteComment = (commentId) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(commentsActions.deleteMyComment(commentId))
+        await dispatch(commentsActions.deleteComment(commentId))
             //  .then(dispatch(commentsActions.getAllComments()))
             //  .then(dispatch(postsActions.getAllPosts()))
             //  .then(dispatch(imagesActions.getAllImages()))

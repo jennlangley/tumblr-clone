@@ -5,5 +5,3 @@ from wtforms.validators import DataRequired, ValidationError
 
 class CommentForm(FlaskForm):
     content = StringField('content', validators=[DataRequired()])
-    postId = IntegerField('postId')
-    userId = IntegerField('userId')

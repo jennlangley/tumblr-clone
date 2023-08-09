@@ -22,7 +22,7 @@ const MyPostsPage = () => {
     useEffect(() => {
         dispatch(usersActions.getUsers());
         dispatch(postsActions.getAllPosts());
-        dispatch(commentsActions.getAllComments());
+        dispatch(commentsActions.getComments());
         dispatch(likesActions.getLikes());
         dispatch(imagesActions.getAllImages());
         

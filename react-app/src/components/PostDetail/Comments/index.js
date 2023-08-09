@@ -1,11 +1,15 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import * as commentsActions from '../../../store/comments';
+import * as usersActions from '../../../store/users';
 import OpenModalButton from '../../OpenModalButton';
 import CreateComment from '../../CommentModal/CreateComment';
+import AddComment from "./AddComment";
 import './Comments.css'
 
 const Comments = ({ postId }) => {
+
     const comments = useSelector(state => Object.values(state.comments).filter(comment => comment.postId === postId));
     const users = useSelector(state => state.users)
 
@@ -18,27 +22,25 @@ const Comments = ({ postId }) => {
                 {showComments ? <span><i className="fa-solid fa-xmark"></i> Close comments</span> :
                 comments && `${Object.values(comments).length} comments`}</div>
             <div>
-                {showComments &&
-                    (comments && Object.values(comments).map(comment => 
-                        <div id="comment-container">
-                            <div><i id="comment-profile-link" className="fa-regular fa-circle-user"></i></div>
-                            <div className="comment-text" key={comment.id}>
-                                
-                                <div className="comment-username">{Object.values(users[comment.userId].username)}<span className="comment-date"> {comment.updated_at}</span></div>
-                                <div>{comment.content}</div>
-                                
+                {showComments && <AddComment postId={postId}/>}
+                {showComments && 
+                    (comments && (Object.values(comments).reverse().map(comment => 
+                        <div key={comment.id} id="comment-container">
+                            <div>
+                                <i id="comment-profile-link" className="fa-regular fa-circle-user" />
                             </div>
-                        </div>
+                            <div className="comment-text" key={comment.id}>
+                                <div className="comment-username">{Object.values(users[comment.userId].username)}
+                                    <span className="comment-date"> {comment.updated_at}</span>
+                                </div>
+                                <div id="comment-content">{comment.content}</div>
+                            </div>
+                            
+                        </div>)
+                        )
                         
-                        
-                        ))
+                    )
                 } 
-                {/* <div className='commentButton'>
-                <OpenModalButton
-                    buttonText = {<i className="fa-regular fa-comment"></i>}
-                    modalComponent={<CreateComment postId={postId} />}
-                />
-               </div>  */}
             </div>
         </div>
     )

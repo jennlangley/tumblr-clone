@@ -54,6 +54,7 @@ body {
 
 .post-content {
     padding-top: 5px;
+    word-break: break-word;
 }
 
 #follow-button {

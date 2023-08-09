@@ -22,7 +22,7 @@ const PostsPage = () => {
     useEffect(() => {
         dispatch(usersActions.getUsers())
         dispatch(postsActions.getAllPosts())
-        dispatch(commentsActions.getAllComments())
+        dispatch(commentsActions.getComments())
         dispatch(likesActions.getLikes())
         dispatch(followsActions.getFollows())
         dispatch(imagesActions.getAllImages()).then(() => setIsLoaded(true));
@@ -77,7 +77,7 @@ const PostsPage = () => {
                                     }} 
                                     >Follow</span>
                         ))}
-                         </div>
+                        </div>
                         <div id="timestamp">{post.created_at}</div>
                         <Images postId={post.id} />
                         <div className="post-content">{post.content}</div>

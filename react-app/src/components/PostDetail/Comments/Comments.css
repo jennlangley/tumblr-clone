@@ -34,7 +34,10 @@
     padding: 10px;
     margin: 4px;
 }
-
+#comment-content {
+    word-break: break-word;
+   
+}
 .comment-username {
     font-weight: bold;
 }
@@ -58,3 +61,39 @@
     flex-direction: row;
     justify-content: space-between;
 } */
+
+#comment-and-comment-button {
+    display: flex;
+    flex: 1;
+}
+#comment-form {
+    display: flex;
+    flex-direction: row;
+}
+#comment-textarea {
+    display: flex;
+    width: 300px;
+    border: none;
+    resize: none;
+    background: 0 0;
+    overflow: hidden;
+    word-break: break-word;
+    outline: none;
+    font-family: inherit;
+}
+#comment-area-and-button {
+    border: 1px solid grey;
+    border-radius: 16px;
+    padding: 4px;
+}
+#comment-button {
+    box-sizing: border-box;
+    font: inherit;
+    border: none;
+    background-color: white;
+    color: rgb(45, 174, 255);
+    cursor: pointer;
+}
+#comment-button:disabled {
+    color: grey;
+}

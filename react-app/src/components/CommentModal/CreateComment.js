@@ -33,8 +33,8 @@ const CreateComment = ({postId}) => {
         setError({})
         setHasFilled(false)
 
-        await dispatch(commentsActions.createMyComment({content}, postId))
-              .then(dispatch(commentsActions.getAllComments()))
+        await dispatch(commentsActions.createComment({content}, postId))
+              .then(dispatch(commentsActions.getComments()))
               closeModal()
     }
 

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Post, Image, Comment, Like
-from app.forms import PostForm
+from app.forms import PostForm, CommentForm
 from datetime import datetime
 
 post_routes = Blueprint('posts', __name__)
@@ -67,20 +67,10 @@ def edit_post(postId):
 def update_post(postId):
     post_form = PostForm()
     post = Post.query.get(postId)
-    post.content = post_form.data['content']
-    db.session.commit()
-    # return
-    return {'post': post.to_dict()}
-
-    if post_form.validate_on_submit():
-        post = Post.query.get(postId)
+    if (post_form.validate_on_submit()) :
         post.content = post_form.data['content']
         post.updated_at = datetime.now()
         db.session.commit()
-
-        # if (post_form.data['imageUrl']):
-        #     image = Image.query.get()
-
         return {'post': post.to_dict()}
     return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
 
@@ -101,6 +91,17 @@ def like_post(postId):
     db.session.commit()
     return {'like': like.to_dict()}
 
+@post_routes.route('/<int:postId>/comments', methods=['POST'])
+@login_required
+def create_comment(postId):
+    comment_form = CommentForm()
+    comment_form['csrf_token'].data = request.cookies['csrf_token']
+
+    if comment_form.validate_on_submit():
+        comment = Comment(content=comment_form.data['content'], userId=current_user.id, postId=postId)
+        db.session.add(comment)
+        db.session.commit()
+        return {'comment': comment.to_dict()}
 
 # @post_routes.route('/<int:postId>')
 # def get_post_by_id(postId):

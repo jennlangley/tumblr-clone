@@ -17,7 +17,7 @@ const MyCommentsPage = () => {
 
     useEffect(() => {
         dispatch(postsActions.getAllPosts())
-        dispatch(commentsActions.getAllComments())
+        dispatch(commentsActions.getComments())
         dispatch(imagesActions.getAllImages())
         dispatch(usersActions.getUsers())
     }, [dispatch])

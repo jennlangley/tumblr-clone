@@ -1,35 +1,29 @@
-const GET_COMMENTS = "comments/GET_COMMENTS"
-const GET_USER_COMMENTS = 'comments/GET_USER_COMMENTS'
-const DELETE_COMMENT = 'comments/DELETE_COMMENT'
-const CREATE_COMMENT = 'comments/CREATE_COMMENT'
-const EDIT_COMMENT = 'comments/EDIT_COMMENT'
+const GET_COMMENTS = "comments/GET_COMMENTS";
+const DELETE_COMMENT = 'comments/DELETE_COMMENT';
+const CREATE_COMMENT = 'comments/CREATE_COMMENT';
+const EDIT_COMMENT = 'comments/EDIT_COMMENT';
 
-const getComments = (comments) => ({
+const getCommentsAction = (comments) => ({
     type: GET_COMMENTS,
     payload: comments
 })
 
-const userComments = (userData) => ({
-    type: GET_USER_COMMENTS,
-    payload: userData
-})
-
-const createThisComment = (comment) => ({
+const createCommentAction = (comment) => ({
     type: CREATE_COMMENT,
     payload: comment
 })
 
-const editThisComment = (comment) => ({
+const editCommentAction = (comment) => ({
     type: EDIT_COMMENT,
     payload: comment
 })
 
-const deleteThisComment = (commentId) => ({
+const deleteCommentAction = (commentId) => ({
     type: DELETE_COMMENT,
     payload: commentId
 })
 
-export const getAllComments = () => async (dispatch) => {
+export const getComments = () => async (dispatch) => {
     const response = await fetch("/api/posts", {
         headers: {
 			"Content-Type": "application/json",
@@ -38,26 +32,12 @@ export const getAllComments = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(getComments(data));
+        dispatch(getCommentsAction(data));
     }
 }
 
-export const getUserComments = ({userId}) => async (dispatch) => {
-    const response = await fetch(`/api/comments/${userId}`, {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-
-    if(response.ok) {
-        const data = await response.json();
-        dispatch(userComments(data))
-    }
-}
-
-export const createMyComment = ({content}, postId) => async (dispatch) => {
-
-    const response = await fetch(`/api/comments/${postId}`, {
+export const createComment = (content, postId) => async (dispatch) => {
+    const response = await fetch(`/api/posts/${postId}/comments`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -69,13 +49,11 @@ export const createMyComment = ({content}, postId) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(createThisComment(data))
+        dispatch(createCommentAction(data))
     }
 }
 
 export const editComment = (content, commentId) => async (dispatch) => {
-
-    console.log(content, commentId)
     const response = await fetch(`/api/comments/${commentId}`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -84,18 +62,18 @@ export const editComment = (content, commentId) => async (dispatch) => {
 
     if(response.ok) {
         const data = await response.json()
-        dispatch(editThisComment(data))
+        dispatch(editCommentAction(data))
     }
 }
 
-export const deleteMyComment = ({commentId}) => async(dispatch) => {
+export const deleteComment = ({commentId}) => async(dispatch) => {
 
     const response = await fetch(`/api/comments/${commentId}`, {
         method: "DELETE"
     })
 
     if (response.ok) {
-        dispatch(deleteThisComment(commentId))
+        dispatch(deleteCommentAction(commentId))
     }
 }
 
@@ -107,14 +85,10 @@ export default function reducer(state = initialState, action) {
         case GET_COMMENTS:
             action.payload.comments.forEach(comment => newState[comment.id] = comment);
             return newState;
-        case GET_USER_COMMENTS:
-            action.payload.userData.forEach(comment => newState[comment.id] = comment);
-            return newState;
         case CREATE_COMMENT:
             newState[action.payload.comment.id] = action.payload.comment;
             return newState;
         case EDIT_COMMENT:
-            console.log(action.payload)
             newState[action.payload.comment.id] = action.payload.comment;
             return newState;
         case DELETE_COMMENT:
