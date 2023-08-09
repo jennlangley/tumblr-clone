@@ -46,8 +46,9 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li><NavLink className='commentsRoute' to='/my_comments' onClick={closeMenu}>{user.username}'s Comments</NavLink></li>
-            <li><NavLink className='postsRoute' to='/my_posts' onClick={closeMenu}>{user.username}'s Posts</NavLink></li>
+            <li><NavLink className='postsRoute' to={`/users/${user.id}/posts`} onClick={closeMenu}>{user.username}'s Posts</NavLink></li>
+            <li><NavLink className='commentsRoute' to={`/users/${user.id}/comments`} onClick={closeMenu}>{user.username}'s Comments</NavLink></li>
+            <li><NavLink className='commentsRoute' to={`/users/${user.id}/likes`} onClick={closeMenu}>{user.username}'s Likes</NavLink></li>
             <li>{user.username}</li>
             <li>{user.email}</li>
             <div className='buttonDiv'>

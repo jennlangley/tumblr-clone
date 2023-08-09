@@ -19,7 +19,7 @@
   list-style: none;
 }
 
-.active {
+#site-home-link {
   color: white;
   text-decoration: none;
 }

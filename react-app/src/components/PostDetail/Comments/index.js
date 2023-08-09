@@ -13,7 +13,7 @@ const Comments = ({ postId }) => {
 
     let commentToggle = showComments ? "comment-toggle comments-on" : "comment-toggle comments-off";
     return (
-        <div>
+        <div className="comments-and-comment-button">
             <div className={commentToggle} onClick={e => setShowComments(!showComments)}>
                 {showComments ? <span><i className="fa-solid fa-xmark"></i> Close comments</span> :
                 comments && `${Object.values(comments).length} comments`}</div>
@@ -32,14 +32,14 @@ const Comments = ({ postId }) => {
                         
                         
                         ))
-                }  
-            </div>
-            <div className='commentButton'>
+                } 
+                {/* <div className='commentButton'>
                 <OpenModalButton
-                    buttonText = 'Add Comment'
+                    buttonText = {<i className="fa-regular fa-comment"></i>}
                     modalComponent={<CreateComment postId={postId} />}
                 />
-               </div>
+               </div>  */}
+            </div>
         </div>
     )
 }

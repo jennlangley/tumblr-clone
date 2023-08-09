@@ -12,7 +12,7 @@ body {
 
 .post {
     margin: 10px;
-    padding: 5px;
+    padding: 10px;
     width: 500px;
     border-radius: 6px;
     background-color: white;
@@ -22,5 +22,36 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+
+}
+#username {
+    font-weight: bold;
+    font-size: 16px;
+}
+#timestamp {
+    font-size: 14px;
+    color: dimgray;
 }
 
+.create-post-container {
+    width: 500px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.edit-and-delete-button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.post-content {
+    padding-top: 5px;
+}

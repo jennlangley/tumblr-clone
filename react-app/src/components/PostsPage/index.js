@@ -10,6 +10,7 @@ import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
 import * as commentsActions from '../../store/comments';
 import * as likesActions from '../../store/likes';
+import * as followsActions from '../../store/follows';
 import './PostsPage.css';
 import DeletePostForm from "../PostModals/DeletePostForm";
 import EditPostForm from "../PostModals/EditPostForm";
@@ -23,36 +24,65 @@ const PostsPage = () => {
         dispatch(postsActions.getAllPosts())
         dispatch(commentsActions.getAllComments())
         dispatch(likesActions.getLikes())
+        dispatch(followsActions.getFollows())
         dispatch(imagesActions.getAllImages()).then(() => setIsLoaded(true));
     }, [dispatch])
 
-    const posts = useSelector(state => Object.values(state.posts))
-    const user = useSelector(state => state.session.user)
+    const posts = useSelector(state => Object.values(state.posts));
+    const user = useSelector(state => state.session.user);
+    const follows = useSelector(state => (Object.values(state.follows)).filter((follow) => follow.followerId === user?.id));
 
-    // let orderPost = []
-    // for(let i = 0; i < posts.length; i++) {
-    //     let post = posts[i]
-    //     orderPost.unshift(post)
-    // }
+    let following = [];
+    for (let follow of follows) {
+        following.push(follow.followedId);
+    }
 
     return (
         isLoaded &&
         <div className="posts">
             {user &&
-                <OpenModalButton
-                    buttonText="New Post"
-                    modalComponent={<PostForm />}
-                />
+                <div className="create-post-container">
+                    <div>
+                        <OpenModalButton
+                            buttonText={<i className="fa-solid fa-plus">  </i>}
+                            modalComponent={<PostForm />}
+                        />
+                        New post
+                    </div>
+                    
+                </div>
+
+                
             }
             <div className="">
                 {Object.values(posts).reverse().map(post =>
                     <div key={post.id} className="post">
-                        <div>{post.user.username}</div>
-                        <div>{post.created_at}</div>
+                        <div id="username">{post.user.username}
+                        {user && !(user.id === post.userId) && (
+                            (following.includes(post.userId) 
+                                ? <i onClick={e => {
+                                    e.preventDefault();
+                                    let followId;
+                                    for (let follow of follows) {
+                                        if (follow.followedId === post.userId && follow.followerId === user.id) {
+                                            followId = follow.id
+                                        }
+                                    }
+                                    dispatch(followsActions.deleteFollow(followId))
+                                }}
+                                className="fa-solid fa-square-minus"></i>
+                                : <i onClick={e => {
+                                    e.preventDefault();
+                                    dispatch(followsActions.createFollow(post.userId));
+                                    }} 
+                                    className="fa-solid fa-square-plus"></i>
+                        ))}
+                        </div>
+                        <div id="timestamp">{post.created_at}</div>
                         <Images postId={post.id} />
-                        <div>{post.content}</div>
+                        <div className="post-content">{post.content}</div>
                         {user && (post.userId === user.id &&
-                        (<>
+                        (<div className="edit-and-delete-button">
                             <OpenModalButton
                             buttonText=<i className="fa-regular fa-trash-can"></i>
                             modalComponent={<DeletePostForm postId={post.id}/>}
@@ -61,7 +91,7 @@ const PostsPage = () => {
                             buttonText=<i className="fa-regular fa-pen-to-square"></i>
                             modalComponent={<EditPostForm post={post} />}
                             />
-                        </>
+                        </div>
                         ))}
                         <div className="comments-like-button">
                             <Comments postId={post.id} />

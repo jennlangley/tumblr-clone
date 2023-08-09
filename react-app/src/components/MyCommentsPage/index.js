@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as commentsActions from '../../store/comments';
 import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
+import * as usersActions from '../../store/users';
 import OpenModalButton from "../OpenModalButton";
 import DeleteComment from "../CommentModal/DeleteComment";
 import EditComment from "../CommentModal/EditComment";
@@ -14,25 +15,16 @@ const MyCommentsPage = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
 
-    // useEffect(() => {
-    //     dispatch(commentsActions.getAllComments())
-    //     dispatch(postsActions.getAllPosts())
-    //     dispatch(imagesActions.getAllImages())
-    // },[dispatch])
+    useEffect(() => {
+        dispatch(postsActions.getAllPosts())
+        dispatch(commentsActions.getAllComments())
+        dispatch(imagesActions.getAllImages())
+        dispatch(usersActions.getUsers())
+    }, [dispatch])
 
     const myComments = useSelector(state => (Object.values(state.comments)).filter((comment) => comment.userId === sessionUser.id))
     const post = useSelector(state => state.posts)
     const image = useSelector(state => state.images)
-
-    // console.log(myComments)
-
-    // let orderComment = []
-    // for(let i = 0; i < myComments.length; i++) {
-    //     let comment = myComments[i]
-    //     orderComment.unshift(post)
-    // }
-
-    // console.log(orderComment)
 
     return (
         <>
