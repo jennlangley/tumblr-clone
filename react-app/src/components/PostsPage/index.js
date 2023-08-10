@@ -20,6 +20,7 @@ const PostsPage = () => {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false)
 
+
     useEffect(() => {
         dispatch(usersActions.getUsers())
         dispatch(postsActions.getAllPosts())
@@ -32,11 +33,14 @@ const PostsPage = () => {
     const posts = useSelector(state => Object.values(state.posts));
     const user = useSelector(state => state.session.user);
     const follows = useSelector(state => (Object.values(state.follows)).filter((follow) => follow.followerId === user?.id));
+    // const image = useSelector(state => Object.values(state.images))
+    // console.log(image, 'OOOOOOOOOOOOOOOO')
 
     let following = [];
     for (let follow of follows) {
         following.push(follow.followedId);
     }
+
 
     return (
         isLoaded &&
@@ -50,10 +54,10 @@ const PostsPage = () => {
                         />
                         New post
                     </div>
-                    
+
                 </div>
 
-                
+
             }
             <div className="">
                 {Object.values(posts).reverse().map(post =>
@@ -61,7 +65,7 @@ const PostsPage = () => {
                         <div id="username-follow-link">
                             <div id="username">{post.user.username}
                             {user && !(user.id === post.userId) && (
-                                (following.includes(post.userId) 
+                                (following.includes(post.userId)
                                     ? <span id="follow-button" onClick={e => {
                                         e.preventDefault();
                                         let followId;
@@ -76,9 +80,29 @@ const PostsPage = () => {
                                     : <span id="follow-button" onClick={e => {
                                         e.preventDefault();
                                         dispatch(followsActions.createFollow(post.userId));
-                                        }} 
+                                        }}
                                         >Follow</span>
                             ))}
+                            </div>
+
+                            <div>
+                        {post.reposted ? (
+                        <span className='reposted'>reposted</span>
+                        ):(
+                            <div></div>
+                        )}
+                        {user && !post.reposted &&(
+                            <span id="repost-button" onClick={(e)=>{e.preventDefault(); dispatch(postsActions.repost(post.id))}}>
+                                <i className="fa-solid fa-repeat"></i>repost</span>
+                        )}
+                        {post.reposted  && (
+                         <div className='originalPoster'>Post originally created by:
+                         <span style={{fontWeight: 'bold'}}>{post.originalPoster}</span>
+                         </div>
+                        )}
+                        {post.reposted && (
+                            <div><img className='repostImg' alt='' src={post.repostUrl} /></div>
+                        )}
                             </div>
                             <div>
                                 <NavLink to={`/posts/${post.id}`}>
@@ -87,7 +111,8 @@ const PostsPage = () => {
                             </div>
                         </div>
                         <div id="timestamp">{post.created_at}</div>
-                        <Images postId={post.id} />
+                            <Images postId={post.id} />
+
                         <div className="post-content">{post.content}</div>
                         {user && (post.userId === user.id &&
                         (<div className="edit-and-delete-button">
@@ -95,7 +120,7 @@ const PostsPage = () => {
                             buttonText=<i className="fa-regular fa-trash-can"></i>
                             modalComponent={<DeletePostForm postId={post.id}/>}
                             />
-                            <OpenModalButton 
+                            <OpenModalButton
                             buttonText=<i className="fa-regular fa-pen-to-square"></i>
                             modalComponent={<EditPostForm post={post} />}
                             />

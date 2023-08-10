@@ -1,18 +1,16 @@
-"""empty message
+"""add repostUrl
 
-Revision ID: 7b5c348409ef
+Revision ID: 8dd16f11f0e6
 Revises: 
-Create Date: 2023-08-07 20:05:36.935258
+Create Date: 2023-08-10 15:15:51.384969
 
 """
 from alembic import op
 import sqlalchemy as sa
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get('SCHEMA')
+
 
 # revision identifiers, used by Alembic.
-revision = '7b5c348409ef'
+revision = '8dd16f11f0e6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,7 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('followerId', sa.Integer(), nullable=True),
     sa.Column('followedId', sa.Integer(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -39,6 +37,9 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('content', sa.String(length=500), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
+    sa.Column('reposted', sa.Boolean(), nullable=True),
+    sa.Column('originalPoster', sa.String(length=500), nullable=True),
+    sa.Column('repostUrl', sa.String(length=500), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
@@ -76,15 +77,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE follows SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE user_follows SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE images SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

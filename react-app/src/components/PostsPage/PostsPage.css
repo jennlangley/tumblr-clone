@@ -71,3 +71,39 @@ body {
 #follow-button:hover {
     text-decoration: underline;
 }
+
+#repost-button {
+    font-size: 14px;
+    padding-left: 6px;
+    color: rgb(45, 174, 255);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#repost-button:hover {
+     text-decoration: underline;
+}
+
+.originalPoster {
+    position: relative;
+    right: 112px;
+    font-size: 14px;
+    color: dimgray;
+    padding-bottom: 10px;
+}
+
+.reposted {
+   position: relative;
+   right: 50px;
+   font-weight: bold;
+   font-size: 16px;
+   color: rgb(45, 174, 255);
+
+}
+
+.repostImg {
+    width: 300px;
+    position: relative;
+    right: 100px;
+
+}

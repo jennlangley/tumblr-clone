@@ -10,6 +10,9 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(500), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    reposted = db.Column(db.Boolean, nullable=True)
+    originalPoster = db.Column(db.String(500), nullable=True)
+    repostUrl = db.Column(db.String(500), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
@@ -23,8 +26,10 @@ class Post(db.Model):
             'id': self.id,
             'content': self.content,
             'userId': self.userId,
+            'reposted': self.reposted,
+            'originalPoster': self.originalPoster,
+            'repostUrl': self.repostUrl,
             'created_at': self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
             'updated_at': self.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
             'user': self.user.to_dict(),
         }
-
