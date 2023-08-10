@@ -17,8 +17,7 @@ import DeletePostForm from "../PostModals/DeletePostForm";
 import EditPostForm from "../PostModals/EditPostForm";
 
 const PostDetail = () => {
-    const postId = useParams();
-    console.log(postId)
+    const { postId } = useParams();
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
@@ -29,37 +28,39 @@ const PostDetail = () => {
         dispatch(followsActions.getFollows())
         dispatch(imagesActions.getAllImages()).then(() => setIsLoaded(true))
     }, [dispatch])
-    const post = useSelector(state => (Object.values(state.posts)).filter(post => post.id === +postId))
+    const post = useSelector(state => state.posts[+postId])
     const user = useSelector(state => state.session.user);
     const follows = useSelector(state => (Object.values(state.follows)).filter((follow) => follow.followerId === user?.id));
-    console.log(post)
+
     let following = [];
     for (let follow of follows) {
         following.push(follow.followedId);
     }
     return (
         isLoaded &&
-        <div className="post">
-            <div id="username">{post.user.username}
-                {user && !(user.id === post.userId) && (
-                    (following.includes(post.userId) 
-                        ? <span id="follow-button" onClick={e => {
-                            e.preventDefault();
-                            let followId;
-                            for (let follow of follows) {
-                                if (follow.followedId === post.userId && follow.followerId === user.id) {
-                                    followId = follow.id
+        <div className="posts">
+            <div className="post">
+                <div id="username">{post.user.username}
+                    {user && !(user.id === post.userId) && (
+                        (following.includes(post.userId) 
+                            ? <span id="follow-button" onClick={e => {
+                                e.preventDefault();
+                                let followId;
+                                for (let follow of follows) {
+                                    if (follow.followedId === post.userId && follow.followerId === user.id) {
+                                        followId = follow.id
+                                    }
                                 }
-                            }
-                            dispatch(followsActions.deleteFollow(followId))
-                        }}
-                        >Unfollow</span>
-                        : <span id="follow-button" onClick={e => {
-                            e.preventDefault();
-                            dispatch(followsActions.createFollow(post.userId));
-                            }} 
-                            >Follow</span>
-                ))}
+                                dispatch(followsActions.deleteFollow(followId))
+                            }}
+                            >Unfollow</span>
+                            : <span id="follow-button" onClick={e => {
+                                e.preventDefault();
+                                dispatch(followsActions.createFollow(post.userId));
+                                }} 
+                                >Follow</span>
+                        ))}
+                        </div>
                 <div id="timestamp">{post.created_at}</div>
                         <Images postId={post.id} />
                         <div className="post-content">{post.content}</div>
@@ -79,9 +80,8 @@ const PostDetail = () => {
                             <Comments postId={post.id} />
                             <Likes postId={post.id} userId={user?.id} />
                         </div>
+                </div>
             </div>
-
-        </div>
     )
 }
 

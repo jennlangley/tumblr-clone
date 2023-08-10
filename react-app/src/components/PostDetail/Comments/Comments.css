@@ -76,15 +76,17 @@
     border: none;
     resize: none;
     background: 0 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     word-break: break-word;
     outline: none;
     font-family: inherit;
+    height: fit-content;
 }
 #comment-area-and-button {
     border: 1px solid grey;
     border-radius: 16px;
     padding: 4px;
+    height: 20px;
 }
 #comment-button {
     box-sizing: border-box;
@@ -92,8 +94,15 @@
     border: none;
     background-color: white;
     color: rgb(45, 174, 255);
+    height: fit-content;
     cursor: pointer;
+    display: flex;
 }
 #comment-button:disabled {
     color: grey;
+    cursor:default;
+}
+#add-comment-container {
+    display: flex;
+    align-items: center;
 }

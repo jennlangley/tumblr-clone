@@ -28,6 +28,11 @@ body {
     font-weight: bold;
     font-size: 16px;
 }
+#username-follow-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 #timestamp {
     font-size: 14px;
     color: dimgray;

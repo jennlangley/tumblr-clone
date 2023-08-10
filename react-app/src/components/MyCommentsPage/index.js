@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as commentsActions from '../../store/comments';
 import * as postsActions from '../../store/posts';
@@ -7,47 +8,51 @@ import * as usersActions from '../../store/users';
 import OpenModalButton from "../OpenModalButton";
 import DeleteComment from "../CommentModal/DeleteComment";
 import EditComment from "../CommentModal/EditComment";
-import './MyComments.css';
+
+import './MyComments.css'
 
 
 
 const MyCommentsPage = () => {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
-
+    
     useEffect(() => {
+        dispatch(usersActions.getUsers())
         dispatch(postsActions.getAllPosts())
         dispatch(commentsActions.getComments())
         dispatch(imagesActions.getAllImages())
-        dispatch(usersActions.getUsers())
     }, [dispatch])
 
+    const sessionUser = useSelector(state => state.session.user);
     const myComments = useSelector(state => (Object.values(state.comments)).filter((comment) => comment.userId === sessionUser.id))
-    const post = useSelector(state => state.posts)
-    const image = useSelector(state => state.images)
+    const posts = useSelector(state => state.posts)
+    const images = useSelector(state => state.images)
 
     return (
         <>
-        <div className='myComments'>
-        <div style={{color:'white'}}>{sessionUser?.username}'s Comments</div>
-        {sessionUser ? (
-            myComments.map(comment =>
-                <div key={comment.id} className='myComment'>
-                   <div>
-                    <img alt='' src={image[comment.postId]?.imageUrl} /></div>
-                   <div>{post[comment.postId]?.content}</div>
-                   <div>{comment.content}</div>
-                    <OpenModalButton
-                        buttonText=<i className="fa-regular fa-trash-can"></i>
-                        modalComponent={<DeleteComment commentId={comment.id}/>}
-                        />
-                    <OpenModalButton
-                        buttonText='Edit Comment'
-                        modalComponent={<EditComment commentId={comment.id} />}
-                        />
-                    <div>{comment.created_at}</div>
-                </div>
-            )
+        <div className='posts'>
+            <div id="num-likes">
+                {myComments.length === 1 ? <div>{myComments.length} comment</div> : <div>{myComments.length} comments</div>}
+            </div>
+            {sessionUser ? (
+                myComments.map(comment =>
+                    <div className="post" key={comment.id}>
+                        <div>
+                            <NavLink to={`/posts/${comment.postId}`}>{posts[comment.postId].user.username}'s post</NavLink>
+                        </div>
+                        <div id="comment-text">{comment.content}</div>
+                        <div>
+                            <OpenModalButton
+                                buttonText=<i className="fa-regular fa-trash-can"></i>
+                                modalComponent={<DeleteComment commentId={comment.id}/>}
+                            />
+                            <OpenModalButton
+                                buttonText=<i className="fa-regular fa-pen-to-square"></i>
+                                modalComponent={<EditComment commentId={comment.id} />}
+                            />
+                        </div>
+                    </div>
+                )
 
         ) : (
             <h1>Not Authorized</h1>

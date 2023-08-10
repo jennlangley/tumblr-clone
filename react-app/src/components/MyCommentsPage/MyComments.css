@@ -17,3 +17,7 @@ body {
     border-radius: 6px;
     background-color: white;
 }
+#comment-text {
+    display: flex;
+    justify-content: space-around;
+}

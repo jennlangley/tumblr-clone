@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import PostForm from '../PostForm/index'
 import Comments from "../PostDetail/Comments";
 import Images from "../PostDetail/Images";
@@ -57,26 +58,33 @@ const PostsPage = () => {
             <div className="">
                 {Object.values(posts).reverse().map(post =>
                     <div key={post.id} className="post">
-                        <div id="username">{post.user.username}
-                        {user && !(user.id === post.userId) && (
-                            (following.includes(post.userId) 
-                                ? <span id="follow-button" onClick={e => {
-                                    e.preventDefault();
-                                    let followId;
-                                    for (let follow of follows) {
-                                        if (follow.followedId === post.userId && follow.followerId === user.id) {
-                                            followId = follow.id
+                        <div id="username-follow-link">
+                            <div id="username">{post.user.username}
+                            {user && !(user.id === post.userId) && (
+                                (following.includes(post.userId) 
+                                    ? <span id="follow-button" onClick={e => {
+                                        e.preventDefault();
+                                        let followId;
+                                        for (let follow of follows) {
+                                            if (follow.followedId === post.userId && follow.followerId === user.id) {
+                                                followId = follow.id
+                                            }
                                         }
-                                    }
-                                    dispatch(followsActions.deleteFollow(followId))
-                                }}
-                                >Unfollow</span>
-                                : <span id="follow-button" onClick={e => {
-                                    e.preventDefault();
-                                    dispatch(followsActions.createFollow(post.userId));
-                                    }} 
-                                    >Follow</span>
-                        ))}
+                                        dispatch(followsActions.deleteFollow(followId))
+                                    }}
+                                    >Unfollow</span>
+                                    : <span id="follow-button" onClick={e => {
+                                        e.preventDefault();
+                                        dispatch(followsActions.createFollow(post.userId));
+                                        }} 
+                                        >Follow</span>
+                            ))}
+                            </div>
+                            <div>
+                                <NavLink to={`/posts/${post.id}`}>
+                                    <i style={{cursor: "pointer"}} className="fa-solid fa-arrow-up-right-from-square"></i>
+                                </NavLink>
+                            </div>
                         </div>
                         <div id="timestamp">{post.created_at}</div>
                         <Images postId={post.id} />
