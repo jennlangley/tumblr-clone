@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Post, Image, Comment, Like
+from app.models import db, Post, Image, Comment, Like, User
 from app.forms import PostForm, CommentForm
 from datetime import datetime
 
@@ -42,7 +42,7 @@ def new_post():
             db.session.add(image)
             db.session.commit()
             return {'post': post.to_dict(), 'image': image.to_dict()}
-        
+
         return {'post': post.to_dict()}
     return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
 
@@ -102,6 +102,26 @@ def create_comment(postId):
         db.session.add(comment)
         db.session.commit()
         return {'comment': comment.to_dict()}
+
+@post_routes.route('/<int:postId>/repost', methods=['POST'])
+@login_required
+def repost(postId):
+    post = Post.query.get(postId)
+    postCreator = User.query.get(post.userId)
+    image = Image.query.filter_by(postId = postId).first()
+
+    new_post = Post(content=post.content, userId=current_user.id, reposted=True, originalPoster=postCreator.username, repostUrl=image.imageUrl)
+    db.session.add(new_post)
+    db.session.commit()
+
+    # new_post_image = Image(imageUrl = image.imageUrl, postId = new_post.id)
+    # db.session.add(new_post_image)
+    # db.session.commit()
+
+   # print(image.imageUrl, 'ooooooooooooooooooooooooo')
+    return {'post': new_post.to_dict()}
+
+
 
 # @post_routes.route('/<int:postId>')
 # def get_post_by_id(postId):

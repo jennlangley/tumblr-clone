@@ -4,6 +4,7 @@ const GET_POSTS = "posts/GET_POSTS";
 const CREATE_POST = "posts/CREATE_POST";
 const DELETE_POST = "posts/DELETE_POST";
 const EDIT_POST = "posts/EDIT_POST";
+const ADD_REPOST = "posts/ADD_REPOST"
 
 const getAllPostsAction = (posts) => ({
     type: GET_POSTS,
@@ -12,6 +13,11 @@ const getAllPostsAction = (posts) => ({
 
 const createPost = (post) => ({
     type: CREATE_POST,
+    payload: post
+})
+
+const postRepost = (post) => ({
+    type: ADD_REPOST,
     payload: post
 })
 
@@ -55,7 +61,18 @@ export const createNewPost = (content, imageUrl) => async (dispatch) => {
         if (imageUrl) {
             dispatch(imagesActions.createNewImage(data))
         }
-        
+
+    }
+}
+
+export const repost = (postId) => async (dispatch) => {
+    const response = await fetch(`/api/posts/${postId}/repost`, {
+        method: "POST",
+  
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(postRepost(data))
     }
 }
 
@@ -94,6 +111,9 @@ export default function reducer(state = initialState, action) {
             action.payload.posts.forEach(post => newState[post.id] = post);
             return newState;
         case CREATE_POST:
+            newState[action.payload.post.id] = action.payload.post;
+            return newState;
+        case ADD_REPOST:
             newState[action.payload.post.id] = action.payload.post;
             return newState;
         case EDIT_POST:
