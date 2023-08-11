@@ -25,7 +25,7 @@ const MyPostsPage = () => {
         dispatch(commentsActions.getComments());
         dispatch(likesActions.getLikes());
         dispatch(imagesActions.getAllImages());
-        
+
     }, [dispatch])
 
     const myPosts = useSelector(state => (Object.values(state.posts)).filter((post) => post.userId === sessionUser.id))
@@ -41,27 +41,27 @@ const MyPostsPage = () => {
                         />
                         New post
                     </div>
-                    
+
             </div>
             {sessionUser ? (
                 myPosts.reverse().map(post =>
                     <div key={post.id} className='post'>
                         <div id="username">{post.user.username}</div>
                         <div id="timestamp">{post.created_at}</div>
-                        <Images postId={post.id} />
+                        <div> <img alt='' src={post.repostUrl} /></div>
                         <div className="post-content">{post.content}</div>
                         <div className="edit-and-delete-button">
                             <OpenModalButton
                             buttonText=<i className="fa-regular fa-trash-can"></i>
                             modalComponent={<DeletePostForm postId={post.id}/>}
-                        
+
                             />
                             <OpenModalButton
                                 buttonText=<i className="fa-regular fa-pen-to-square"></i>
-                                modalComponent={<EditPostForm postId={post.id} />}
+                                modalComponent={<EditPostForm post={post} />}
                             />
                         </div>
-                        
+
                         <div className="comments-like-button">
                             <Comments postId={post.id} />
                             <Likes postId={post.id} userId={sessionUser.id} />

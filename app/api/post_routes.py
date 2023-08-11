@@ -26,8 +26,9 @@ def get_posts():
             'images': [image.to_dict() for image in images],
             'comments': [comment.to_dict() for comment in comments]}
 
-# @login_required
+
 @post_routes.route('', methods=['POST'])
+@login_required
 def new_post():
     post_form = PostForm()
     post_form['csrf_token'].data = request.cookies['csrf_token']
@@ -63,16 +64,16 @@ def edit_post(postId):
         return post.to_dict()
 
 
-@post_routes.route('<int:postId>', methods=["PUT"])
-def update_post(postId):
-    post_form = PostForm()
-    post = Post.query.get(postId)
-    if (post_form.validate_on_submit()) :
-        post.content = post_form.data['content']
-        post.updated_at = datetime.now()
-        db.session.commit()
-        return {'post': post.to_dict()}
-    return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
+# @post_routes.route('<int:postId>', methods=["PUT"])
+# def update_post(postId):
+#     post_form = PostForm()
+#     post = Post.query.get(postId)
+#     if (post_form.validate_on_submit()) :
+#         post.content = post_form.data['content']
+#         post.updated_at = datetime.now()
+#         db.session.commit()
+#         return {'post': post.to_dict()}
+#     return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
 
 @post_routes.route('/<int:postId>', methods=['DELETE'])
 @login_required
