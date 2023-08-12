@@ -5,22 +5,24 @@ import * as postsActions from "../../store/posts";
 
 const EditPostForm = ({ post }) => {
     const dispatch = useDispatch();
-    const image = useSelector(state => state.images[post.id])
     const [content, setContent] = useState(post.content);
-    const [imageUrl, setImageUrl] = useState(image ? image.imageUrl : "");
-    
+    const [image, setImage] = useState(null);
     const [errors, setErrors] = useState([]);
+    const [imageLoading, setImageLoading] = useState(false);
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setHasSubmitted(true);
+
         if (!errors.length) {
-            // dispatch(imagesActions.createNewImage(imageUrl))
-            await dispatch(postsActions.editPost(post.id, content, imageUrl))
+            const formData = new FormData();
+            formData.append("image", image);
+            formData.append("content", content);
+            setImageLoading(true);
+            await dispatch(postsActions.editPost(post.id, formData))
             setContent('');
-            setImageUrl('');
+            setImage('');
             setErrors([]);
             setHasSubmitted(false);
             closeModal();
@@ -33,11 +35,11 @@ const EditPostForm = ({ post }) => {
             if (!content) errors.push('Post must have some content!')
             setErrors(errors)
         }
-    }, [hasSubmitted, content, imageUrl]);
+    }, [hasSubmitted, content]);
 
     return (
         <div className="post">
-            <form id="post-form" onSubmit={handleSubmit}>
+            <form encType="multipart/form-data" id="post-form" onSubmit={handleSubmit}>
                 <div className='errorsBox'>
                     <ul className='errors'>
                     {errors.map((error, idx) => (
@@ -51,13 +53,14 @@ const EditPostForm = ({ post }) => {
                     value={content}
                     onChange={e => setContent(e.target.value)}
                 />
-                <label>Image URL: </label>
+                <label>Image: </label>
                 <input
-                    type="text"
-                    value={imageUrl}
-                    onChange={e => setImageUrl(e.target.value)}
+                    type="file"
+                    onChange={e => setImage(e.target.files[0])}
+                    accept='image/*'
                 />
                 <button type='submit'>Update Post</button>
+                {(imageLoading)&& <p>Loading...</p>}
             </form>
         </div>
     )

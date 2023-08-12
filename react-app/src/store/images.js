@@ -53,7 +53,6 @@ export default function reducer(state = initialState, action) {
             newState[action.payload.image.id] = action.payload.image;
             return newState;
         case EDIT_IMAGE:
-            console.log(action.payload)
             newState[action.payload.image.id] = action.payload.image;
             return newState;
         default:

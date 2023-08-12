@@ -8,4 +8,4 @@ from app.models import Post
 class PostForm(FlaskForm):
     content = StringField('content', validators=[DataRequired()])
     userId = IntegerField('userId')
-    image = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    image = FileField("Image File", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
