@@ -40,3 +40,8 @@ body {
 .buttons-div {
     margin-top: 10px;
 }
+.my-posts-username-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

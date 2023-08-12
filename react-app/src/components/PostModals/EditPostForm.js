@@ -5,30 +5,20 @@ import * as postsActions from "../../store/posts";
 
 const EditPostForm = ({ post }) => {
     const dispatch = useDispatch();
-
     const image = useSelector(state => state.images[post.id])
-
-    const [imageUrl, setImageUrl] = useState(image?.imageUrl);
     const [content, setContent] = useState(post.content);
+    const [imageUrl, setImageUrl] = useState(image ? image.imageUrl : "");
+    
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
-
     const { closeModal } = useModal();
-
-    // useEffect(()=> {
-    //     dispatch(postsActions.getAllPosts())
-    //     dispatch(imageActions.getAllImages())
-    // },[dispatch])
-
-    // const myPost = useSelector(state => Object.values(state.posts).filter((post => post.id === postId)))
-    // const myImage = useSelector(state => Object.values(state.images).filter(image => image.postId === postId))
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
         if (!errors.length) {
             // dispatch(imagesActions.createNewImage(imageUrl))
-            await dispatch(postsActions.editPost(post.id, content))
+            await dispatch(postsActions.editPost(post.id, content, imageUrl))
             setContent('');
             setImageUrl('');
             setErrors([]);

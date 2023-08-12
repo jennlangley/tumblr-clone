@@ -38,11 +38,14 @@ const PostsPage = () => {
     for (let follow of follows) {
         following.push(follow.followedId);
     }
-    console.log(hideFollowing)
+
+    const followingPosts = useSelector(state => (Object.values(state.posts)).filter(post => following.includes(post.userId)));
+
     return (
         isLoaded &&
         <div className="posts">
             {user &&
+            <>
                 <div className="create-post-container">
                     <div>
                         <OpenModalButton
@@ -51,15 +54,15 @@ const PostsPage = () => {
                         />
                         New post
                     </div>
-                </div>}
+                </div>
             <div id="toggle-follows-container">
                 <div id="following-toggle" onClick={e=>setHideFollowing(true)}>All Posts</div>
                 <div id="following-toggle" onClick={e=>setHideFollowing(false)}>Following Posts</div>
             </div>
-            
-            
+            </>
+            }
             <div className="">
-                {Object.values(posts).reverse().map(post =>
+                {(hideFollowing ? posts : followingPosts).reverse().map(post =>
                     <div key={post.id} className="post">
                         <div id="username-follow-link">
                             <div id="username">{post.user.username}

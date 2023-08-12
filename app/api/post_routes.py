@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 from app.models import db, Post, Image, Comment, Like, User
 from app.forms import PostForm, CommentForm
 from datetime import datetime
+from app.api.aws_helpers import (
+    upload_file_to_s3, get_unique_filename)
 
 post_routes = Blueprint('posts', __name__)
 
@@ -28,24 +30,36 @@ def get_posts():
 
 
 @post_routes.route('', methods=['POST'])
-@login_required
+# @login_required
 def new_post():
     post_form = PostForm()
     post_form['csrf_token'].data = request.cookies['csrf_token']
-
+    print("CONTENT: ", post_form.data['content'])
+    print("IMAGE: ", post_form.data["image"])
+    
     if post_form.validate_on_submit():
         post = Post(content=post_form.data['content'], userId=current_user.id)
         db.session.add(post)
         db.session.commit()
 
-        if (post_form.data['imageUrl']):
-            image = Image(imageUrl=post_form.data['imageUrl'], postId=post.id)
+        if (post_form.data['image']):
+            image = post_form.data["image"]
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            print(upload)
+
+            if "url" not in upload:
+                return validation_errors_to_error_messages(upload)
+                
+            url = upload["url"]
+            image = Image(imageUrl=url, postId=post.id)
             db.session.add(image)
             db.session.commit()
             return {'post': post.to_dict(), 'image': image.to_dict()}
-
+        
         return {'post': post.to_dict()}
-    return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
+    
+    return validation_errors_to_error_messages(post_form.errors)
 
 @post_routes.route('/<int:postId>', methods=['PUT'])
 @login_required
@@ -57,11 +71,16 @@ def edit_post(postId):
         post = Post.query.get(postId)
         post.content = post_form.data['content']
         post.updated_at = datetime.now()
+        image = Image.query.filter_by(postId=postId).one()
+        image.imageUrl = post_form.data['imageUrl']
+        print(image.imageUrl)
+
         db.session.commit()
 
         # if (post_form.data['imageUrl']):
         #     image = Image.query.get()
-        return post.to_dict()
+        return {'post': post.to_dict(),
+                'image': image.to_dict()}
 
 
 # @post_routes.route('<int:postId>', methods=["PUT"])
