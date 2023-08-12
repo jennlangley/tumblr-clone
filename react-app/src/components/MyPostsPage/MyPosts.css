@@ -17,3 +17,26 @@ body {
     border-radius: 6px;
     background-color: white;
 }
+
+#delete-button {
+    color: red;
+}
+
+#delete-button:hover{
+    background-color: pink;
+}
+
+#edit-button {
+    color: gray;
+    position: relative;
+    left: 20px;
+    bottom: 18px;
+}
+
+#edit-button:hover {
+    background-color: rgb(186, 205, 224);
+}
+
+.buttons-div {
+    margin-top: 10px;
+}

@@ -16,7 +16,7 @@ import Likes from "../PostDetail/Likes";
 
 const MyPostsPage = () => {
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         dispatch(usersActions.getUsers());
         dispatch(postsActions.getAllPosts());
@@ -49,16 +49,19 @@ const MyPostsPage = () => {
                         <div id="timestamp">{post.created_at}</div>
                         <div> <img alt='' src={post.repostUrl} /></div>
                         <div className="post-content">{post.content}</div>
-                        <div className="edit-and-delete-button">
+                        <div className='buttons-div'>
+                        <div className="delete-button">
                             <OpenModalButton
-                            buttonText=<i className="fa-regular fa-trash-can"></i>
+                            buttonText=<i className="fa-regular fa-trash-can"  id='delete-button'></i>
                             modalComponent={<DeletePostForm postId={post.id}/>}
-
                             />
+                        </div>
+                        <div className='edit-button'>
                             <OpenModalButton
-                                buttonText=<i className="fa-regular fa-pen-to-square"></i>
+                                buttonText=<i className="fa-regular fa-pen-to-square" id='edit-button'></i>
                                 modalComponent={<EditPostForm post={post} />}
                             />
+                        </div>
                         </div>
 
                         <div className="comments-like-button">

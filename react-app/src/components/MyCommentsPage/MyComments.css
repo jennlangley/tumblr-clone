@@ -21,3 +21,22 @@ body {
     display: flex;
     justify-content: space-around;
 }
+
+#deleteButton {
+    color: red;
+}
+
+#deleteButton:hover {
+    background-color: pink;
+}
+
+#editButton {
+    color: gray;
+    position: relative;
+    left: 20px;
+    bottom: 18px;
+}
+
+#editButton:hover {
+    background-color: rgb(186, 205, 224);
+}

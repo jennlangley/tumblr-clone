@@ -12,7 +12,7 @@ import './MyComments.css'
 
 const MyCommentsPage = () => {
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         dispatch(usersActions.getUsers())
         dispatch(postsActions.getAllPosts())
@@ -37,13 +37,15 @@ const MyCommentsPage = () => {
                             <NavLink to={`/posts/${comment.postId}`}>{posts[comment.postId].user.username}'s post</NavLink>
                         </div>
                         <div id="comment-text">{comment.content}</div>
-                        <div>
+                        <div className='deleteButton'>
                             <OpenModalButton
-                                buttonText=<i className="fa-regular fa-trash-can"></i>
+                                buttonText=<i className="fa-regular fa-trash-can" id='deleteButton'></i>
                                 modalComponent={<DeleteComment commentId={comment.id}/>}
                             />
+                        </div>
+                        <div className='editButton'>
                             <OpenModalButton
-                                buttonText=<i className="fa-regular fa-pen-to-square"></i>
+                                buttonText=<i className="fa-regular fa-pen-to-square" id='editButton'></i>
                                 modalComponent={<EditComment commentId={comment.id} />}
                             />
                         </div>
