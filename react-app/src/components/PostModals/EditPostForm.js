@@ -7,8 +7,8 @@ const EditPostForm = ({ post }) => {
     const dispatch = useDispatch();
     const image = useSelector(state => state.images[post.id])
     const [content, setContent] = useState(post.content);
-    const [imageUrl, setImageUrl] = useState(image?.imageUrl);
-    if (!image) setImageUrl('')
+    const [imageUrl, setImageUrl] = useState(image ? image.imageUrl : "");
+    
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal();

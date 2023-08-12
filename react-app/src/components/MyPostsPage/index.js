@@ -8,6 +8,7 @@ import * as imagesActions from '../../store/images';
 import * as commentsActions from '../../store/comments';
 import * as likesActions from '../../store/likes';
 import PostForm from "../PostForm";
+import Images from "../PostDetail/Images";
 import * as usersActions from '../../store/users';
 import './MyPosts.css';
 import Comments from "../PostDetail/Comments";
@@ -37,17 +38,30 @@ const MyPostsPage = () => {
                         <OpenModalButton
                             buttonText={<i className="fa-solid fa-plus">  </i>}
                             modalComponent={<PostForm />}
-                        />
-                        New post
+                        />New post
                     </div>
-
             </div>
             {sessionUser ? (
                 myPosts.reverse().map(post =>
                     <div key={post.id} className='post'>
-                        <div id="username">{post.user.username}</div>
+                        <div id="username-follow-link">
+                            <div id="username">{post.user.username}</div>
+                            {post.reposted ? (
+                                    <span className='reposted'>reposted</span>
+                                ): 
+                                <></>}
+                            {post.reposted  && (
+                            <div className='originalPoster'>Post originally created by:
+                                <span style={{fontWeight: 'bold'}}>{post.originalPoster}</span>
+                            </div>
+                            )}
+                        </div>
                         <div id="timestamp">{post.created_at}</div>
-                        <div> <img alt='' src={post.repostUrl} /></div>
+                        <div> 
+                            {post.reposted ? <img alt='' src={post.repostUrl} />
+                            : <Images postId={post.id} />
+                            }
+                        </div>
                         <div className="post-content">{post.content}</div>
                         <div className="edit-and-delete-button">
                             <OpenModalButton

@@ -22,8 +22,8 @@ export const editImage = (imageUrl) => async (dispatch) => {
     dispatch(getAllImages())
 }
 
-export const createNewImage = (images) => async (dispatch) => {
-    dispatch(createNewImageAction(images))
+export const createNewImage = (image) => async (dispatch) => {
+    dispatch(createNewImageAction(image))
     dispatch(getAllImages())
 }
 

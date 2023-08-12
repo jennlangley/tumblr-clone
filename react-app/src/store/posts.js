@@ -44,24 +44,18 @@ export const getAllPosts = () => async (dispatch) => {
     }
 }
 
-export const createNewPost = (content, imageUrl) => async (dispatch) => {
+export const createNewPost = (post) => async (dispatch) => {
     const response = await fetch("/api/posts", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            content,
-            imageUrl
-        })
+        body: post
     })
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(createPost(data))
-        if (imageUrl) {
-            dispatch(imagesActions.createNewImage(data))
-        }
 
+    if (response.ok) {
+        const resPost = await response.json();
+        dispatch(createPost(resPost))
+        dispatch(imagesActions.createNewImage(resPost))
+    } else {
+        console.log("there was an error making your post!")
     }
 }
 
@@ -73,6 +67,8 @@ export const repost = (postId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         dispatch(postRepost(data))
+    } else {
+        return response.errors;
     }
 }
 

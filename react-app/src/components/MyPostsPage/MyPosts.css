@@ -17,3 +17,8 @@ body {
     border-radius: 6px;
     background-color: white;
 }
+.my-posts-username-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
