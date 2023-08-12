@@ -40,8 +40,9 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className='profileButton' onClick={openMenu}>
+        {/* <i className="fas fa-user-circle" /> */}
+        <i id='profileIcon' className="fa-regular fa-user fa-lg" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -49,25 +50,30 @@ function ProfileButton({ user }) {
             <li><NavLink className='postsRoute' to={`/users/${user.id}/posts`} onClick={closeMenu}>{user.username}'s Posts</NavLink></li>
             <li><NavLink className='commentsRoute' to={`/users/${user.id}/comments`} onClick={closeMenu}>{user.username}'s Comments</NavLink></li>
             <li><NavLink className='commentsRoute' to={`/users/${user.id}/likes`} onClick={closeMenu}>{user.username}'s Likes</NavLink></li>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
+            <li style={{color:'white'}}>{user.username}</li>
+            <li style={{color:'white'}}>{user.email}</li>
             <div className='buttonDiv'>
               <button className='logOut' onClick={handleLogout}>Log Out</button>
             </div>
           </>
         ) : (
           <>
+          <ul className='newProfile-dropdown'>
+          <div className='loginButton'>
             <OpenModalButton
               buttonText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
+            </div>
 
-            <OpenModalButton
+            <div className='signupButton'><OpenModalButton
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
+            </div>
+            </ul>
           </>
         )}
       </ul>

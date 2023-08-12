@@ -1,23 +1,63 @@
 .profile-dropdown {
-  background-color: white;
+  background-color: lightslategray;
   border-radius: 6px;
   list-style: none;
   position: absolute;
   right: 10px;
   width: 150px;
+  /* width:auto; */
   padding-inline: 10px;
+}
 
+.newProfile-dropdown {
+  background-color: lightslategray;
+  border-radius: 6px;
+  list-style: none;
+  position: absolute;
+  right: 10px;
+  /* width: 150px; */
+  width:70px;
+  /* padding-inline: 10px; */
 }
 
 .hidden {
   display: none;
 }
 
+.profileButton {
+  background-color: lightslategray;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
 .navigation {
   display: flex;
   justify-content: space-between;
   list-style: none;
 }
+.signupButton {
+  background-color: lightslategray;
+  font-family: Helvetica;
+  color: white;
+}
+
+.signupButton:hover {
+  font-weight: bold;
+}
+
+.loginButton {
+  background-color: lightslategray;
+  font-family: Helvetica;
+  color: white;
+}
+
+.loginButton:hover {
+  font-weight: bold;
+}
+
 
 #site-home-link {
   color: white;
@@ -34,12 +74,14 @@
   margin-top: 5px;
   margin-bottom: 5px;
   cursor: pointer;
+}
 
+.logOut:hover {
+  background-color: gray;
 }
 
 .commentsRoute {
-  color: lightslategray;
-
+  color: white;
   text-decoration: none;
 }
 
@@ -48,7 +90,7 @@
 }
 
 .postsRoute {
-  color: lightslategray;
+  color: white;
   text-decoration: none;
 }
 
