@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import PostForm from '../PostForm/index'
 import Comments from "../PostDetail/Comments";
 import Images from "../PostDetail/Images";
 import Likes from "../PostDetail/Likes";
@@ -15,6 +14,7 @@ import * as followsActions from '../../store/follows';
 import './PostsPage.css';
 import DeletePostForm from "../PostModals/DeletePostForm";
 import EditPostForm from "../PostModals/EditPostForm";
+import NotFound from "../Errors/NotFound";
 
 const PostDetail = () => {
     const { postId } = useParams();
@@ -28,16 +28,23 @@ const PostDetail = () => {
         dispatch(followsActions.getFollows())
         dispatch(imagesActions.getAllImages()).then(() => setIsLoaded(true))
     }, [dispatch])
+    
     const post = useSelector(state => state.posts[+postId])
     const user = useSelector(state => state.session.user);
     const follows = useSelector(state => (Object.values(state.follows)).filter((follow) => follow.followerId === user?.id));
 
+    if (!post && isLoaded) {
+        return (
+            <NotFound />
+        )
+    }
+    
     let following = [];
     for (let follow of follows) {
         following.push(follow.followedId);
     }
     return (
-        isLoaded &&
+        isLoaded && (
         <div className="posts">
             <div className="post">
                 <div id="username">{post.user.username}
@@ -82,6 +89,7 @@ const PostDetail = () => {
                         </div>
                 </div>
             </div>
+        )
     )
 }
 

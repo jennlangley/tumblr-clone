@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DeletePostForm from "../PostModals/DeletePostForm";
 import EditPostForm from "../PostModals/EditPostForm";
-import Images from "../PostDetail/Images";
 import OpenModalButton from "../OpenModalButton";
 import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
@@ -17,8 +16,7 @@ import Likes from "../PostDetail/Likes";
 
 const MyPostsPage = () => {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
-
+    
     useEffect(() => {
         dispatch(usersActions.getUsers());
         dispatch(postsActions.getAllPosts());
@@ -28,6 +26,7 @@ const MyPostsPage = () => {
 
     }, [dispatch])
 
+    const sessionUser = useSelector(state => state.session.user);
     const myPosts = useSelector(state => (Object.values(state.posts)).filter((post) => post.userId === sessionUser.id))
 
     return (

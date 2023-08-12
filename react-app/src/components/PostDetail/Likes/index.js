@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as likesActions from '../../../store/likes';
-import OpenModalButton from "../../OpenModalButton";
-import SignupFormModal from "../../SignupFormModal";
 import './Likes.css';
 
 const Likes = ({ postId, userId }) => {

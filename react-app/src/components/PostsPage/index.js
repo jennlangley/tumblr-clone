@@ -19,7 +19,7 @@ import EditPostForm from "../PostModals/EditPostForm";
 const PostsPage = () => {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false)
-
+    const [hideFollowing, setHideFollowing] = useState(true);
 
     useEffect(() => {
         dispatch(usersActions.getUsers())
@@ -33,15 +33,12 @@ const PostsPage = () => {
     const posts = useSelector(state => Object.values(state.posts));
     const user = useSelector(state => state.session.user);
     const follows = useSelector(state => (Object.values(state.follows)).filter((follow) => follow.followerId === user?.id));
-    // const image = useSelector(state => Object.values(state.images))
-    // console.log(image, 'OOOOOOOOOOOOOOOO')
 
     let following = [];
     for (let follow of follows) {
         following.push(follow.followedId);
     }
-
-
+    console.log(hideFollowing)
     return (
         isLoaded &&
         <div className="posts">
@@ -54,11 +51,13 @@ const PostsPage = () => {
                         />
                         New post
                     </div>
-
-                </div>
-
-
-            }
+                </div>}
+            <div id="toggle-follows-container">
+                <div id="following-toggle" onClick={e=>setHideFollowing(true)}>All Posts</div>
+                <div id="following-toggle" onClick={e=>setHideFollowing(false)}>Following Posts</div>
+            </div>
+            
+            
             <div className="">
                 {Object.values(posts).reverse().map(post =>
                     <div key={post.id} className="post">
@@ -120,10 +119,12 @@ const PostsPage = () => {
                             buttonText=<i className="fa-regular fa-trash-can"></i>
                             modalComponent={<DeletePostForm postId={post.id}/>}
                             />
+                            { !post.reposted &&
                             <OpenModalButton
                             buttonText=<i className="fa-regular fa-pen-to-square"></i>
                             modalComponent={<EditPostForm post={post} />}
                             />
+                            }
                         </div>
                         ))}
                         <div className="comments-like-button">

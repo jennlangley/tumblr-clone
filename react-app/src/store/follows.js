@@ -48,7 +48,6 @@ export const deleteFollow = (followId) => async (dispatch) => {
         method: 'DELETE',
     })
     if (response.ok) {
-        const data = await response.json();
         dispatch(deleteFollowAction(followId))
     }
 }

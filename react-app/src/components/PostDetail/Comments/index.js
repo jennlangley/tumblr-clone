@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { useState } from "react";
-import * as commentsActions from '../../../store/comments';
-import * as usersActions from '../../../store/users';
 import OpenModalButton from '../../OpenModalButton';
-import CreateComment from '../../CommentModal/CreateComment';
 import AddComment from "./AddComment";
 import DeleteComment from "../../CommentModal/DeleteComment";
 import EditComment from "../../CommentModal/EditComment";

@@ -107,3 +107,15 @@ body {
     right: 100px;
 
 }
+#following-toggle {
+    color: rgb(45, 174, 255);
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+}
+#toggle-follows-container {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    justify-content: space-evenly;
+}

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as postsActions from "../../store/posts";
-import * as imageActions from "../../store/images";
 
 const EditPostForm = ({ post }) => {
     const dispatch = useDispatch();
@@ -10,8 +9,6 @@ const EditPostForm = ({ post }) => {
     const image = useSelector(state => state.images[post.id])
 
     const [imageUrl, setImageUrl] = useState(image?.imageUrl);
-
-
     const [content, setContent] = useState(post.content);
     const [errors, setErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);

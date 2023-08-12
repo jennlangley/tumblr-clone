@@ -8,10 +8,7 @@ import * as usersActions from '../../store/users';
 import OpenModalButton from "../OpenModalButton";
 import DeleteComment from "../CommentModal/DeleteComment";
 import EditComment from "../CommentModal/EditComment";
-
 import './MyComments.css'
-
-
 
 const MyCommentsPage = () => {
     const dispatch = useDispatch();
@@ -26,7 +23,6 @@ const MyCommentsPage = () => {
     const sessionUser = useSelector(state => state.session.user);
     const myComments = useSelector(state => (Object.values(state.comments)).filter((comment) => comment.userId === sessionUser.id))
     const posts = useSelector(state => state.posts)
-    const images = useSelector(state => state.images)
 
     return (
         <>

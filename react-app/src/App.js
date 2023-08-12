@@ -8,8 +8,10 @@ import PostDetail from "./components/PostsPage/PostDetail";
 import MyCommentsPage from "./components/MyCommentsPage";
 import MyPostsPage from "./components/MyPostsPage";
 import MyLikesPage from "./components/MyLikesPage";
+import NotFound from "./components/Errors/NotFound";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import EntryPage from './components/EntryPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,10 +27,10 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+          <Route exact path="/login" >
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
           <Route path='/posts/:postId'>
@@ -37,15 +39,19 @@ function App() {
           <Route path='/posts'>
             <PostsPage isLoaded={isLoaded} />
           </Route>
+          <Route exact path="/">
+            <EntryPage />
+          </Route>
           <Route path={`/users/${user?.id}/comments`}>
             <MyCommentsPage isLoaded={isLoaded} />
           </Route>
-          <Route path={`/users/${user?.id}/posts`}>
+          <Route exact path={`/users/${user?.id}/posts`}>
             <MyPostsPage isLoaded={isLoaded} />
           </Route>
-          <Route path={`/users/${user?.id}/likes`}>
+          <Route exact path={`/users/${user?.id}/likes`}>
             <MyLikesPage isLoaded={isLoaded} />
           </Route>
+          <Route component={NotFound} />
         </Switch>
       )}
     </>
