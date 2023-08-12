@@ -89,7 +89,7 @@ export const editPost = (postId, content, imageUrl) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(editPostAction(data))
-        // dispatch(imagesActions.editImage(data))
+        dispatch(imagesActions.editImage(data))
     }
 }
 
@@ -117,7 +117,7 @@ export default function reducer(state = initialState, action) {
             newState[action.payload.post.id] = action.payload.post;
             return newState;
         case EDIT_POST:
-            newState[action.payload.id] = action.payload;
+            newState[action.payload.post.id] = action.payload.post;
             return newState;
         case DELETE_POST:
             delete newState[action.payload];

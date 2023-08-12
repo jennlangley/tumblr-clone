@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as likesActions from '../../../store/likes';
 import './Likes.css';
@@ -5,17 +6,16 @@ import './Likes.css';
 const Likes = ({ postId, userId }) => {
     const dispatch = useDispatch();
     const likes = useSelector(state => Object.values(state.likes).filter(like => like.postId === postId));
-
-    
-
     let liked = false;
     let likeId;
 
     for (let like of likes) {
-        if (like.userId === userId) liked = true;
-        likeId = like.id;
+        if (like.userId === userId) {
+            liked = true;
+            likeId = like.id;
+        }
     };
-    
+
     const likePost = async (e) => {
         e.preventDefault();
         await dispatch(likesActions.createLike(postId));

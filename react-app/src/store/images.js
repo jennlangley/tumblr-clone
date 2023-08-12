@@ -12,13 +12,13 @@ const createNewImageAction = (image) => ({
     payload: image
 })
 
-const editImageAction = (editImage) => ({
+const editImageAction = (imageUrl) => ({
     type: EDIT_IMAGE,
-    payload: editImage
+    payload: imageUrl
 })
 
-export const editImage = (image) => async (dispatch) => {
-    dispatch(editImageAction(image))
+export const editImage = (imageUrl) => async (dispatch) => {
+    dispatch(editImageAction(imageUrl))
     dispatch(getAllImages())
 }
 
@@ -40,29 +40,6 @@ export const getAllImages = () => async (dispatch) => {
     }
 }
 
-// export const createNewImage = (imageUrl) => async (dispatch) => {
-   
-//     const response = await fetch("/api/images", {
-//         method: 'POST',
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//             imageUrl
-//         })
-//     })
-
-//     if (response.ok) {
-// 		const data = await response.json();
-
-// 		dispatch(createNewImageAction(data));
-//         return data
-
-
-
-//     }
-// }
-
 const initialState = {}
 
 export default function reducer(state = initialState, action) {
@@ -76,6 +53,7 @@ export default function reducer(state = initialState, action) {
             newState[action.payload.image.id] = action.payload.image;
             return newState;
         case EDIT_IMAGE:
+            console.log(action.payload)
             newState[action.payload.image.id] = action.payload.image;
             return newState;
         default:

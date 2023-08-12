@@ -5,14 +5,12 @@ import './PostForm.css';
 import { useModal } from "../../context/Modal";
 
 const PostForm = () => {
-
     const dispatch = useDispatch()
     const [content, setContent] = useState('')
     const [imageUrl, setImageUrl] = useState('')
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const { closeModal } = useModal()
-    // let post = useSelector(state=> state.post)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,8 +18,6 @@ const PostForm = () => {
 
         if (!errors.length) {
             await dispatch(postsActions.createNewPost(content, imageUrl));
-            // if (imageUrl) await dispatch(imagesActions.createNewImage(imageUrl))
-            // dispatch(imagesActions.createNewImage(imageUrl))
             setContent('');
             setImageUrl('');
             setErrors([]);

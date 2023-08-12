@@ -57,11 +57,16 @@ def edit_post(postId):
         post = Post.query.get(postId)
         post.content = post_form.data['content']
         post.updated_at = datetime.now()
+        image = Image.query.filter_by(postId=postId).one()
+        image.imageUrl = post_form.data['imageUrl']
+        print(image.imageUrl)
+
         db.session.commit()
 
         # if (post_form.data['imageUrl']):
         #     image = Image.query.get()
-        return post.to_dict()
+        return {'post': post.to_dict(),
+                'image': image.to_dict()}
 
 
 # @post_routes.route('<int:postId>', methods=["PUT"])

@@ -38,7 +38,7 @@ const PostsPage = () => {
     for (let follow of follows) {
         following.push(follow.followedId);
     }
-    console.log(hideFollowing)
+
     return (
         isLoaded &&
         <div className="posts">
