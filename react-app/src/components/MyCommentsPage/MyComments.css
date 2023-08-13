@@ -24,6 +24,7 @@ body {
 }
 #my-comment-text {
     word-break: break-all;
+    padding: 5px 0px;
 }
 
 #deleteButton {
@@ -43,4 +44,19 @@ body {
 
 #editButton:hover {
     background-color: rgb(186, 205, 224);
+}
+.comment-timestamp {
+    width: fit-content;
+}
+#my-comment-buttons {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 18px;
+}
+.my-comment-buttons-timestamp {
+    display: flex;
+    justify-content: space-between;
+}
+#my-comment-post-link {
+    padding-left: 6px;
 }

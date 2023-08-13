@@ -48,46 +48,36 @@ function LoginFormModal() {
         </ul>
         </div>
 
-
+      <div className="loginInputs">
         <div className='email'>
 
-          <span>Email:   </span>
+          <span>Email:</span>
           <input className='input'
-            placeholder='username or email'
+            placeholder='Username or email'
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-
         </div>
 
         <div className='password'>
-
           <span>Password: </span>
-          <input className='input'
-            placeholder='password'
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          </div>
-
+            <input className='input'
+              placeholder='Password'
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+        </div>
         </div>
         <div className='footer'>
-          <div><button className='LogIn'>Log In</button></div>
-          <div><button className='Demo' onClick={loginDemo}>Demo User</button></div>
-
-
-           {/* {disable ? (
-            <button id='isDisabled' disabled={disable} >Log In</button>
-            ) : (
-             <button disabled={disable} >Log In</button>
-             )}
-
-          <button id='cancelButton' onClick={closeModal}>Cancel</button> */}
-          </div>
+          <div><button className='buttonDesign'>Log In</button></div>
+          <div><button className='buttonDesign' onClick={loginDemo}>Demo</button></div>
+        </div>
+        </div>
+        
         </div>
 
       </form>

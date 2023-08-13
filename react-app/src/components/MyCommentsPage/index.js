@@ -37,20 +37,27 @@ const MyCommentsPage = () => {
                 myComments.map(comment =>
                     <div className="post" key={comment.id}>
                         <div>
-                            <NavLink className="postsRoute" to={`/posts/${comment.postId}`}>{posts[comment.postId].user.username}'s post</NavLink>
+                            <NavLink className="postsRoute" to={`/posts/${comment.postId}`}>{posts[comment.postId].user.username}'s post
+                                <i id="my-comment-post-link" className="fa-solid fa-arrow-up-right-from-square"></i>
+                            </NavLink>
                         </div>
                         <div id="my-comment-text">{comment.content}</div>
-                        <div className='deleteButton'>
-                            <OpenModalButton
-                                buttonText=<i className="fa-regular fa-trash-can" id='deleteButton'></i>
-                                modalComponent={<DeleteComment commentId={comment.id}/>}
-                            />
-                        </div>
-                        <div className='editButton'>
-                            <OpenModalButton
-                                buttonText=<i className="fa-regular fa-pen-to-square" id='editButton'></i>
-                                modalComponent={<EditComment commentId={comment.id} />}
-                            />
+                        <div className="my-comment-buttons-timestamp">
+                            <div id="timestamp" className="comment-timestamp">{comment.created_at}</div>
+                            <div id="my-comment-buttons">
+                                <div className='deleteButton'>
+                                    <OpenModalButton
+                                        buttonText=<div className="edit-delete-div"><i className="fa-regular fa-trash-can"></i></div>
+                                        modalComponent={<DeleteComment commentId={comment.id}/>}
+                                    />
+                                </div>
+                                <div className='editButton'>
+                                    <OpenModalButton
+                                        buttonText=<div className="edit-delete-div"><i className="fa-regular fa-pen-to-square"></i></div>
+                                        modalComponent={<EditComment comment={comment} />}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )

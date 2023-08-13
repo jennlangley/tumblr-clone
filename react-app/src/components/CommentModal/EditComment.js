@@ -14,7 +14,7 @@ const EditComment = ({ comment }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true)
-        if (content.length > 1) {
+        if (content.length > 0) {
             await dispatch(commentsActions.editComment(comment.id, content))
             setContent('')
             setErrors([])
@@ -32,25 +32,32 @@ const EditComment = ({ comment }) => {
     }, [hasSubmitted, content])
 
     return (
-        <div className="post">
-            <form id="post-form" onSubmit={handleSubmit}>
-                <div className='errorsBox'>
-                        <ul className='errors'>
-                        {errors.map((error, idx) => (
-                            <li key={idx}>{error}</li>
-                        ))}
-                        </ul>
+        <form onSubmit={handleSubmit}>
+            <div className="modalBackground">
+                <div className="modalContainer">
+                    <div className="title">Edit Comment</div>
+                    <div className='errorsBox'>
+                            <ul className='errors'>
+                            {errors.map((error, idx) => (
+                                <li key={idx}>{error}</li>
+                            ))}
+                            </ul>
+                    </div>
+                    <div>
+                    <textarea 
+                        className="textarea-edit"
+                        type="text"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                    />
+                    </div>
+                    <div className="footer">
+                        <div><button className="buttonDesign" type="submit">Edit Comment</button></div>
+                        <div><button className="buttonDesign" onClick={closeModal}>Cancel</button></div>
+                    </div>
                 </div>
-                <label>Edit Comment</label>
-                <textarea 
-                    type="text"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                />
-                <button  type="submit">Edit Comment</button>
-                <button onClick={closeModal}>Cancel</button>
-            </form>
-        </div>
+            </div>
+        </form>
         
     )
 }

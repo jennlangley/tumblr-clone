@@ -32,27 +32,25 @@ function SignupFormModal() {
 	return (
 		<>
 		<form onSubmit={handleSubmit}>
-		  <div id='modal-background'>
-             <div className="modalContainer2">
-
-             <div className='titleCloseButton2'>
-               <button id='titleCloseButton2' onClick={closeModal}>X</button>
-             </div>
-
-			  <div className='title2'>Sign Up</div>
-
-			  <div className='errors2'>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
+		  <div id='modalBackground'>
+             <div className="modalContainer">
+				<div className='titleCloseButton'>
+				<button id='titleCloseButton' onClick={closeModal}>X</button>
 				</div>
-
+			  <div className='title'>Sign Up</div>
+				<div className='errors'>
+					<ul>
+						{errors.map((error, idx) => (
+							<li key={idx}>{error}</li>
+						))}
+					</ul>
+				</div>
+			<div className="loginInputs">
 				<div className='email'>
-					Email:
+					<span>Email:</span>
 					<input
-						placeholder='type your email'
+						className="input"
+						placeholder='Enter your email'
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -61,9 +59,10 @@ function SignupFormModal() {
 				</div>
 
 				<div className='username'>
-					Username:
+					<span>Username:</span>
 					<input
-						placeholder='create your username'
+						className="input"
+						placeholder='Enter your username'
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
@@ -72,9 +71,10 @@ function SignupFormModal() {
 				</div>
 
 				<div className='password'>
-					Password:
+					<span>Password:</span>
 					<input
-						placeholder='create your password'
+						className="input"
+						placeholder='Create a password'
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
@@ -83,18 +83,19 @@ function SignupFormModal() {
 				</div>
 
 				<div className='ConPass'>
-					Confirm Password:
+					<span>Confirm Password:</span>
 					<input
-						placeholder='confrim your password'
+						className="input"
+						placeholder='Confirm your password'
 						type="password"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
 					/>
 				</div>
-
+			</div>
 				<div className='button'>
-				<button className='buttonDesign' type="submit">Sign Up</button>
+					<button className='buttonDesign' type="submit">Sign Up</button>
 				</div>
 			 </div>
 			 </div>

@@ -35,3 +35,20 @@
     font-weight: bold;
     background-color: rgb(130, 165, 201);
 }
+.delete-footer {
+    display: flex;
+    margin: auto;
+}
+#delete-title {
+    position: relative;
+    top: 50px;
+}
+.textarea-edit {
+    font-family: inherit;
+    width: 300px;
+    height: 100px;
+}
+.create-post-form {
+    margin: auto;
+    text-align: left;
+}

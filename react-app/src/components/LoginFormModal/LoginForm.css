@@ -1,79 +1,23 @@
 .modalBackground {
-    width: 500px;
-    height: 200px;
-    background-color: rgba(0, 0, 0, 0);
-    position: static;
-    bottom: 100px;
-    left: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  width: 500px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0);
+  position: static;
+  bottom: 100px;
+  left: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
   .modalContainer {
-    width: 450px;
-    height: 300px;
-    border-radius: 30px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    display: grid;
-    grid-template-rows: 25px 40px 100px 35px 35px;
-    padding: 25px;
-  }
-  .titleCloseButton {
-    grid-row: 1/2;
-    /* display: flex;
-    justify-content: flex-end; */
-  }
-
-  .titleCloseButton button {
-    background-color: transparent;
-    border: none;
-    font-size: 25px;
-    cursor: pointer;
-    position: relative;
-    left: 290px;
-  }
-
- .title {
-    grid-row: 2/3;
-    display: inline-block;
-    text-align: center;
-    font-size: 35px;
-    font-weight: bold;
-  }
-
-  .errors{
-    grid-row: 3/4;
-    color: red;
-  }
-
-  .modalContainer .errorsBox{
-    height: 4px;
-  }
-
-  .modalContainer .email {
-    height: 5px;
-  }
-
-  .email {
-    grid-row: 4/5;
-  }
-
-  .modalContainer .password {
-    height: 5px;
-  }
-
-  .password {
-    grid-row: 5/6;
-  }
-
-
-  .input {
-    border-radius: 5px;
-    height: 25px;
-  }
-
+  width: 450px;
+  height: 300px;
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 25px;
+}
 
 .LogIn {
   color: white;
@@ -97,4 +41,24 @@
   right: 200px;
   border-radius: 10px;
   cursor: pointer;
+}
+.loginInputs {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.username, .email, .password, .ConPass {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  text-align: left;
+}
+.input {
+  width: 100%;
+  display: block;
+  height: 20px;
+  margin-left: 4px;
 }

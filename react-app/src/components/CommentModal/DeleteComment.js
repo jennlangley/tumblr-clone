@@ -20,14 +20,14 @@ const DeleteComment = (commentId) => {
     return (
         <div className="modalBackground">
             <div className="modalContainer">
-                <div></div>
-                <div>
-                    <h1 className='deleteTitle'>Delete This Comment?</h1>
-                    <button className='yesButton' onClick={e => handleSubmit(e)}>Yes</button>
-                    <button className='noButton' onClick={closeModal}>No</button>
+                <div id="delete-title" className="title">Delete this comment?</div>
+                <div className="delete-footer">
+                    <div><button  className="buttonDesign" onClick={e => handleSubmit(e)}>Yes</button></div>
+                    <div><button className="buttonDesign" onClick={closeModal}>No</button></div>
                 </div>
             </div>
         </div>
+
     )
 }
 

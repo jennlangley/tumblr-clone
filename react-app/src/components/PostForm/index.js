@@ -40,31 +40,43 @@ const PostForm = () => {
     }, [hasSubmitted, content]);
 
     return (
-        <div className="post">
-            <form encType="multipart/form-data" id="post-form" onSubmit={handleSubmit}>
-                <div className='errorsBox'>
-                    <ul className='errors'>
-                    {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))}
-                    </ul>
+        <form encType="multipart/form-data" id="post-form" onSubmit={handleSubmit}>
+            <div className="modalBackground">
+                <div className="modalContainer">
+                    <div className="title">Create a Post!</div>
+                    <div className='errorsBox'>
+                        <ul className='errors'>
+                        {errors.map((error, idx) => (
+                            <li key={idx}>{error}</li>
+                        ))}
+                        </ul>
+                    </div>
+                    <div className="create-post-form">
+                        <div>
+                            <div>Write something: </div>
+                            <textarea
+                                className="textarea-edit"
+                                type="text"
+                                value={content}
+                                onChange={e => setContent(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <div>Image: </div>
+                            <input
+                                type="file"
+                                onChange={e => setImage(e.target.files[0])}
+                                accept="image/*"
+                            />
+                        </div>
+                        <div className="footer">
+                            <div><button className="buttonDesign" type='submit'>Post</button></div>
+                            {(imageLoading)&& <p>Loading...</p>}
+                        </div>
+                    </div>
                 </div>
-                <label>Write something: </label>
-                <textarea
-                    type="text"
-                    value={content}
-                    onChange={e => setContent(e.target.value)}
-                />
-                <label>Image: </label>
-                <input
-                    type="file"
-                    onChange={e => setImage(e.target.files[0])}
-                    accept="image/*"
-                />
-                <button type='submit'>Post</button>
-                {(imageLoading)&& <p>Loading...</p>}
-            </form>
-        </div>
+            </div>
+        </form>
     )
 }
 

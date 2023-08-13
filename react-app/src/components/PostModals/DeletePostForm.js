@@ -15,11 +15,10 @@ const DeletePostForm = (postId) => {
     return (
         <div className="modalBackground">
             <div className="modalContainer">
-                <div></div>
-                <div>
-                    <h1>Confirm Delete</h1>
-                    <button onClick={e => handleSubmit(e)}>Yes</button>
-                    <button onClick={closeModal}>No</button>  
+                <div id="delete-title" className="title">Delete this Post?</div>
+                <div className="delete-footer">
+                    <button className="buttonDesign" onClick={e => handleSubmit(e)}>Yes</button>
+                    <button className="buttonDesign" onClick={closeModal}>No</button>  
                 </div>
             </div>
         </div>
