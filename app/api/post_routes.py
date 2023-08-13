@@ -69,7 +69,8 @@ def edit_post(postId):
         post.content = post_form.data['content']
         post.updated_at = datetime.now()
         db.session.commit()
-        old_image = Image.query.filter_by(postId = postId).first();
+        old_image = Image.query.filter_by(postId = postId).first()
+        
         if (post_form.data['image']):
     
             image = post_form.data['image']
@@ -80,15 +81,16 @@ def edit_post(postId):
                 return validation_errors_to_error_messages(upload)
              
             url = upload["url"]
+
             if (old_image):
-                old_image.imageUrl = url;
-            else:
-                new_image = Image(imageUrl=url, postId=postId)
-                db.session.add(new_image)
+                old_image.imageUrl = url
                 db.session.commit()
-                return {'post': post.to_dict(), 'image': new_image.to_dict()}
+                return {'post': post.to_dict(), 'image': old_image.to_dict()}
+            
+            new_image = Image(imageUrl=url, postId=postId)
+            db.session.add(new_image)
             db.session.commit()
-            return {'post': post.to_dict(), 'image': old_image.to_dict()}
+            return {'post': post.to_dict(), 'image': new_image.to_dict()}
         
         return {'post': post.to_dict()} 
     

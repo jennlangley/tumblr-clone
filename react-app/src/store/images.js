@@ -18,13 +18,11 @@ const editImageAction = (image) => ({
 })
 
 export const editImage = (image) => async (dispatch) => {
-    await dispatch(editImageAction(image))
-    // dispatch(getAllImages())
+    dispatch(editImageAction(image))
 }
 
 export const createNewImage = (image) => async (dispatch) => {
-    await dispatch(createNewImageAction(image))
-    // dispatch(getAllImages())
+    dispatch(createNewImageAction(image))
 }
 
 export const getAllImages = () => async (dispatch) => {
