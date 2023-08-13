@@ -21,39 +21,33 @@ const Comments = ({ postId }) => {
                 {showComments ? <span><i className="fa-solid fa-xmark"></i> Close comments</span> :
                 comments && `${Object.values(comments).length} comments`}</div>
             <div>
-                {sessionUser && showComments && <AddComment postId={postId}/>}
-                {showComments && 
-                    (comments && (Object.values(comments).reverse().map(comment => 
-                        <div key={comment.id} id="comment-container">
-                            <div>
-                                <i id="comment-profile-link" className="fa-regular fa-circle-user" />
+            {sessionUser && showComments && <AddComment postId={postId}/>}
+            {showComments && 
+                (comments && (Object.values(comments).reverse().map(comment => 
+                    <div key={comment.id} id="comment-container">
+                        <div>
+                            <i id="comment-profile-link" className="fa-regular fa-circle-user" />
+                        </div>
+                        <div className="comment-text" key={comment.id}>
+                            <div className="comment-username">{Object.values(users[comment.userId].username)}
+                                <span className="comment-date"> {comment.updated_at}</span>
                             </div>
-                            <div className="comment-text" key={comment.id}>
-                                <div className="comment-username">{Object.values(users[comment.userId].username)}
-                                    <span className="comment-date"> {comment.updated_at}</span>
-                                    <> </>
-                                    {(comment.userId === sessionUser?.id) && 
-                                        (<>
-                                            <OpenModalButton
-                                                buttonText=<i className="fa-regular fa-trash-can"></i>
-                                                modalComponent={<DeleteComment commentId={comment.id}/>}
-                                            />
-                                            <OpenModalButton
-                                                buttonText=<i className="fa-regular fa-pen-to-square"></i>
-                                                modalComponent={<EditComment commentId={comment.id} />}
-                                            />
-                                        
-                                        </>)
-                                    }
-                                </div>
-                                <div id="comment-content">{comment.content}</div>
-                                
-                            </div>
-                        </div>)
-                        )
-                        
-                    )
-                } 
+                            <div id="comment-content">{comment.content}</div>
+                                {(comment.userId === sessionUser?.id) && 
+                                    (<div className="edit-and-delete-button">
+                                        <OpenModalButton
+                                            buttonText=<i className="fa-regular fa-trash-can"></i>
+                                            modalComponent={<DeleteComment commentId={comment.id}/>}
+                                        />
+                                        <OpenModalButton
+                                            buttonText=<i className="fa-regular fa-pen-to-square"></i>
+                                            modalComponent={<EditComment comment={comment} />}
+                                        />
+                                    
+                                    </div>)
+                                }
+                        </div>
+                    </div>)))} 
             </div>
         </div>
     )

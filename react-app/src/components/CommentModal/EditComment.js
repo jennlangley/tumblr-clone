@@ -1,73 +1,57 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react"
-// import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as commentsActions from "../../store/comments";
 import './CreateComment.css'
 
-const EditComment = ({commentId}) => {
-
-    // const history = useHistory();
+const EditComment = ({ comment }) => {
     const dispatch = useDispatch()
+    const [content, setContent] = useState(comment.content)
+    const [hasSubmitted, setHasSubmitted] = useState(false)
+    const [errors, setErrors] = useState([])
     const { closeModal } = useModal();
-
-    // useEffect(()=> {
-    //     dispatch(commentsActions.getAllComments())
-    // },[dispatch])
-
-    const comment = useSelector(state => Object.values(state.comments).filter((comment => comment.id === commentId)))
-
-
-    const [content, setContent] = useState(comment[0].content)
-    const [hasFilled, setHasFilled] = useState(false)
-    const [error, setError] = useState({})
-
-    useEffect(() => {
-        let validationErrors = {}
-
-        if (content.length === 0 && hasFilled) {
-            validationErrors.content = "*Comment field cannot be empty"
-        }
-
-        if(validationErrors) {
-            setError(validationErrors)
-        } else {
-            setError({})
-        }
-
-    }, [content, hasFilled])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        setError({})
-        setHasFilled(false)
-
-        await dispatch(commentsActions.editComment({content}, commentId))
-              .then(closeModal())
+        setHasSubmitted(true)
+        if (content.length > 1) {
+            await dispatch(commentsActions.editComment(comment.id, content))
+            setContent('')
+            setErrors([])
+            setHasSubmitted(false)
+            closeModal()
+        }
     }
 
+    useEffect(() => {
+        if (hasSubmitted) {
+            const errors = []
+            if (!content) errors.push('Comment must have some content!')
+            setErrors(errors)
+        }
+    }, [hasSubmitted, content])
+
     return (
-        <form onSubmit={handleSubmit}>
-        <div className="modalBackground">
-            <div className="modalContainer">
-                <div></div>
-                <div>
-                    <h1 className='createTitle'>Type in your comment</h1>
-                    <div className='errorContent'>
-                      {error.content && (<p>{error.content}</p>)}
-                    </div>
-                    <textarea id='comment'
-                              placeholder='Edit your comment'
-                              value={content}
-                              onChange={(e) => setContent(e.target.value)}
-                              onClick={()=> {setHasFilled(true)}} />
-                    <button className='addComment' onClick={e => handleSubmit(e)}>Edit Comment</button>
-                    <button className='cancelComment' onClick={closeModal}>Cancel</button>
+        <div className="post">
+            <form id="post-form" onSubmit={handleSubmit}>
+                <div className='errorsBox'>
+                        <ul className='errors'>
+                        {errors.map((error, idx) => (
+                            <li key={idx}>{error}</li>
+                        ))}
+                        </ul>
                 </div>
-            </div>
+                <label>Edit Comment</label>
+                <textarea 
+                    type="text"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                />
+                <button  type="submit">Edit Comment</button>
+                <button onClick={closeModal}>Cancel</button>
+            </form>
         </div>
-        </form>
+        
     )
 }
 

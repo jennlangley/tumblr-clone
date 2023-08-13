@@ -15,7 +15,7 @@ def seed_images():
         postId=3, 
     )
     image_4 = Image(
-        imageUrl="https://media.macphun.com/img/uploads/customer/how-to/593/15353560665b83aca2a112e0.05630799.jpg", 
+        imageUrl="https://api.hub.jhu.edu/factory/sites/default/files/styles/landscape/public/stars_feature.png", 
         postId=4,
     )
 

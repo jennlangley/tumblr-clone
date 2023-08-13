@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as postsActions from "../../store/posts";
 
@@ -14,7 +14,7 @@ const EditPostForm = ({ post }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setHasSubmitted(true)
         if (!errors.length) {
             const formData = new FormData();
             formData.append("image", image);
@@ -47,19 +47,19 @@ const EditPostForm = ({ post }) => {
                     ))}
                     </ul>
                 </div>
-                <label>Write something: </label>
+                <label>Edit Post: </label>
                 <textarea
                     type="text"
                     value={content}
                     onChange={e => setContent(e.target.value)}
                 />
-                <label>Image: </label>
+                <label>Edit Image: </label>
                 <input
                     type="file"
                     onChange={e => setImage(e.target.files[0])}
                     accept='image/*'
                 />
-                <button type='submit'>Update Post</button>
+                <button disabled={errors.length > 0} type='submit'>Update Post</button>
                 {(imageLoading)&& <p>Loading...</p>}
             </form>
         </div>

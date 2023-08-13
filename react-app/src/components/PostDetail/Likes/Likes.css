@@ -26,3 +26,27 @@
     border: none;
     color: red;
 }
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -70px;
+    background-color: slategray;
+    box-shadow: 2px 2px 8px black;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    font-size: 14px;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

@@ -15,7 +15,7 @@ const PostForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // setHasSubmitted(true);
+        setHasSubmitted(true);
 
         if (!errors.length) {
             const formData = new FormData();

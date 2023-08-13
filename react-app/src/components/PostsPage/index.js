@@ -15,7 +15,6 @@ import * as followsActions from '../../store/follows';
 import './PostsPage.css';
 import DeletePostForm from "../PostModals/DeletePostForm";
 import EditPostForm from "../PostModals/EditPostForm";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const PostsPage = () => {
     const dispatch = useDispatch();
@@ -87,9 +86,9 @@ const PostsPage = () => {
                             ))}
                             </div>
                             <div>
-                            <NavLink to={`/posts/${post.id}`}>
-                                <i style={{cursor: "pointer"}} className="fa-solid fa-arrow-up-right-from-square"></i>
-                            </NavLink>
+                                <NavLink to={`/posts/${post.id}`}>
+                                    <i style={{cursor: "pointer", color: "black"}} className="fa-solid fa-arrow-up-right-from-square"></i>
+                                </NavLink>
                             </div>
                         </div>
 

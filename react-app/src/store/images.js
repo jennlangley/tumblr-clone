@@ -12,13 +12,13 @@ const createNewImageAction = (image) => ({
     payload: image
 })
 
-const editImageAction = (imageUrl) => ({
+const editImageAction = (image) => ({
     type: EDIT_IMAGE,
-    payload: imageUrl
+    payload: image
 })
 
-export const editImage = (imageUrl) => async (dispatch) => {
-    dispatch(editImageAction(imageUrl))
+export const editImage = (image) => async (dispatch) => {
+    dispatch(editImageAction(image))
     dispatch(getAllImages())
 }
 

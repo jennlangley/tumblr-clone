@@ -83,10 +83,9 @@ export const editPost = (postId, post) => async (dispatch) => {
     
     if (response.ok) {
         const data = await response.json();
-        dispatch(editPostAction(data))
-        console.log(data)
+        dispatch(editPostAction(data.post))
         if (data.image) {
-            dispatch(imagesActions.editImage(data))
+            dispatch(imagesActions.editImage(data.image))
         }
         
     } else {

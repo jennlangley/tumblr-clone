@@ -53,11 +53,14 @@ export const createComment = (content, postId) => async (dispatch) => {
     }
 }
 
-export const editComment = (content, commentId) => async (dispatch) => {
+export const editComment = (commentId, content) => async (dispatch) => {
+    console.log("content ", content)
     const response = await fetch(`/api/comments/${commentId}`, {
         method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(content)
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({content})
     })
 
     if(response.ok) {

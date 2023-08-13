@@ -20,6 +20,10 @@ body {
 #comment-text {
     display: flex;
     justify-content: space-around;
+    word-break: break-all;
+}
+#my-comment-text {
+    word-break: break-all;
 }
 
 #deleteButton {

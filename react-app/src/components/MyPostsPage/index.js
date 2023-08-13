@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DeletePostForm from "../PostModals/DeletePostForm";
 import EditPostForm from "../PostModals/EditPostForm";
@@ -47,7 +48,13 @@ const MyPostsPage = () => {
                     <div key={post.id} className='post'>
                         <div id="username-follow-link">
                             <div id="username">{post.user.username}</div>
-                            {post.reposted ? (
+                            <div>
+                                <NavLink to={`/posts/${post.id}`}>
+                                    <i style={{cursor: "pointer", color: "black"}} className="fa-solid fa-arrow-up-right-from-square"></i>
+                                </NavLink>
+                            </div>
+                        </div>
+                        {post.reposted ? (
                                     <span className='reposted'>reposted</span>
                                 ): 
                                 <></>}
@@ -56,7 +63,6 @@ const MyPostsPage = () => {
                                 <span style={{fontWeight: 'bold'}}>{post.originalPoster}</span>
                             </div>
                             )}
-                        </div>
                         <div id="timestamp">{post.created_at}</div>
                         <div> 
                             {post.reposted ? <img alt='' className="repostImg" src={post.repostUrl} />
@@ -64,19 +70,15 @@ const MyPostsPage = () => {
                             }
                         </div>
                         <div className="post-content">{post.content}</div>
-                        <div className='buttons-div'>
-                        <div className="delete-button">
+                        <div className='edit-and-delete-button'>
                             <OpenModalButton
-                            buttonText=<i className="fa-regular fa-trash-can"  id='delete-button'></i>
+                            buttonText=<div className="edit-delete-div"><i className="fa-regular fa-trash-can"></i></div>
                             modalComponent={<DeletePostForm postId={post.id}/>}
                             />
-                        </div>
-                        <div className='edit-button'>
                             <OpenModalButton
-                                buttonText=<i className="fa-regular fa-pen-to-square" id='edit-button'></i>
+                                buttonText=<div className="edit-delete-div"><i className="fa-regular fa-pen-to-square"></i></div>
                                 modalComponent={<EditPostForm post={post} />}
                             />
-                        </div>
                         </div>
 
                         <div className="comments-like-button">

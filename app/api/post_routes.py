@@ -70,7 +70,6 @@ def edit_post(postId):
         post.updated_at = datetime.now()
         db.session.commit()
         old_image = Image.query.filter_by(postId = postId).first();
-        print(old_image)
         if (post_form.data['image']):
             
             image = post_form.data['image']
@@ -89,18 +88,6 @@ def edit_post(postId):
         return {'post': post.to_dict()} 
     
     return validation_errors_to_error_messages(post_form.errors)
-
-
-# @post_routes.route('<int:postId>', methods=["PUT"])
-# def update_post(postId):
-#     post_form = PostForm()
-#     post = Post.query.get(postId)
-#     if (post_form.validate_on_submit()) :
-#         post.content = post_form.data['content']
-#         post.updated_at = datetime.now()
-#         db.session.commit()
-#         return {'post': post.to_dict()}
-#     return {'errors': validation_errors_to_error_messages(post_form.errors)}, 401
 
 @post_routes.route('/<int:postId>', methods=['DELETE'])
 @login_required
@@ -142,22 +129,4 @@ def repost(postId):
     db.session.add(new_post)
     db.session.commit()
 
-    # new_post_image = Image(imageUrl = image.imageUrl, postId = new_post.id)
-    # db.session.add(new_post_image)
-    # db.session.commit()
-
-   # print(image.imageUrl, 'ooooooooooooooooooooooooo')
     return {'post': new_post.to_dict()}
-
-
-
-# @post_routes.route('/<int:postId>')
-# def get_post_by_id(postId):
-#     post = Post.query.get(postId)
-#     return post.to_dict()
-
-
-# @post_routes.route('/<int:postId/comments/<int:commentId>', methods=['DELETE'])
-# def delete_comment(postId, commentId):
-#     post = Post.query.get(postId)
-#     comment = Comment.query.get(commentId)

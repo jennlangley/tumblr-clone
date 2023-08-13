@@ -37,9 +37,9 @@ const MyCommentsPage = () => {
                 myComments.map(comment =>
                     <div className="post" key={comment.id}>
                         <div>
-                            <NavLink to={`/posts/${comment.postId}`}>{posts[comment.postId].user.username}'s post</NavLink>
+                            <NavLink className="postsRoute" to={`/posts/${comment.postId}`}>{posts[comment.postId].user.username}'s post</NavLink>
                         </div>
-                        <div id="comment-text">{comment.content}</div>
+                        <div id="my-comment-text">{comment.content}</div>
                         <div className='deleteButton'>
                             <OpenModalButton
                                 buttonText=<i className="fa-regular fa-trash-can" id='deleteButton'></i>
