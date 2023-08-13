@@ -63,13 +63,13 @@ function LoginFormModal() {
 
         <div className='password'>
           <span>Password: </span>
-            <input className='input'
-              placeholder='Password'
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <input className='input'
+            placeholder='Password'
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
         </div>
         <div className='footer'>

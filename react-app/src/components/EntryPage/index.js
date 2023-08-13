@@ -9,7 +9,7 @@ const EntryPage = () => {
 
     if (sessionUser) return <Redirect to="/posts" />
     return (
-        <div className="welcome-container">
+      
             <div id="welcome-page">
                 <div>
                     <h1>Welcome!</h1> 
@@ -21,9 +21,14 @@ const EntryPage = () => {
                     <NavLink id="entry-link" to="/login">
                         Login
                     </NavLink>
+
+                    <NavLink id="entry-link" to='/signup'>
+                        Sign Up
+                    </NavLink>
                 </div>
+                
             </div>
-        </div>
+        
     )
 }
 

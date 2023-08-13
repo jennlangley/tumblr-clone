@@ -40,7 +40,7 @@ const PostsPage = () => {
         following.push(follow.followedId);
     }
     const followingPosts = useSelector(state => (Object.values(state.posts)).filter(post => following.includes(post.userId)));
-    
+
     return (
         isLoaded &&
         <div className="posts">

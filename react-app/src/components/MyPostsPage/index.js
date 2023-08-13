@@ -14,12 +14,12 @@ import * as usersActions from '../../store/users';
 import './MyPosts.css';
 import Comments from "../PostDetail/Comments";
 import Likes from "../PostDetail/Likes";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 
 const MyPostsPage = () => {
     const dispatch = useDispatch();
-
+    const history = useHistory();
     useEffect(() => {
         dispatch(usersActions.getUsers());
         dispatch(postsActions.getAllPosts());
@@ -31,18 +31,10 @@ const MyPostsPage = () => {
 
     const sessionUser = useSelector(state => state.session.user);
     const myPosts = useSelector(state => (Object.values(state.posts)).filter((post) => post.userId === sessionUser.id))
-    if (!sessionUser) return <Redirect to="/posts" />;
+    if (!sessionUser) history.push('/posts')
     return (
         <>
         <div className='posts'>
-            <div className="create-post-container">
-                    <div>
-                        <OpenModalButton
-                            buttonText={<div><i className="fa-solid fa-plus"></i> New Post</div>}
-                            modalComponent={<PostForm />}
-                        />
-                    </div>
-            </div>
             {sessionUser ? (
                 myPosts.reverse().map(post =>
                     <div key={post.id} className='post'>

@@ -22,7 +22,11 @@
     align-items: center;
 }
 #entry-links-container {
+    width: 200px;
     padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 #entry-link {
     text-decoration: none;

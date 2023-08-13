@@ -9,11 +9,11 @@ import Comments from "../PostDetail/Comments";
 import Images from "../PostDetail/Images";
 import Likes from "../PostDetail/Likes";
 import './MyLikesPage.css'
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const MyLikesPage = () => {
     const dispatch = useDispatch();
-    
+    const history = useHistory();
     useEffect(() => {
         dispatch(usersActions.getUsers());
         dispatch(postsActions.getAllPosts());
@@ -30,7 +30,7 @@ const MyLikesPage = () => {
     }
     const posts = useSelector(state => (Object.values(state.posts)).filter(post => likedPosts.includes(post.id)))
 
-    if (!user) return <Redirect to='/posts' />
+    if (!user) history.push('/posts')
 
     return (
         user &&

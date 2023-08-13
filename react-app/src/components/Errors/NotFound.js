@@ -1,16 +1,17 @@
 import React from "react"
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink } from "react-router-dom"
+import '../EntryPage/EntryPage.css'
 const NotFound = () => {
 
     return (
-    
-    <Redirect to='/posts' />
-    // <div className="welcome-container">
-    //     <div id="welcome-page">
-    //         <h2>Uh oh! Page not found.</h2>
-    //     </div>
-        
-    // </div>
+        <div id="welcome-page">
+            <div className="title">Page not found!</div>
+            <div id="entry-links-container">
+            <NavLink id="entry-link" to="/posts">
+                Back to Posts
+            </NavLink>
+        </div>
+        </div>
     
     
     )

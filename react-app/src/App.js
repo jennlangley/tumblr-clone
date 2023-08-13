@@ -43,18 +43,16 @@ function App() {
           <Route exact path="/">
             {(user) ? <Redirect to="/posts" /> : <EntryPage />}
           </Route>
-          <Route path={`/users/${user?.id}/comments`}>
+          <Route exact path={`/users/:userId/comments`}>
             {(user) ? <MyCommentsPage isLoaded={isLoaded} /> : <Redirect to="/posts" />}
           </Route>
-          <Route path={`/users/${user?.id}/posts`}>
+          <Route exact path={`/users/:userId/posts`}>
             {(user)? <MyPostsPage isLoaded={isLoaded} /> : <Redirect to="/posts"/>}
           </Route>
-          <Route path={`/users/${user?.id}/likes`}>
+          <Route exact path={`/users/:userId/likes`}>
             {(user) ? <MyLikesPage isLoaded={isLoaded} /> : <Redirect to ="/posts" />}
           </Route>
-          <Route>
-            <NotFound />
-          </Route>
+          <Route component={NotFound} />
         </Switch>
       )}
     </>

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { Redirect } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as commentsActions from '../../store/comments';
 import * as postsActions from '../../store/posts';
@@ -13,7 +12,7 @@ import './MyComments.css'
 
 const MyCommentsPage = () => {
     const dispatch = useDispatch();
-
+    const history = useHistory();
     useEffect(() => {
         dispatch(usersActions.getUsers())
         dispatch(postsActions.getAllPosts())
@@ -25,7 +24,7 @@ const MyCommentsPage = () => {
     const myComments = useSelector(state => (Object.values(state.comments)).filter((comment) => comment.userId === sessionUser.id))
     const posts = useSelector(state => state.posts)
 
-    if (!sessionUser) return <Redirect to="/posts" />;
+    if (!sessionUser) return history.push('/posts')
 
     return (
         sessionUser && <>

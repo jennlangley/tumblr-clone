@@ -9,16 +9,25 @@ def seed_likes():
         userId=1, postId=3
     )
     like3 = Like(
-        userId=2, postId=1
+        userId=2, postId=2
     )
     like4 = Like(
-        userId=2, postId=3
+        userId=2, postId=4
     )
     like5 = Like(
-        userId=3, postId=1
+        userId=3, postId=3
     )
     like6 = Like(
         userId=3, postId=2
+    )
+    like7 = Like(
+        userId=1, postId=7
+    )
+    like8 = Like(
+        userId=3, postId=6
+    )
+    like9 = Like(
+        userId=2, postId=5
     )
 
 
@@ -28,6 +37,9 @@ def seed_likes():
     db.session.add(like4)
     db.session.add(like5)
     db.session.add(like6)
+    db.session.add(like7)
+    db.session.add(like8)
+    db.session.add(like9)
     db.session.commit()
 
 def undo_likes():
