@@ -15,6 +15,7 @@ import * as followsActions from '../../store/follows';
 import './PostsPage.css';
 import DeletePostForm from "../PostModals/DeletePostForm";
 import EditPostForm from "../PostModals/EditPostForm";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const PostsPage = () => {
     const dispatch = useDispatch();
@@ -33,36 +34,35 @@ const PostsPage = () => {
     const posts = useSelector(state => Object.values(state.posts));
     const user = useSelector(state => state.session.user);
     const follows = useSelector(state => (Object.values(state.follows)).filter((follow) => follow.followerId === user?.id));
-
+    const followingTabContainer = "following-toggle" + (hideFollowing ? "" : " on");
+    const postsTabContainer = "following-toggle" + (hideFollowing ? " on" : "")
     let following = [];
     for (let follow of follows) {
         following.push(follow.followedId);
     }
-
     const followingPosts = useSelector(state => (Object.values(state.posts)).filter(post => following.includes(post.userId)));
-
+    
     return (
         isLoaded &&
         <div className="posts">
             {user &&
             <>
                 <div className="create-post-container">
-                    <div>
+                    <div id="new-post-button">
                         <OpenModalButton
-                            buttonText={<i className="fa-solid fa-plus">  </i>}
+                            buttonText={<div><i className="fa-solid fa-plus"></i> New Post</div>}
                             modalComponent={<PostForm />}
                         />
-                        New post
                     </div>
                 </div>
             <div id="toggle-follows-container">
-                <div id="following-toggle" onClick={e=>setHideFollowing(true)}>All Posts</div>
-                <div id="following-toggle" onClick={e=>setHideFollowing(false)}>Following Posts</div>
+                <div className={postsTabContainer} onClick={e=>setHideFollowing(true)}>All Posts</div>
+                <div className={followingTabContainer} onClick={e=>setHideFollowing(false)}>Following Posts</div>
             </div>
             </>
             }
             <div className="">
-                {(hideFollowing ? posts : followingPosts).reverse().map(post =>
+                {(user ? (hideFollowing ? posts : followingPosts) : posts).reverse().map(post =>
                     <div key={post.id} className="post">
                         <div id="username-follow-link">
                             <div id="username">{post.user.username}
@@ -86,50 +86,57 @@ const PostsPage = () => {
                                         >Follow</span>
                             ))}
                             </div>
-
                             <div>
+                            <NavLink to={`/posts/${post.id}`}>
+                                <i style={{cursor: "pointer"}} className="fa-solid fa-arrow-up-right-from-square"></i>
+                            </NavLink>
+                            </div>
+                        </div>
+
+                        <div>
                         {post.reposted ? (
                         <span className='reposted'>reposted</span>
                         ):(
-                            <div></div>
+                            <></>
                         )}
-                        {user && !post.reposted &&(
-                            <span id="repost-button" onClick={(e)=>{e.preventDefault(); dispatch(postsActions.repost(post.id))}}>
-                                <i className="fa-solid fa-repeat"></i>repost</span>
-                        )}
+                        
                         {post.reposted  && (
                          <div className='originalPoster'>Post originally created by:
                          <span style={{fontWeight: 'bold'}}>{post.originalPoster}</span>
                          </div>
                         )}
                         {post.reposted && (
-                            <div><img className='repostImg' alt='' src={post.repostUrl} /></div>
+                            <img className='repostImg' alt='' src={post.repostUrl} />
                         )}
-                            </div>
-                            <div>
-                                <NavLink to={`/posts/${post.id}`}>
-                                    <i style={{cursor: "pointer"}} className="fa-solid fa-arrow-up-right-from-square"></i>
-                                </NavLink>
-                            </div>
                         </div>
+                        
                         <div id="timestamp">{post.created_at}</div>
                             <Images postId={post.id} />
-
                         <div className="post-content">{post.content}</div>
-                        {user && (post.userId === user.id &&
-                        (<div className="edit-and-delete-button">
-                            <OpenModalButton
-                            buttonText=<i className="fa-regular fa-trash-can"></i>
-                            modalComponent={<DeletePostForm postId={post.id}/>}
-                            />
-                            { !post.reposted &&
-                            <OpenModalButton
-                            buttonText=<i className="fa-regular fa-pen-to-square"></i>
-                            modalComponent={<EditPostForm post={post} />}
-                            />
-                            }
+                        <div className="repost-edit-delete-icons">
+                            {user && !post.reposted &&(
+                                <div 
+                                    id="repost-button" 
+                                    onClick={(e)=>{e.preventDefault(); dispatch(postsActions.repost(post.id))}}
+                                >
+                                    <i className="fa-solid fa-repeat"/>
+                                    {" "} repost
+                                </div>
+                            )}
+
+                            {user && (post.userId === user.id &&
+                            (<div className="edit-and-delete-button">
+                                <OpenModalButton
+                                buttonText=<div className="edit-delete-div"><i className="fa-regular fa-trash-can"></i></div>
+                                modalComponent={<DeletePostForm postId={post.id}/>}
+                                />
+                                {!post.reposted &&
+                                <OpenModalButton
+                                buttonText=<div className="edit-delete-div"><i className="fa-regular fa-pen-to-square"></i></div>
+                                modalComponent={<EditPostForm post={post} />}
+                                />}
+                            </div>))}
                         </div>
-                        ))}
                         <div className="comments-like-button">
                             <Comments postId={post.id} />
                             <Likes postId={post.id} userId={user?.id} />

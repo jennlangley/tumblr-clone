@@ -7,7 +7,7 @@ const Images = ({ postId }) => {
     const images = useSelector(state => Object.values(state.images).filter(image => image.postId === postId))
   
     return (
-        <div>
+        <div className="post-image">
             {images.length ? images.map(image => <img className="post-image" alt="" key={image.id} src={image.imageUrl}/>) : null}
         </div>
     )

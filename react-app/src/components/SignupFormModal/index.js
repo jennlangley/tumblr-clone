@@ -31,7 +31,6 @@ function SignupFormModal() {
 
 	return (
 		<>
-
 		<form onSubmit={handleSubmit}>
 		  <div id='modal-background'>
              <div className="modalContainer2">

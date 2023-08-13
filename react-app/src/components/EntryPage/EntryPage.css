@@ -1,0 +1,35 @@
+#welcome-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: auto;
+    justify-content: center;
+    background-color: white;
+    width: 500px;
+    border-radius: 20px;
+    box-shadow: 8px 8px 8px black;
+    height: 300px;
+}
+.welcome-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#entry-links-container {
+    padding: 20px;
+}
+#entry-link {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(45, 174, 255);
+}
+#entry-link:hover {
+    text-decoration: underline;
+}

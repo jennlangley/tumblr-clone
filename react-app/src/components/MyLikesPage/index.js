@@ -9,6 +9,7 @@ import Comments from "../PostDetail/Comments";
 import Images from "../PostDetail/Images";
 import Likes from "../PostDetail/Likes";
 import './MyLikesPage.css'
+import { Redirect } from "react-router-dom";
 
 const MyLikesPage = () => {
     const dispatch = useDispatch();
@@ -29,8 +30,11 @@ const MyLikesPage = () => {
     }
     const posts = useSelector(state => (Object.values(state.posts)).filter(post => likedPosts.includes(post.id)))
 
+    if (!user) return <Redirect to='/posts' />
+
     return (
-        <div className="posts">
+        user &&
+        (<div className="posts">
             <div id="num-likes">
                 {posts.length === 1 ? <div>{posts.length} like</div> : <div>{posts.length} likes</div>}
             </div>
@@ -51,7 +55,7 @@ const MyLikesPage = () => {
                     <h1>Not Authorized</h1>
                 )}
             
-        </div>
+        </div>)
         
     )
 }

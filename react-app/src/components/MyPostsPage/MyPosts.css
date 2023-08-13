@@ -45,3 +45,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
 }
+#new-post-button-container {
+    display: flex;
+    flex-direction: row;
+}

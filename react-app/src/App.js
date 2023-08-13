@@ -12,6 +12,7 @@ import NotFound from "./components/Errors/NotFound";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import EntryPage from './components/EntryPage';
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,18 +41,20 @@ function App() {
             <PostsPage isLoaded={isLoaded} />
           </Route>
           <Route exact path="/">
-            <EntryPage />
+            {(user) ? <Redirect to="/posts" /> : <EntryPage />}
           </Route>
           <Route path={`/users/${user?.id}/comments`}>
-            <MyCommentsPage isLoaded={isLoaded} />
+            {(user) ? <MyCommentsPage isLoaded={isLoaded} /> : <Redirect to="/posts" />}
           </Route>
-          <Route exact path={`/users/${user?.id}/posts`}>
-            <MyPostsPage isLoaded={isLoaded} />
+          <Route path={`/users/${user?.id}/posts`}>
+            {(user)? <MyPostsPage isLoaded={isLoaded} /> : <Redirect to="/posts"/>}
           </Route>
-          <Route exact path={`/users/${user?.id}/likes`}>
-            <MyLikesPage isLoaded={isLoaded} />
+          <Route path={`/users/${user?.id}/likes`}>
+            {(user) ? <MyLikesPage isLoaded={isLoaded} /> : <Redirect to ="/posts" />}
           </Route>
-          <Route component={NotFound} />
+          <Route>
+            <NotFound />
+          </Route>
         </Switch>
       )}
     </>

@@ -1,8 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import Logo from '../../images/ramble_logo.png'
 import './Navigation.css';
+
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
@@ -10,7 +12,9 @@ function Navigation({ isLoaded }){
 	return (
 		<ul className='navigation'>
 			<li>
-				<NavLink exact to="/posts" id='site-home-link'>Ramble</NavLink>
+				<Link to="/posts" id='site-home-link'>
+					<img id='site-logo' alt="Site logo" src={Logo} />
+				</Link>
 			</li>
 			{isLoaded && (
 				<li>

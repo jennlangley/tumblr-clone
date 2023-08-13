@@ -1,5 +1,5 @@
 .profile-dropdown {
-  background-color: lightslategray;
+  background-color: white;
   border-radius: 6px;
   list-style: none;
   position: absolute;
@@ -7,8 +7,8 @@
   width: 150px;
   /* width:auto; */
   padding-inline: 10px;
+  box-shadow: 0px 2px 6px .25px black;
 }
-
 .newProfile-dropdown {
   background-color: lightslategray;
   border-radius: 6px;
@@ -19,20 +19,18 @@
   width:70px;
   /* padding-inline: 10px; */
 }
-
 .hidden {
   display: none;
 }
-
 .profileButton {
   background-color: lightslategray;
   border: none;
   color: white;
   font-weight: bold;
   cursor: pointer;
+  font-size: 16px;
+  padding-bottom: 2px;
 }
-
-
 .navigation {
   display: flex;
   justify-content: space-between;
@@ -47,8 +45,15 @@
 .signupButton:hover {
   font-weight: bold;
 }
-
+.dropdown-link {
+  color: lightslategray;
+  margin: 2px;
+}
+.dropdown-link:hover {
+  font-weight: bold;
+}
 .loginButton {
+  cursor: pointer;
   background-color: lightslategray;
   font-family: Helvetica;
   color: white;
@@ -79,9 +84,10 @@
 .logOut:hover {
   background-color: gray;
 }
-
+.profile-dropdown a {
+  color: lightslategray;
+}
 .commentsRoute {
-  color: white;
   text-decoration: none;
 }
 
@@ -96,4 +102,7 @@
 
 .postsRoute:hover {
   font-weight: bold;
+}
+#site-logo {
+  width: 150px;
 }

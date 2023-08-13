@@ -16,6 +16,7 @@ body {
     width: 500px;
     border-radius: 6px;
     background-color: white;
+    box-shadow: 0px 0px 6px black;
 }
 
 .comments-like-button {
@@ -55,6 +56,7 @@ body {
     display: flex;
     justify-content: flex-end;
     padding: 5px;
+    font-size: 20px;
 }
 
 .post-content {
@@ -78,6 +80,9 @@ body {
     color: rgb(45, 174, 255);
     cursor: pointer;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+
 }
 
 #repost-button:hover {
@@ -86,36 +91,58 @@ body {
 
 .originalPoster {
     position: relative;
-    right: 112px;
     font-size: 14px;
     color: dimgray;
     padding-bottom: 10px;
 }
 
 .reposted {
-   position: relative;
-   right: 50px;
    font-weight: bold;
    font-size: 16px;
    color: rgb(45, 174, 255);
 
 }
-
 .repostImg {
-    width: 300px;
+    max-width: 500px;
     position: relative;
-    right: 100px;
 
 }
-#following-toggle {
-    color: rgb(45, 174, 255);
-    text-decoration: underline;
+.following-toggle {
+    color: lightgrey;
     cursor: pointer;
     font-weight: bold;
+    width: 50%;
+    text-align: center;
+    margin: 5px;
+}
+.following-toggle.on {
+    color: rgb(45, 174, 255);
+    cursor: pointer;
+    font-weight: bold;
+    width: 50%;
+    text-align: center;
+    border-bottom: 2px solid rgb(45, 174, 255);
 }
 #toggle-follows-container {
     display: flex;
     flex-direction: row;
     width: 500px;
     justify-content: space-evenly;
+}
+#new-post-button {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+}
+.edit-delete-div {
+    padding-left: 10px;
+}
+.repost-edit-delete-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
 }

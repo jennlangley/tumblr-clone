@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as commentsActions from '../../store/comments';
@@ -24,8 +25,10 @@ const MyCommentsPage = () => {
     const myComments = useSelector(state => (Object.values(state.comments)).filter((comment) => comment.userId === sessionUser.id))
     const posts = useSelector(state => state.posts)
 
+    if (!sessionUser) return <Redirect to="/posts" />;
+
     return (
-        <>
+        sessionUser && <>
         <div className='posts'>
             <div id="num-likes">
                 {myComments.length === 1 ? <div>{myComments.length} comment</div> : <div>{myComments.length} comments</div>}

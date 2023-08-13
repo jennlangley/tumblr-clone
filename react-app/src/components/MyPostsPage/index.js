@@ -13,6 +13,7 @@ import * as usersActions from '../../store/users';
 import './MyPosts.css';
 import Comments from "../PostDetail/Comments";
 import Likes from "../PostDetail/Likes";
+import { Redirect } from "react-router-dom";
 
 
 const MyPostsPage = () => {
@@ -29,16 +30,16 @@ const MyPostsPage = () => {
 
     const sessionUser = useSelector(state => state.session.user);
     const myPosts = useSelector(state => (Object.values(state.posts)).filter((post) => post.userId === sessionUser.id))
-
+    if (!sessionUser) return <Redirect to="/posts" />;
     return (
         <>
         <div className='posts'>
             <div className="create-post-container">
                     <div>
                         <OpenModalButton
-                            buttonText={<i className="fa-solid fa-plus">  </i>}
+                            buttonText={<div><i className="fa-solid fa-plus"></i> New Post</div>}
                             modalComponent={<PostForm />}
-                        />New post
+                        />
                     </div>
             </div>
             {sessionUser ? (
@@ -51,14 +52,14 @@ const MyPostsPage = () => {
                                 ): 
                                 <></>}
                             {post.reposted  && (
-                            <div className='originalPoster'>Post originally created by:
+                            <div className='originalPoster'>Post originally created by: 
                                 <span style={{fontWeight: 'bold'}}>{post.originalPoster}</span>
                             </div>
                             )}
                         </div>
                         <div id="timestamp">{post.created_at}</div>
                         <div> 
-                            {post.reposted ? <img alt='' src={post.repostUrl} />
+                            {post.reposted ? <img alt='' className="repostImg" src={post.repostUrl} />
                             : <Images postId={post.id} />
                             }
                         </div>

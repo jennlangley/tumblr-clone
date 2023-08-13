@@ -3,6 +3,7 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function LoginFormModal() {
     e.preventDefault()
     dispatch(login('demo@aa.io','password'))
     .then(closeModal())
+    return <Redirect to="/posts" />
   }
 
   return (
