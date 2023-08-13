@@ -51,6 +51,7 @@ const PostForm = () => {
                         ))}
                         </ul>
                     </div>
+                    {(imageLoading)&& <div className="loadingDiv">Loading...</div>}
                     <div className="create-post-form">
                         <div>
                             <div>Write something: </div>
@@ -71,7 +72,7 @@ const PostForm = () => {
                         </div>
                         <div className="footer">
                             <div><button className="buttonDesign" type='submit'>Post</button></div>
-                            {(imageLoading)&& <p>Loading...</p>}
+                            
                         </div>
                     </div>
                 </div>

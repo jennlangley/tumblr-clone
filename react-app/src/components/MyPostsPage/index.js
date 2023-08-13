@@ -8,7 +8,6 @@ import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
 import * as commentsActions from '../../store/comments';
 import * as likesActions from '../../store/likes';
-import PostForm from "../PostForm";
 import Images from "../PostDetail/Images";
 import * as usersActions from '../../store/users';
 import './MyPosts.css';

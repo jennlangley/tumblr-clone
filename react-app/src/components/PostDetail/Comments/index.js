@@ -36,11 +36,11 @@ const Comments = ({ postId }) => {
                                 {(comment.userId === sessionUser?.id) && 
                                     (<div className="edit-and-delete-button">
                                         <OpenModalButton
-                                            buttonText=<i className="fa-regular fa-trash-can"></i>
+                                            buttonText=<div className="edit-delete-div"><i className="fa-regular fa-trash-can"></i></div>
                                             modalComponent={<DeleteComment commentId={comment.id}/>}
                                         />
                                         <OpenModalButton
-                                            buttonText=<i className="fa-regular fa-pen-to-square"></i>
+                                            buttonText=<div className="edit-delete-div"><i className="fa-regular fa-pen-to-square"></i></div>
                                             modalComponent={<EditComment comment={comment} />}
                                         />
                                     

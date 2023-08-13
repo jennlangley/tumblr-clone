@@ -80,7 +80,13 @@ def edit_post(postId):
                 return validation_errors_to_error_messages(upload)
              
             url = upload["url"]
-            old_image.imageUrl = url;
+            if (old_image):
+                old_image.imageUrl = url;
+            else:
+                new_image = Image(imageUrl=url, postId=postId)
+                db.session.add(new_image)
+                db.session.commit()
+                return {'post': post.to_dict(), 'image': new_image.to_dict()}
             db.session.commit()
             return {'post': post.to_dict(), 'image': old_image.to_dict()}
         
@@ -124,8 +130,8 @@ def repost(postId):
     post = Post.query.get(postId)
     postCreator = User.query.get(post.userId)
     image = Image.query.filter_by(postId = postId).first()
-
-    new_post = Post(content=post.content, userId=current_user.id, reposted=True, originalPoster=postCreator.username, repostUrl=image.imageUrl)
+    url = image.imageUrl if image else None
+    new_post = Post(content=post.content, userId=current_user.id, reposted=True, originalPoster=postCreator.username, repostUrl=url)
     db.session.add(new_post)
     db.session.commit()
 
