@@ -37,7 +37,7 @@ export const getAllPosts = () => async (dispatch) => {
 			"Content-Type": "application/json",
 		},
     });
-
+    
     if (response.ok) {
         const data = await response.json();
         dispatch(getAllPostsAction(data));
@@ -52,7 +52,7 @@ export const createNewPost = (post) => async (dispatch) => {
 
     if (response.ok) {
         const resPost = await response.json();
-        dispatch(createPost(resPost))
+        dispatch(createPost(resPost.post))
         if (resPost.image) {   
             dispatch(imagesActions.createNewImage(resPost.image))
         }
@@ -70,7 +70,7 @@ export const editPost = (postId, post) => async (dispatch) => {
     
     if (response.ok) {
         const resPost = await response.json();
-        dispatch(editPostAction(resPost))
+        dispatch(editPostAction(resPost.post))
         if (resPost.image) {
             dispatch(imagesActions.editImage(resPost.image))
         }
@@ -83,11 +83,10 @@ export const editPost = (postId, post) => async (dispatch) => {
 export const repost = (postId) => async (dispatch) => {
     const response = await fetch(`/api/posts/${postId}/repost`, {
         method: "POST",
-  
     })
     if (response.ok) {
         const data = await response.json()
-        dispatch(postRepost(data))
+        dispatch(postRepost(data.post))
     } else {
         return response.errors;
     }
@@ -111,13 +110,13 @@ export default function reducer(state = initialState, action) {
             action.payload.posts.forEach(post => newState[post.id] = post);
             return newState;
         case CREATE_POST:
-            newState[action.payload.post.id] = action.payload.post;
+            newState[action.payload.id] = action.payload;
             return newState;
         case ADD_REPOST:
-            newState[action.payload.post.id] = action.payload.post;
+            newState[action.payload.id] = action.payload;
             return newState;
         case EDIT_POST:
-            newState[action.payload.post.id] = action.payload.post;
+            newState[action.payload.id] = action.payload;
             return newState;
         case DELETE_POST:
             delete newState[action.payload];
