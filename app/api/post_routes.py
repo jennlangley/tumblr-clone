@@ -71,7 +71,7 @@ def edit_post(postId):
         db.session.commit()
         old_image = Image.query.filter_by(postId = postId).first();
         if (post_form.data['image']):
-            
+    
             image = post_form.data['image']
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
@@ -89,7 +89,6 @@ def edit_post(postId):
                 return {'post': post.to_dict(), 'image': new_image.to_dict()}
             db.session.commit()
             return {'post': post.to_dict(), 'image': old_image.to_dict()}
-        
         
         return {'post': post.to_dict()} 
     

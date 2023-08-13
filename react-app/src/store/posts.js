@@ -54,7 +54,7 @@ export const createNewPost = (post) => async (dispatch) => {
         const resPost = await response.json();
         dispatch(createPost(resPost.post))
         if (resPost.image) {   
-            dispatch(imagesActions.createNewImage(resPost.image))
+            await dispatch(imagesActions.createNewImage(resPost.image))
         }
         
     } else {
@@ -121,7 +121,7 @@ export default function reducer(state = initialState, action) {
         case DELETE_POST:
             delete newState[action.payload];
             return newState;
-        default:
-            return newState;
+    default:
+        return newState;
     }
 }
