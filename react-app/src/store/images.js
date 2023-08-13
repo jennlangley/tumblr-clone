@@ -50,9 +50,11 @@ export default function reducer(state = initialState, action) {
             action.payload.images.forEach(image => newState[image.id] = image);
             return newState;
         case CREATE_IMAGE:
+            console.log('create image payload', action.payload)
             newState[action.payload.id] = action.payload;
             return newState;
         case EDIT_IMAGE:
+            console.log('edit image payload', action.payload)
             newState[action.payload.id] = action.payload;
             return newState;
         default:
