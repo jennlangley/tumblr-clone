@@ -53,25 +53,12 @@ export const createNewPost = (post) => async (dispatch) => {
     if (response.ok) {
         const resPost = await response.json();
         dispatch(createPost(resPost))
-        if (resPost.image) {
-            dispatch(imagesActions.createNewImage(resPost))
+        if (resPost.image) {   
+            dispatch(imagesActions.createNewImage(resPost.image))
         }
         
     } else {
         console.log("there was an error making your post!")
-    }
-}
-
-export const repost = (postId) => async (dispatch) => {
-    const response = await fetch(`/api/posts/${postId}/repost`, {
-        method: "POST",
-  
-    })
-    if (response.ok) {
-        const data = await response.json()
-        dispatch(postRepost(data))
-    } else {
-        return response.errors;
     }
 }
 
@@ -85,11 +72,24 @@ export const editPost = (postId, post) => async (dispatch) => {
         const resPost = await response.json();
         dispatch(editPostAction(resPost))
         if (resPost.image) {
-            dispatch(imagesActions.editImage(resPost))
+            dispatch(imagesActions.editImage(resPost.image))
         }
         
     } else {
         console.log('there was an error making your post!')
+    }
+}
+
+export const repost = (postId) => async (dispatch) => {
+    const response = await fetch(`/api/posts/${postId}/repost`, {
+        method: "POST",
+  
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(postRepost(data))
+    } else {
+        return response.errors;
     }
 }
 
