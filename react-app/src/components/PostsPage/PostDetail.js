@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Comments from "../PostDetail/Comments";
 import Images from "../PostDetail/Images";
 import Likes from "../PostDetail/Likes";
@@ -20,6 +20,7 @@ const PostDetail = () => {
     const { postId } = useParams();
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
+    const history = useHistory();
     useEffect(() => {
         dispatch(usersActions.getUsers())
         dispatch(postsActions.getAllPosts())
@@ -47,46 +48,79 @@ const PostDetail = () => {
         isLoaded && (
         <div className="posts">
             <div className="post">
-                <div id="username">{post.user.username}
-                    {user && !(user.id === post.userId) && (
-                        (following.includes(post.userId) 
-                            ? <span id="follow-button" onClick={e => {
-                                e.preventDefault();
-                                let followId;
-                                for (let follow of follows) {
-                                    if (follow.followedId === post.userId && follow.followerId === user.id) {
-                                        followId = follow.id
+                <div id="username-follow-link">
+                    <div id="username">{post.user.username}
+                        {user && !(user.id === post.userId) && (
+                            (following.includes(post.userId) 
+                                ? <span id="follow-button" onClick={e => {
+                                    e.preventDefault();
+                                    let followId;
+                                    for (let follow of follows) {
+                                        if (follow.followedId === post.userId && follow.followerId === user.id) {
+                                            followId = follow.id
+                                        }
                                     }
-                                }
-                                dispatch(followsActions.deleteFollow(followId))
-                            }}
-                            >Unfollow</span>
-                            : <span id="follow-button" onClick={e => {
-                                e.preventDefault();
-                                dispatch(followsActions.createFollow(post.userId));
-                                }} 
-                                >Follow</span>
-                        ))}
-                        </div>
+                                    dispatch(followsActions.deleteFollow(followId))
+                                }}
+                                >Unfollow</span>
+                                : <span id="follow-button" onClick={e => {
+                                    e.preventDefault();
+                                    dispatch(followsActions.createFollow(post.userId));
+                                    }} 
+                                    >Follow</span>
+                            ))}
+                    </div>
+                </div>
+                <div>
+                    {post.reposted ? (
+                    <span className='reposted'>reposted</span>
+                    ):(
+                        <></>
+                    )}
+                    
+                    {post.reposted  && (
+                    <div className='originalPoster'>Post originally created by:{" "}
+                    <span style={{fontWeight: 'bold'}}>{post.originalPoster}</span>
+                    </div>
+                    )}
+                    {post.reposted && (
+                        <img className='repostImg' alt='' src={post.repostUrl} />
+                    )}
+                </div>
                 <div id="timestamp">{post.created_at}</div>
-                        <Images postId={post.id} />
-                        <div className="post-content">{post.content}</div>
-                        {user && (post.userId === user.id &&
-                        (<div className="edit-and-delete-button">
-                            <OpenModalButton
-                            buttonText=<i className="fa-regular fa-trash-can"></i>
-                            modalComponent={<DeletePostForm postId={post.id}/>}
-                            />
-                            <OpenModalButton 
-                            buttonText=<i className="fa-regular fa-pen-to-square"></i>
-                            modalComponent={<EditPostForm post={post} />}
-                            />
+                <Images postId={post.id} />
+                <div className="post-content">{post.content}</div>
+                <div className="repost-edit-delete-icons">
+                    {user && !post.reposted &&(
+                        <div 
+                            id="repost-button" 
+                            onClick={(e)=>{
+                                e.preventDefault(); dispatch(postsActions.repost(post.id))
+                                history.push('/posts')
+                                }}
+                        >
+                            <i className="fa-solid fa-repeat"/>
+                            {" "} repost
                         </div>
-                        ))}
-                        <div className="comments-like-button">
-                            <Comments postId={post.id} />
-                            <Likes postId={post.id} userId={user?.id} />
-                        </div>
+                    )}
+
+                    {user && (post.userId === user.id &&
+                    (<div className="edit-and-delete-button">
+                        <OpenModalButton
+                        buttonText=<div className="edit-delete-div"><i className="fa-regular fa-trash-can"></i></div>
+                        modalComponent={<DeletePostForm postId={post.id}/>}
+                        />
+                        {!post.reposted &&
+                        <OpenModalButton
+                        buttonText=<div className="edit-delete-div"><i className="fa-regular fa-pen-to-square"></i></div>
+                        modalComponent={<EditPostForm post={post} />}
+                        />}
+                    </div>))}
+                </div>
+                <div className="comments-like-button">
+                    <Comments postId={post.id} />
+                    <Likes postId={post.id} userId={user?.id} />
+                </div>
                 </div>
             </div>
         )

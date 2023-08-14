@@ -33,7 +33,7 @@ function SignupFormModal() {
 		<>
 		<form onSubmit={handleSubmit}>
 		  <div id='modalBackground'>
-             <div className="modalContainer">
+             <div className="modalContainer editpost">
 				<div className='titleCloseButton'>
 				<button id='titleCloseButton' onClick={closeModal}>X</button>
 				</div>

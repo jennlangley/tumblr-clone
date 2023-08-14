@@ -29,11 +29,14 @@ const MyPostsPage = () => {
     }, [dispatch])
 
     const sessionUser = useSelector(state => state.session.user);
-    const myPosts = useSelector(state => (Object.values(state.posts)).filter((post) => post.userId === sessionUser.id))
-    if (!sessionUser) history.push('/posts')
+    const myPosts = useSelector(state => (Object.values(state.posts)).filter((post) => post.userId === sessionUser.id));
+    if (!sessionUser) history.push('/posts');
     return (
         <>
         <div className='posts'>
+            <div id="num-likes">
+                {myPosts.length === 1 ? <div>{myPosts.length} post</div> : <div>{myPosts.length} posts</div>}
+            </div>
             {sessionUser ? (
                 myPosts.reverse().map(post =>
                     <div key={post.id} className='post'>
@@ -50,7 +53,7 @@ const MyPostsPage = () => {
                                 ): 
                                 <></>}
                             {post.reposted  && (
-                            <div className='originalPoster'>Post originally created by: 
+                            <div className='originalPoster'>Post originally created by:{" "}
                                 <span style={{fontWeight: 'bold'}}>{post.originalPoster}</span>
                             </div>
                             )}
@@ -66,10 +69,12 @@ const MyPostsPage = () => {
                             buttonText=<div className="edit-delete-div"><i className="fa-regular fa-trash-can"></i></div>
                             modalComponent={<DeletePostForm postId={post.id}/>}
                             />
+
+                            {!post.reposted &&
                             <OpenModalButton
-                                buttonText=<div className="edit-delete-div"><i className="fa-regular fa-pen-to-square"></i></div>
-                                modalComponent={<EditPostForm post={post} />}
-                            />
+                            buttonText=<div className="edit-delete-div"><i className="fa-regular fa-pen-to-square"></i></div>
+                            modalComponent={<EditPostForm post={post} />}
+                            />}
                         </div>
 
                         <div className="comments-like-button">

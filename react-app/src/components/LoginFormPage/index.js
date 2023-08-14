@@ -21,6 +21,12 @@ function LoginFormPage() {
     }
   };
 
+  const loginDemo = async (e) => {
+    e.preventDefault()
+    dispatch(login('demo@aa.io','password'))
+    // return <Redirect to="/posts" />
+  }
+
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <div className="">
@@ -55,7 +61,10 @@ function LoginFormPage() {
                   />
               </div>
             </div>
-            <div><button className="buttonDesign" type="submit">Log In</button></div>
+            <div className='footer'>
+              <div><button className='buttonDesign'>Log In</button></div>
+              <div><button className='buttonDesign' onClick={loginDemo}>Demo</button></div>
+            </div>
           
         </div>
       </div>

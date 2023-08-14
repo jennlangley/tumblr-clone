@@ -6,6 +6,8 @@ import Comments from "../PostDetail/Comments";
 import Images from "../PostDetail/Images";
 import Likes from "../PostDetail/Likes";
 import OpenModalButton from "../OpenModalButton";
+import DeletePostForm from "../PostModals/DeletePostForm";
+import EditPostForm from "../PostModals/EditPostForm";
 import * as usersActions from '../../store/users';
 import * as postsActions from '../../store/posts';
 import * as imagesActions from '../../store/images';
@@ -13,14 +15,12 @@ import * as commentsActions from '../../store/comments';
 import * as likesActions from '../../store/likes';
 import * as followsActions from '../../store/follows';
 import './PostsPage.css';
-import DeletePostForm from "../PostModals/DeletePostForm";
-import EditPostForm from "../PostModals/EditPostForm";
+
 
 const PostsPage = () => {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false)
     const [hideFollowing, setHideFollowing] = useState(true);
-
     useEffect(() => {
         dispatch(usersActions.getUsers())
         dispatch(postsActions.getAllPosts())
@@ -34,7 +34,7 @@ const PostsPage = () => {
     const user = useSelector(state => state.session.user);
     const follows = useSelector(state => (Object.values(state.follows)).filter((follow) => follow.followerId === user?.id));
     const followingTabContainer = "following-toggle" + (hideFollowing ? "" : " on");
-    const postsTabContainer = "following-toggle" + (hideFollowing ? " on" : "")
+    const postsTabContainer = "following-toggle" + (hideFollowing ? " on" : "");
     let following = [];
     for (let follow of follows) {
         following.push(follow.followedId);
@@ -55,8 +55,8 @@ const PostsPage = () => {
                     </div>
                 </div>
             <div id="toggle-follows-container">
-                <div className={postsTabContainer} onClick={e=>setHideFollowing(true)}>All Posts</div>
-                <div className={followingTabContainer} onClick={e=>setHideFollowing(false)}>Following Posts</div>
+                <div className={postsTabContainer} onClick={e=>setHideFollowing(!hideFollowing)}>All Posts</div>
+                <div className={followingTabContainer} onClick={e=>setHideFollowing(!hideFollowing)}>Following Posts</div>
             </div>
             </>
             }
@@ -93,30 +93,36 @@ const PostsPage = () => {
                         </div>
 
                         <div>
-                        {post.reposted ? (
-                        <span className='reposted'>reposted</span>
-                        ):(
-                            <></>
-                        )}
-                        
-                        {post.reposted  && (
-                         <div className='originalPoster'>Post originally created by:
-                         <span style={{fontWeight: 'bold'}}>{post.originalPoster}</span>
-                         </div>
-                        )}
-                        {post.reposted && (
-                            <img className='repostImg' alt='' src={post.repostUrl} />
-                        )}
+                            {post.reposted ? (
+                            <span className='reposted'>reposted</span>
+                            ):(
+                                <></>
+                            )}
+                            
+                            {post.reposted  && (
+                            <div className='originalPoster'>Post originally created by:{" "}
+                            <span style={{fontWeight: 'bold'}}>{post.originalPoster}</span>
+                            </div>
+                            )}
+                            {post.reposted && (
+                                <img className='repostImg' alt='' src={post.repostUrl} />
+                            )}
                         </div>
                         
                         <div id="timestamp">{post.created_at}</div>
-                            <Images postId={post.id} />
+                        <Images postId={post.id} />
                         <div className="post-content">{post.content}</div>
                         <div className="repost-edit-delete-icons">
                             {user && !post.reposted &&(
                                 <div 
                                     id="repost-button" 
-                                    onClick={(e)=>{e.preventDefault(); dispatch(postsActions.repost(post.id))}}
+                                    onClick={(e)=>{
+                                        e.preventDefault(); dispatch(postsActions.repost(post.id));
+                                        if (!hideFollowing) {
+                                            setHideFollowing(true)
+                                        }
+                                        window.scrollTo(0,0)
+                                        }}
                                 >
                                     <i className="fa-solid fa-repeat"/>
                                     {" "} repost

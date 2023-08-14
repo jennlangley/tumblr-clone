@@ -20,7 +20,9 @@
     justify-content: space-between;
     padding-top: 10px;
 }
-
+#logged-out-like {
+    cursor: not-allowed;
+}
 #logged-out-button {
     background-color: none;
     border: none;
