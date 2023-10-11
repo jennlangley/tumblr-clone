@@ -29,7 +29,7 @@ const Likes = ({ postId, userId }) => {
         <div className="num-likes-like-button">
             <div className="num-likes">{likes.length} </div>
             {!userId && 
-            <div className="tooltip tooltiptex">
+            <div className="tooltip tooltiptext">
             <span className="tooltiptext">You must be logged in to like!</span>
                 <i id="logged-out-like" className="fa-regular fa-heart"></i>
             </div>
