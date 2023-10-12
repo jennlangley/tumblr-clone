@@ -21,9 +21,8 @@ const EditPostForm = ({ post }) => {
             formData.append("image", image);
             formData.append("content", content);
             try {
-                
-                await dispatch(postsActions.editPost(post.id, formData));
                 setImageLoading(true);
+                await dispatch(postsActions.editPost(post.id, formData));
                 setContent('');
                 setImage(null);
                 setErrors([]);
@@ -31,9 +30,9 @@ const EditPostForm = ({ post }) => {
                 setImageLoading(false);
                 closeModal();
             } catch(error) {
+                setImageLoading(false);
                 setErrors(error);
             }
-            
         }
     }
     

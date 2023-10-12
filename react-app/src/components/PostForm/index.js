@@ -22,14 +22,15 @@ const PostForm = () => {
             formData.append("image", image);
             formData.append("content", content);
             try {
-                await dispatch(postsActions.createNewPost(formData));
                 setImageLoading(true);
+                await dispatch(postsActions.createNewPost(formData));
                 setContent('');
                 setImage('');
                 setErrors([]);
                 setHasSubmitted(false);
                 closeModal();
             } catch(error) {
+                setImageLoading(false);
                 setErrors(error)
             }
         }
