@@ -21,13 +21,17 @@ const PostForm = () => {
             const formData = new FormData();
             formData.append("image", image);
             formData.append("content", content);
-            setImageLoading(true);
-            await dispatch(postsActions.createNewPost(formData));
-            setContent('');
-            setImage('');
-            setErrors([]);
-            setHasSubmitted(false);
-            closeModal();
+            try {
+                await dispatch(postsActions.createNewPost(formData));
+                setImageLoading(true);
+                setContent('');
+                setImage('');
+                setErrors([]);
+                setHasSubmitted(false);
+                closeModal();
+            } catch(error) {
+                setErrors(error)
+            }
         }
     }
 

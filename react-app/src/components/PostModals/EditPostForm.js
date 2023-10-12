@@ -15,27 +15,33 @@ const EditPostForm = ({ post }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setHasSubmitted(true)
+        setHasSubmitted(true);
         if (content.length > 0) {
             const formData = new FormData();
             formData.append("image", image);
             formData.append("content", content);
-            setImageLoading(true);
-            await dispatch(postsActions.editPost(post.id, formData))
-            setContent('');
-            setImage(null);
-            setErrors([]);
-            setHasSubmitted(false);
-            setImageLoading(false)
-            closeModal();
+            try {
+                
+                await dispatch(postsActions.editPost(post.id, formData));
+                setImageLoading(true);
+                setContent('');
+                setImage(null);
+                setErrors([]);
+                setHasSubmitted(false);
+                setImageLoading(false);
+                closeModal();
+            } catch(error) {
+                setErrors(error);
+            }
+            
         }
     }
     
     useEffect(() => {
         if (hasSubmitted) {
-            const errors = []
-            if (!content) errors.push('Post must have some content!')
-            setErrors(errors)
+            const errors = [];
+            if (!content) errors.push('Post must have some content');
+            setErrors(errors);
         }
     }, [hasSubmitted, content]);
 

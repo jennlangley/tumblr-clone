@@ -58,7 +58,8 @@ export const createNewPost = (post) => async (dispatch) => {
         }
         
     } else {
-        console.log("there was an error making your post!")
+        const resPost = await response.json();
+        throw resPost;
     }
 }
 
@@ -76,7 +77,8 @@ export const editPost = (postId, post) => async (dispatch) => {
         }
         
     } else {
-        console.log('there was an error making your post!')
+        const resPost = await response.json();
+        throw resPost;
     }
 }
 

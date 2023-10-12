@@ -42,11 +42,12 @@ def new_post():
 
         if (post_form.data['image']):
             image = post_form.data["image"]
+            if not image: return {'image': 'Unsupported file type'}
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
 
             if "url" not in upload:
-                return validation_errors_to_error_messages(upload)
+                return validation_errors_to_error_messages(upload), 401
                 
             url = upload["url"]
             image = Image(imageUrl=url, postId=post.id)
@@ -56,7 +57,7 @@ def new_post():
         
         return {'post': post.to_dict()}
     
-    return validation_errors_to_error_messages(post_form.errors)
+    return validation_errors_to_error_messages(post_form.errors), 401
 
 @post_routes.route('/<int:postId>', methods=['PUT'])
 @login_required
@@ -78,7 +79,7 @@ def edit_post(postId):
             upload = upload_file_to_s3(image)
 
             if "url" not in upload:
-                return validation_errors_to_error_messages(upload)
+                return validation_errors_to_error_messages(upload), 401
              
             url = upload["url"]
 
@@ -94,7 +95,7 @@ def edit_post(postId):
         
         return {'post': post.to_dict()} 
     
-    return validation_errors_to_error_messages(post_form.errors)
+    return validation_errors_to_error_messages(post_form.errors), 401
 
 @post_routes.route('/<int:postId>', methods=['DELETE'])
 @login_required

@@ -41,7 +41,7 @@ function App() {
             <PostsPage isLoaded={isLoaded} />
           </Route>
           <Route exact path="/">
-            {(user) ? <Redirect to="/posts" /> : <EntryPage />}
+            <PostsPage isLoaded={isLoaded} />
           </Route>
           <Route exact path={`/users/:userId/comments`}>
             {(user) ? <MyCommentsPage isLoaded={isLoaded} /> : <Redirect to="/posts" />}
