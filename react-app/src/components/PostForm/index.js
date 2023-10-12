@@ -58,8 +58,8 @@ const PostForm = () => {
                     </div>
                     {(imageLoading)&& <div className="loadingDiv">Loading...</div>}
                     <div className="create-post-form">
-                        <div>
-                            <div>Write something: </div>
+                        <div className="label-input-div">
+                            <label>Write something</label>
                             <textarea
                                 className="textarea-edit"
                                 type="text"
@@ -67,8 +67,8 @@ const PostForm = () => {
                                 onChange={e => setContent(e.target.value)}
                             />
                         </div>
-                        <div>
-                            <div>Image: </div>
+                        <div className="label-input-div">
+                            <label>Image</label>
                             <input
                                 type="file"
                                 onChange={e => setImage(e.target.files[0])}

@@ -79,7 +79,7 @@ const EditPostForm = ({ post }) => {
                     </div>
                     {(imageLoading)&& <div>Loading...</div>}
                     <div className="footer">
-                        <div><button className="buttonDesign" type='submit'>Update Post</button></div>
+                        <button className="buttonDesign" type='submit'>Update Post</button>
                         
                     </div>
                     </div>

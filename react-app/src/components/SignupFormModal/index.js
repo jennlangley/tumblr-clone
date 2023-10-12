@@ -33,9 +33,9 @@ function SignupFormModal() {
 		<>
 		<form onSubmit={handleSubmit}>
 		  <div id='modalBackground'>
-             <div className="modalContainer editpost">
+             <div className="modalContainer">
 				<div className='titleCloseButton'>
-				<button id='titleCloseButton' onClick={closeModal}>X</button>
+					<button id='titleCloseButton' onClick={closeModal}>X</button>
 				</div>
 			  <div className='title'>Sign Up</div>
 				<div className='errors'>
@@ -47,7 +47,7 @@ function SignupFormModal() {
 				</div>
 			<div className="loginInputs">
 				<div className='email'>
-					<span>Email:</span>
+					<label>Email</label>
 					<input
 						className="input"
 						placeholder='Enter your email'
@@ -58,8 +58,8 @@ function SignupFormModal() {
 					/>
 				</div>
 
-				<div className='username'>
-					<span>Username:</span>
+				<div className="email">
+					<label>Username</label>
 					<input
 						className="input"
 						placeholder='Enter your username'
@@ -71,7 +71,7 @@ function SignupFormModal() {
 				</div>
 
 				<div className='password'>
-					<span>Password:</span>
+					<label>Password</label>
 					<input
 						className="input"
 						placeholder='Create a password'
@@ -82,8 +82,8 @@ function SignupFormModal() {
 					/>
 				</div>
 
-				<div className='ConPass'>
-					<span>Confirm Password:</span>
+				<div className="email">
+					<label>Confirm password</label>
 					<input
 						className="input"
 						placeholder='Confirm your password'

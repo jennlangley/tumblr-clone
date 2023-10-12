@@ -36,24 +36,24 @@ function LoginFormModal() {
        <div className='modalBackground'>
          <div className="modalContainer">
            <div className='titleCloseButton'>
-            <button onClick={closeModal}>X</button>
+            <button id='titleCloseButton' onClick={closeModal}>X</button>
           </div>
       <div className='title'>Log In</div>
 
-        <div className='errorsBox'>
-        <ul className='errors'>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
+        <div className="errors">
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
         </div>
 
       <div className="loginInputs">
         <div className='email'>
 
-          <span>Email:</span>
+          <label>Email</label>
           <input className='input'
-            placeholder='Username or email'
+            placeholder='Email'
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -62,7 +62,7 @@ function LoginFormModal() {
         </div>
 
         <div className='password'>
-          <span>Password: </span>
+          <label>Password</label>
           <input className='input'
             placeholder='Password'
             type="password"

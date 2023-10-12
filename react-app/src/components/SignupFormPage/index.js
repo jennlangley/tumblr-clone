@@ -42,7 +42,7 @@ function SignupFormPage() {
           </div>
           <div className="loginInputs">
               <div className="email">
-              <span>Email:</span>
+              <span>Email</span>
               <input
                 className="input"
                 type="text"
@@ -52,7 +52,7 @@ function SignupFormPage() {
               />
             </div>
             <div className="username">
-              <span>Username:</span>
+              <span>Username</span>
               <input
                 className="input"
                 type="text"
@@ -72,7 +72,7 @@ function SignupFormPage() {
               />
             </div>
             <div className="password">
-              <span>Confirm Password:</span>
+              <span>Confirm password</span>
               <input
                 className="input"
                 type="password"

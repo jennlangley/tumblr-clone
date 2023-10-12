@@ -5,3 +5,11 @@
 .modalContainer.editpost {
    height: fit-content;
 }
+textarea {
+   border: 2px solid rgb(45, 174, 255);
+   resize: none;
+}
+.label-input-div {
+   display: grid;
+   grid-template-columns: repeat(1, 1fr);
+}

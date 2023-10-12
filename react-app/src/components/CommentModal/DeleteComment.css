@@ -52,3 +52,6 @@
     margin: auto;
     text-align: left;
 }
+.footer > .buttonDesign {
+    width: fit-content;
+}
