@@ -13,6 +13,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import EntryPage from './components/EntryPage';
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       )}
+      <Footer isLoaded={isLoaded} />
     </>
   );
 }
