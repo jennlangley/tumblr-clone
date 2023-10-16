@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 def seed_posts():
     post1 = Post(
-        content="🎮🌆 Exploring Akihabara's electric streets is like stepping into a gamer's wonderland! Neon lights, anime boutiques, and a pulse of pop culture make every corner a vibrant adventure. From retro arcades to the latest tech, it's a sensory feast for any geek at heart. 🕹️💫", 
+        content="🎮🌆 Exploring Akihabara's electric streets is like stepping into a gamer's wonderland! Neon lights, anime boutiques, and a pulse of pop culture make every corner a vibrant adventure. 🕹️💫", 
         userId=1, 
     )
     post2 = Post(
@@ -11,7 +11,7 @@ def seed_posts():
         userId=1, 
     )
     post3 = Post(
-        content="🐚🌊 Each seashell holds a whispered tale of the sea, a testament to the beauty and resilience of nature. They are delicate treasures that remind us of sandy shores, gentle waves, and the wonders hidden beneath the surface. Collecting them is like gathering fragments of the ocean's soul. 🌟🏖️", 
+        content="🐚🌊 Each seashell holds a whispered tale of the sea, a testament to the beauty and resilience of nature. They are delicate treasures that remind us of sandy shores, gentle waves, and the wonders hidden beneath the surface.🌟🏖️", 
         userId=2, 
     )
     post4 = Post(
@@ -19,11 +19,7 @@ def seed_posts():
         userId=3
     )
     post5 = Post(
-        content='''🍂✨ Embracing the crisp kiss of autumn leaves and the scent of pumpkin spice in the air. 
-        Fall, with its warm hues and cozy knits, paints a tapestry of beauty all around. 
-        It's a season of change, reminding us that letting go can be a breathtaking transformation. 
-        From apple-picking adventures to golden sunsets, every moment is a masterpiece. 
-        Here's to bonfires, hot cocoa, and the magic of fall! 🍁🎃''',
+        content="🍂✨ Embracing the crisp kiss of autumn leaves and the scent of pumpkin spice in the air. Fall, with its warm hues and cozy knits, paints a tapestry of beauty all around. Here's to bonfires, hot cocoa, and the magic of fall! 🍁🎃",
         userId=3
     )
     post6 = Post(
@@ -32,18 +28,11 @@ def seed_posts():
     )
 
     post7 = Post(
-        content="""📚✨ Diving into the world of literature is like embarking on a grand adventure, 
-        where each page unfolds new landscapes and characters, waiting to be discovered. 
-        From the enchanting realms of fantasy to the intricate tapestries of historical fiction, 
-        there's a universe for every soul. The power of words is boundless, painting vivid images in our minds and 
-        stirring emotions deep within our hearts. It's in the tender solace of a well-worn book that we find refuge, 
-        and in its pages, we encounter kindred spirits and wisdom that transcends time. Let's celebrate the magic that words weave, 
-        the stories that resonate, and the authors who gift us these treasures. What literary gem has recently captivated your imagination?""",
+        content="📚✨ Dive into the boundless world of literature! With each page, we embark on adventures, meet unforgettable characters, and explore enchanting realms. Words have the power to paint vivid images and stir deep emotions. What book has recently captured your heart?",
         userId=3,
     )
     post8 = Post(
-        content='''🌴A palm tree vacation is a slice of paradise. With golden sands, swaying fronds, and the soothing sound of waves, 
-        it's a haven of relaxation and adventure. From sunrise to sunset, it's a canvas of tranquil beauty etched in memory forever.🌴''',
+        content='''🌴A palm tree vacation is a slice of paradise. With golden sands, swaying fronds, and the soothing sound of waves, it's a haven of relaxation and adventure. From sunrise to sunset, it's a canvas of tranquil beauty etched in memory forever.🌴''',
         userId=1
     )
     post9 = Post(
@@ -55,7 +44,7 @@ def seed_posts():
         userId=3
     )
     post11 = Post(
-        content="🌿✨ Crafting is my sanctuary, where creativity takes flight. With every stitch, every brushstroke, I weave a piece of my soul into existence. It's not just about the end result, but the journey of imagination and discovery. Here's to the art of making, where magic unfolds in every crafted creation! 🎨🧵",
+        content="🎨✂️ Embracing the art of crafting is like weaving a tapestry of creativity. Each stitch, each brushstroke, is a brush with magic. Whether it's knitting cozy scarves or painting vibrant scenes, let your imagination run wild! What's your latest crafting project? Share the love! 💖",
         userId=2
     )
 
