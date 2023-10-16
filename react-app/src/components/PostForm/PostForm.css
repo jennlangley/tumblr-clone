@@ -6,15 +6,14 @@
    height: fit-content;
 }
 textarea {
-   border: 2px solid rgb(45, 174, 255);
+   border: 2px solid var(--accent);
    resize: none;
    font-family: inherit;
    width: 20rem;
    height: 5rem;
-}
-textarea:focus {
    outline: none;
 }
+
 .label-input-div {
    display: grid;
    grid-template-columns: repeat(1, 1fr);

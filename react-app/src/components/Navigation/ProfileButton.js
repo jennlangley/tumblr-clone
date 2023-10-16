@@ -53,13 +53,13 @@ function ProfileButton({ user }) {
             <li><NavLink className='profile-link' to={`/users/${user.id}/comments`} onClick={closeMenu}>Your Comments</NavLink></li>
             <li><NavLink className='profile-link' to={`/users/${user.id}/likes`} onClick={closeMenu}>Your Likes</NavLink></li>
             <div className='buttonDiv'>
-              <button className='buttonDesign' onClick={handleLogout}>Log Out</button>
+              <button className='buttonDiv buttonDesign' onClick={handleLogout}>Log Out</button>
             </div>
           </>
         ) : (
           <>
-          <ul className='profile-dropdown'>
-          <div className='dropdown-link'>
+  
+          <div className='buttonDiv buttonDesign'>
             <OpenModalButton
               buttonText="Log In"
               onItemClick={closeMenu}
@@ -67,13 +67,13 @@ function ProfileButton({ user }) {
             />
             </div>
 
-            <div className='dropdown-link'><OpenModalButton
+            <div className='buttonDiv buttonDesign'><OpenModalButton
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
             </div>
-            </ul>
+   
           </>
         )}
       </ul>

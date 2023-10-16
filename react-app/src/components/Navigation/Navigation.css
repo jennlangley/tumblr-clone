@@ -26,6 +26,7 @@
 .buttonDiv {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .newProfile-dropdown {
   background-color: lightslategray;
@@ -39,7 +40,7 @@
   display: none;
 }
 .profileButton {
-  background-color: lightslategray;
+  background-color: #00000000;
   border: none;
   color: white;
   font-weight: bold;
