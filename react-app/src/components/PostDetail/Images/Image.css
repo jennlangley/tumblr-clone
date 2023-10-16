@@ -1,3 +1,4 @@
 .post-image {
     max-width: 500px;
+    width: -webkit-fill-available;
 }

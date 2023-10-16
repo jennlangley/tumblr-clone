@@ -1,0 +1,36 @@
+:root {
+    --background:#05445E;
+    --accent:rgb(45, 174, 255);
+    --primary-1: #0E86D4;
+    --primary-2: #055C9D;
+    --gray: rgb(138, 138, 138);
+}
+
+body {
+    background-color: var(--background);
+    font-family: Helvetica;
+}
+
+.buttonDesign {
+    background-color: var(--primary-2);
+    border: none;
+    border-radius: 16px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    height: 30px;
+    margin: 5px 10px;
+    padding: 0px 16px;
+}
+
+.buttonDesign:hover {
+    background-color: var(--primary-1);
+}
+
+.buttonDesign.cancel {
+    background-color: var(--gray);
+}
+.buttonDesign.cancel:hover {
+    background-color: rgb(138, 138, 138, .7);
+}

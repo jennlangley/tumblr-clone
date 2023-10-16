@@ -58,8 +58,8 @@ const EditPostForm = ({ post }) => {
                         </ul>
                     </div>
                     <div className="create-post-form">
-                        <div>
-                            <div>Edit Post: </div>
+                        <div className="label-input-div">
+                            <label>Content</label>
                             <textarea
                                 className="textarea-edit"
                                 type="text"
@@ -68,8 +68,8 @@ const EditPostForm = ({ post }) => {
                             />
                         </div>
                     
-                    <div>
-                        <div>Edit Image: </div>
+                    <div className="label-input-div">
+                        <label>Image</label>
                         <input
                             type="file"
                             onChange={e => setImage(e.target.files[0])}
@@ -79,8 +79,8 @@ const EditPostForm = ({ post }) => {
                     </div>
                     {(imageLoading)&& <div>Loading...</div>}
                     <div className="footer">
+                        <button onClick={closeModal} className="buttonDesign cancel">Cancel</button>
                         <button className="buttonDesign" type='submit'>Update Post</button>
-                        
                     </div>
                     </div>
                 </div>

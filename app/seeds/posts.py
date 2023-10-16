@@ -3,40 +3,60 @@ from sqlalchemy.sql import text
 
 def seed_posts():
     post1 = Post(
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id porta nibh venenatis cras sed felis. Tincidunt ornare massa eget egestas purus viverra. Nibh venenatis cras sed felis eget velit aliquet.", 
+        content="🎮🌆 Exploring Akihabara's electric streets is like stepping into a gamer's wonderland! Neon lights, anime boutiques, and a pulse of pop culture make every corner a vibrant adventure. From retro arcades to the latest tech, it's a sensory feast for any geek at heart. 🕹️💫", 
         userId=1, 
     )
     post2 = Post(
-        content="Lorem donec massa sapien faucibus et molestie. Adipiscing tristique risus nec feugiat in fermentum posuere urna. Molestie at elementum eu facilisis. Duis at tellus at urna.", 
+        content="The river's gentle flow harmonizes with the symphony of nature, weaving a tapestry of life along its verdant banks.", 
         userId=1, 
     )
     post3 = Post(
-        content="Duis at tellus at urna condimentum mattis. Eros donec ac odio tempor orci dapibus ultrices in. Sodales ut etiam sit amet nisl purus in. Duis ut diam quam nulla porttitor massa. Mauris a diam maecenas sed enim.", 
+        content="🐚🌊 Each seashell holds a whispered tale of the sea, a testament to the beauty and resilience of nature. They are delicate treasures that remind us of sandy shores, gentle waves, and the wonders hidden beneath the surface. Collecting them is like gathering fragments of the ocean's soul. 🌟🏖️", 
         userId=2, 
     )
     post4 = Post(
-        content="Starry skies :)",
+        content="Space, a boundless expanse, holds secrets beyond our wildest dreams. Amongst the stars, galaxies dance, and mysteries await the curious hearts of cosmic explorers.",
         userId=3
     )
     post5 = Post(
-        content='''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.''',
+        content='''🍂✨ Embracing the crisp kiss of autumn leaves and the scent of pumpkin spice in the air. 
+        Fall, with its warm hues and cozy knits, paints a tapestry of beauty all around. 
+        It's a season of change, reminding us that letting go can be a breathtaking transformation. 
+        From apple-picking adventures to golden sunsets, every moment is a masterpiece. 
+        Here's to bonfires, hot cocoa, and the magic of fall! 🍁🎃''',
         userId=3
     )
     post6 = Post(
-        content="I love the sunset",
+        content="The horizon blazed with hues of crimson and gold as the sun dipped below the edge of the world, casting a warm embrace upon the earth.",
         userId=2
     )
 
     post7 = Post(
-        content="A diam sollicitudin tempor id eu nisl nunc mi ipsum. Magna etiam tempor orci eu lobortis elementum nibh.",
+        content="""📚✨ Diving into the world of literature is like embarking on a grand adventure, 
+        where each page unfolds new landscapes and characters, waiting to be discovered. 
+        From the enchanting realms of fantasy to the intricate tapestries of historical fiction, 
+        there's a universe for every soul. The power of words is boundless, painting vivid images in our minds and 
+        stirring emotions deep within our hearts. It's in the tender solace of a well-worn book that we find refuge, 
+        and in its pages, we encounter kindred spirits and wisdom that transcends time. Let's celebrate the magic that words weave, 
+        the stories that resonate, and the authors who gift us these treasures. What literary gem has recently captivated your imagination?""",
         userId=3,
     )
     post8 = Post(
-        content="I love the beach...",
+        content='''🌴A palm tree vacation is a slice of paradise. With golden sands, swaying fronds, and the soothing sound of waves, 
+        it's a haven of relaxation and adventure. From sunrise to sunset, it's a canvas of tranquil beauty etched in memory forever.🌴''',
         userId=1
+    )
+    post9 = Post(
+        content="""🎬✨ Just watched "Inception" and I'm still caught in its mind-bending maze. Nolan's genius, the dream within a dream, it's a cinematic marvel! The layers of reality kept me hooked till the end. What's your favorite movie mind-bender? 🌌🧠""",
+        userId=2,
+    )
+    post10 = Post(
+        content="Meerkats: tiny creatures, big personalities! Their teamwork and curiosity in the wild are a true inspiration. 🌍💫",
+        userId=3
+    )
+    post11 = Post(
+        content="🌿✨ Crafting is my sanctuary, where creativity takes flight. With every stitch, every brushstroke, I weave a piece of my soul into existence. It's not just about the end result, but the journey of imagination and discovery. Here's to the art of making, where magic unfolds in every crafted creation! 🎨🧵",
+        userId=2
     )
 
 
@@ -48,6 +68,9 @@ def seed_posts():
     db.session.add(post6)
     db.session.add(post7)
     db.session.add(post8)
+    db.session.add(post9)
+    db.session.add(post10)
+    db.session.add(post11)
     db.session.commit()
 
 def undo_posts():

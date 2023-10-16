@@ -48,7 +48,7 @@ const PostForm = () => {
         <form encType="multipart/form-data" id="post-form" onSubmit={handleSubmit}>
             <div className="modalBackground">
                 <div className="modalContainer editpost">
-                    <div className="title">Create a Post!</div>
+                    <div className="title">Create a Post</div>
                     <div className='errorsBox'>
                         <ul className='errors'>
                         {errors.map((error, idx) => (
@@ -59,7 +59,7 @@ const PostForm = () => {
                     {(imageLoading)&& <div className="loadingDiv">Loading...</div>}
                     <div className="create-post-form">
                         <div className="label-input-div">
-                            <label>Write something</label>
+                            <label>Content</label>
                             <textarea
                                 className="textarea-edit"
                                 type="text"

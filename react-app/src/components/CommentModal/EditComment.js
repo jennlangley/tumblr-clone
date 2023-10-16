@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react"
 import { useModal } from "../../context/Modal";
 import * as commentsActions from "../../store/comments";
-import './CreateComment.css'
 
 const EditComment = ({ comment }) => {
     const dispatch = useDispatch()
@@ -43,17 +42,16 @@ const EditComment = ({ comment }) => {
                             ))}
                             </ul>
                     </div>
-                    <div>
+                
                     <textarea 
-                        className="textarea-edit"
                         type="text"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                     />
-                    </div>
+
                     <div className="footer">
-                        <div><button className="buttonDesign" type="submit">Edit Comment</button></div>
-                        <div><button className="buttonDesign" onClick={closeModal}>Cancel</button></div>
+                        <div><button className="buttonDesign cancel" onClick={closeModal}>Cancel</button></div>
+                        <div><button className="buttonDesign" type="submit">Edit</button></div>
                     </div>
                 </div>
             </div>

@@ -27,6 +27,10 @@ def seed_images():
         imageUrl="https://photostorage.explorest.com/usa/hawaii/vlim-mai-poina-palmtree-feed.jpg", 
         postId=8,
     )
+    image_7 = Image(
+        imageUrl="https://gwennseemel.com/images/2012/2012CANMeerkatGwennSeemel.gif",
+        postId=10,
+    )
 
 
     db.session.add(image_1)
@@ -35,6 +39,7 @@ def seed_images():
     db.session.add(image_4)
     db.session.add(image_5)
     db.session.add(image_6)
+    db.session.add(image_7)
     db.session.commit()
 
 def undo_images():

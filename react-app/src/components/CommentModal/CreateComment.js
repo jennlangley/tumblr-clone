@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react"
 import { useModal } from "../../context/Modal";
 import * as commentsActions from "../../store/comments";
-import './CreateComment.css'
 
 const CreateComment = ({postId}) => {
     const dispatch = useDispatch()

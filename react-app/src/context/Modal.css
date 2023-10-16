@@ -22,3 +22,37 @@
   position: absolute;
   /* background-color:white; */
 }
+.modalBackground {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  bottom: 100px;
+  height: 200px;
+  justify-content: center;
+  left: 400px;
+  position: static;
+  width: 500px;
+}
+.modalContainer {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 25px;
+  align-items: center;
+  width: 450px;
+}
+.titleCloseButton {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.titleCloseButton button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+  width: fit-content;
+}
+

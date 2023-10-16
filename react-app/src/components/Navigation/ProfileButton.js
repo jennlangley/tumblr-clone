@@ -5,6 +5,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import './Navigation.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -47,13 +48,12 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li><NavLink className='postsRoute' to={`/users/${user.id}/posts`} onClick={closeMenu}>{user.username}'s Posts</NavLink></li>
-            <li><NavLink className='commentsRoute' to={`/users/${user.id}/comments`} onClick={closeMenu}>{user.username}'s Comments</NavLink></li>
-            <li><NavLink className='commentsRoute' to={`/users/${user.id}/likes`} onClick={closeMenu}>{user.username}'s Likes</NavLink></li>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
+            <li>Hi, {user.username}</li>
+            <li><NavLink className='profile-link' to={`/users/${user.id}/posts`} onClick={closeMenu}>Your Posts</NavLink></li>
+            <li><NavLink className='profile-link' to={`/users/${user.id}/comments`} onClick={closeMenu}>Your Comments</NavLink></li>
+            <li><NavLink className='profile-link' to={`/users/${user.id}/likes`} onClick={closeMenu}>Your Likes</NavLink></li>
             <div className='buttonDiv'>
-              <button className='logOut' onClick={handleLogout}>Log Out</button>
+              <button className='buttonDesign' onClick={handleLogout}>Log Out</button>
             </div>
           </>
         ) : (

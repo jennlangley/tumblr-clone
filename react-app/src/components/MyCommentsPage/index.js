@@ -36,7 +36,7 @@ const MyCommentsPage = () => {
                 myComments.map(comment =>
                     <div className="post" key={comment.id}>
                         <div>
-                            <NavLink className="postsRoute" to={`/posts/${comment.postId}`}>{posts[comment.postId].user.username}'s post
+                            <NavLink className="post-link" to={`/posts/${comment.postId}`}>{posts[comment.postId].user.username}'s post
                                 <i id="my-comment-post-link" className="fa-solid fa-arrow-up-right-from-square"></i>
                             </NavLink>
                         </div>
