@@ -3,25 +3,25 @@ from sqlalchemy.sql import text
 
 def seed_comments():
     comment1 = Comment(
-        content="This is a great post!", userId=1, postId=3
+        content="Seashells are beautiful", userId=1, postId=3
     )
     comment2 = Comment(
-        content="wow this is fantastic", userId=1, postId=3,
+        content="wow this is fantastic", userId=1, postId=10,
     )
     comment3 = Comment(
-        content="I loved this post I had to comment something", userId=2, postId=1
+        content="Japan is just so cool", userId=2, postId=1
     )
     comment4 = Comment(
-        content="I have never seen something so cool....!", userId=2, postId=5
+        content="Fall weather is my favorite", userId=2, postId=5
     )
     comment5 = Comment(
-        content="Brilliant!!", userId=1, postId=7
+        content="frankenstein, my favorite book!", userId=1, postId=7
     )
     comment6 = Comment(
-        content="Great post, I love it", userId=3, postId=6
+        content="The colors in this image are simply stunning", userId=3, postId=6
     )
     comment7 = Comment(
-        content="Beaufitul imagery", userId=1, postId=4
+        content="Stars always amazed me ⭐", userId=1, postId=4
     )
 
     db.session.add(comment1)

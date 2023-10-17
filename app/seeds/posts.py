@@ -40,7 +40,7 @@ def seed_posts():
         userId=2,
     )
     post10 = Post(
-        content="Meerkats: tiny creatures, big personalities! Their teamwork and curiosity in the wild are a true inspiration. 🌍💫",
+        content="The ocean is simply beautiful. 🌍💫",
         userId=3
     )
     post11 = Post(

@@ -33,6 +33,13 @@
 
 ## Showcase
 
+
+![postcreation](https://github.com/jennlangley/tumblr-clone/assets/106412948/ed610b7e-5b10-45bc-aacb-fe0caed3ee30)
+
+![commentcreate](https://github.com/jennlangley/tumblr-clone/assets/106412948/f21f8a0c-7865-4619-9b77-ed8016352f3f)
+
+
+
 ## Wiki Documents
 - [Backend Routes](https://github.com/jennlangley/tumblr-clone/wiki/Backend-Routes)
 - [Database Schema](https://github.com/jennlangley/tumblr-clone/wiki/Database-Schema)

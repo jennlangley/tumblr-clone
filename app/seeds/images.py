@@ -20,15 +20,15 @@ def seed_images():
     )
 
     image_5 = Image(
-        imageUrl="https://i.pinimg.com/originals/83/b2/cb/83b2cb8d890e9f46405b1cf081265b5f.jpg", 
+        imageUrl="https://images6.alphacoders.com/133/1332843.png", 
         postId=6,
     )
     image_6 = Image(
-        imageUrl="https://photostorage.explorest.com/usa/hawaii/vlim-mai-poina-palmtree-feed.jpg", 
+        imageUrl="https://www.icegif.com/wp-content/uploads/2022/11/icegif-558.gif", 
         postId=8,
     )
     image_7 = Image(
-        imageUrl="https://gwennseemel.com/images/2012/2012CANMeerkatGwennSeemel.gif",
+        imageUrl="https://www.surfertoday.com/images/stories/ocean-breaking-wave.jpg",
         postId=10,
     )
 

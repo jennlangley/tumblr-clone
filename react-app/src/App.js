@@ -56,7 +56,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       )}
-      <Footer isLoaded={isLoaded} />
+      {/* <Footer isLoaded={isLoaded} /> */}
     </>
   );
 }
