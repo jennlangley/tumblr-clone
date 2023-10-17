@@ -41,10 +41,10 @@
 
 
 ## Wiki Documents
-- [Backend Routes](https://github.com/jennlangley/style-swap/wiki/API%E2%80%90Routes)
-- [Database Schema](https://github.com/jennlangley/style-swap/wiki/Database-Schema)
-- [Feature List](https://github.com/jennlangley/style-swap/wiki/Feature-List)
-- [User Stories](https://github.com/jennlangley/style-swap/wiki/User-Stories)
+- [Backend Routes](https://github.com/jennlangley/tumblr-clone/wiki/Backend-Routes)
+- [Database Schema](https://github.com/jennlangley/tumblr-clone/wiki/Database-Schema)
+- [Feature List](https://github.com/jennlangley/tumblr-clone/wiki/Feature-List)
+- [User Stories](https://github.com/jennlangley/tumblr-clone/wiki/User-Stories)
 
 ## Installation
 
