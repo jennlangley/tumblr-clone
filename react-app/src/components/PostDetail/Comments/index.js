@@ -19,7 +19,7 @@ const Comments = ({ postId }) => {
         <div className="comments-and-comment-button">
             <div className={commentToggle} onClick={e => setShowComments(!showComments)}>
                 {showComments ? <span><i className="fa-solid fa-xmark"></i> Close comments</span> :
-                comments && `${Object.values(comments).length} comments`}</div>
+                comments && Object.values(comments).length !== 1 ? `${Object.values(comments).length} comments` : `${Object.values(comments).length} comment`}</div>
             <div>
             {sessionUser && showComments && <AddComment postId={postId}/>}
             {showComments && 
