@@ -33,6 +33,7 @@
 
 ## Showcase
 
+![homepage](https://github.com/jennlangley/tumblr-clone/assets/106412948/b91224b3-7315-403b-9460-bc91dc8045e7")
 
 ![postcreation](https://github.com/jennlangley/tumblr-clone/assets/106412948/ed610b7e-5b10-45bc-aacb-fe0caed3ee30)
 
